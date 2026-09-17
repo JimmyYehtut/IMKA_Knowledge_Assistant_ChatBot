@@ -1,0 +1,1211 @@
+{
+  "generated_at": "2026-09-17T09:59:14",
+  "mode": "no-rag",
+  "model": "gpt-5.6-luna",
+  "pdf": "ABB_Manual_for_Induction_Motors_and_Generators_EN.pdf",
+  "detail": "high",
+  "reasoning": null,
+  "source_file": "D:\\git\\fumeng1994\\IMKA_Knowledge_Assistant_ChatBot\\test\\questions.json",
+  "total": 70,
+  "count": 70,
+  "errors": 0,
+  "usage_total": {
+    "input_tokens": 16728883,
+    "cached_input_tokens": 0,
+    "output_tokens": 4360,
+    "reasoning_tokens": 1270
+  },
+  "cost_usd_total": 3.351,
+  "results": [
+    {
+      "id": 1,
+      "question": "What is the Pt-100 resistance, in ohms, at exactly 100°C according to Table 11?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 11, p.114",
+      "expected_answer": "138.50 Ω",
+      "answer": "According to Table 11, the Pt-100 resistance at **100°C** is **138.50 Ω**. **(Page 114)**",
+      "usage": {
+        "input_tokens": 238988,
+        "cached_input_tokens": 0,
+        "output_tokens": 34,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04784,
+      "elapsed_s": 12.23
+    },
+    {
+      "id": 2,
+      "question": "What is the Pt-100 resistance, in ohms, at exactly 40°C according to Table 11?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 11, p.113",
+      "expected_answer": "115.54 Ω",
+      "answer": "According to Table 11, the Pt-100 resistance at **40°C** is **115.54 Ω**. (Page 114.)",
+      "usage": {
+        "input_tokens": 238988,
+        "cached_input_tokens": 0,
+        "output_tokens": 33,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04784,
+      "elapsed_s": 9.61
+    },
+    {
+      "id": 3,
+      "question": "What is the tightening torque (Nm) for an oiled M20 bolt of property class 8.8?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 7, p.79",
+      "expected_answer": "360 Nm",
+      "answer": "- **Oiled M20 bolt, property class 8.8:** **360 Nm**  \n- **Page:** 79 (Table 7, General tightening torques)",
+      "usage": {
+        "input_tokens": 238988,
+        "cached_input_tokens": 0,
+        "output_tokens": 40,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04785,
+      "elapsed_s": 99.87
+    },
+    {
+      "id": 4,
+      "question": "What is the tightening torque (Nm) for a dry M20 bolt of property class 8.8?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 7, p.79",
+      "expected_answer": "390 Nm",
+      "answer": "- **Dry M20 bolt (property class 8.8): 390 Nm**  \n- **Source:** Page 79, Table 7 “General tightening torques.”",
+      "usage": {
+        "input_tokens": 238987,
+        "cached_input_tokens": 0,
+        "output_tokens": 40,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04785,
+      "elapsed_s": 9.3
+    },
+    {
+      "id": 5,
+      "question": "What is the tightening torque, in Nm, for an EF_LB 18 axially locating bearing?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 4, p.34",
+      "expected_answer": "900 Nm",
+      "answer": "- **Tightening torque:** **900 Nm**  \n- **Page:** 34, Table 4 (“Tightening torque … Axially locating bearing carries the locking force”)",
+      "usage": {
+        "input_tokens": 238986,
+        "cached_input_tokens": 0,
+        "output_tokens": 41,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04785,
+      "elapsed_s": 29.54
+    },
+    {
+      "id": 6,
+      "question": "What is the tightening torque, in Nm, for an EM_LB 9S axially locating bearing?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 4, p.34",
+      "expected_answer": "250 Nm",
+      "answer": "The tightening torque for an **EM_LB 9S** axially locating bearing is **250 Nm**.  \n**Source: Page 34, Table 4.**",
+      "usage": {
+        "input_tokens": 238987,
+        "cached_input_tokens": 0,
+        "output_tokens": 40,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04785,
+      "elapsed_s": 25.46
+    },
+    {
+      "id": 7,
+      "question": "For a rigid-support machine, what is the rms velocity boundary between vibration Zone B and Zone C?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 8, p.81",
+      "expected_answer": "4.5 mm/s",
+      "answer": "- **RMS velocity boundary (Zone B/C): 4.5 mm/s** for a rigid-support machine.  \n- **Source:** Page 81, Table 8.",
+      "usage": {
+        "input_tokens": 238985,
+        "cached_input_tokens": 0,
+        "output_tokens": 41,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04785,
+      "elapsed_s": 49.46
+    },
+    {
+      "id": 8,
+      "question": "For a flexible-support machine, what is the rms velocity boundary between vibration Zone C and Zone D?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 8, p.82",
+      "expected_answer": "11.0 mm/s",
+      "answer": "- **11.0 mm/s RMS** for a flexible-support machine.  \n- Source: **page 82**, Table 8.",
+      "usage": {
+        "input_tokens": 238985,
+        "cached_input_tokens": 0,
+        "output_tokens": 32,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04784,
+      "elapsed_s": 100.89
+    },
+    {
+      "id": 9,
+      "question": "What is the initial ALARM value for bearing housing vibration on a rigid-support machine?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 9, p.82",
+      "expected_answer": "3.4 mm/s",
+      "answer": "- **Initial ALARM value:** **3.4 mm/s RMS** for a rigid-support machine.  \n- **Page:** 82 (Table 9).",
+      "usage": {
+        "input_tokens": 238982,
+        "cached_input_tokens": 0,
+        "output_tokens": 37,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04784,
+      "elapsed_s": 23.84
+    },
+    {
+      "id": 10,
+      "question": "What is the initial TRIP value for bearing housing vibration on a flexible-support machine?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 9, p.82",
+      "expected_answer": "11.0 mm/s",
+      "answer": "- **Initial TRIP value:** **11.0 mm/s r.m.s.**\n- **Page:** 82 (Table 9)",
+      "usage": {
+        "input_tokens": 238982,
+        "cached_input_tokens": 0,
+        "output_tokens": 33,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04784,
+      "elapsed_s": 26.02
+    },
+    {
+      "id": 11,
+      "question": "For a 100–250 mm rigid flange coupling, what is the permissible parallel misalignment?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 5, p.44",
+      "expected_answer": "0.02 mm (0.8 mil)",
+      "answer": "- **Permissible parallel misalignment:** **0.02 mm (0.8 mil)**  \n- **Source:** Page **49**, Table 5.",
+      "usage": {
+        "input_tokens": 238984,
+        "cached_input_tokens": 0,
+        "output_tokens": 37,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04784,
+      "elapsed_s": 25.18
+    },
+    {
+      "id": 12,
+      "question": "For a 250–500 mm gear coupling, what is the permissible angular misalignment?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 5, p.45",
+      "expected_answer": "0.05 mm (2 mil)",
+      "answer": "- **Permissible angular misalignment:** **0.05 mm (2 mil)** for a **250–500 mm gear coupling**.  \n- **Source:** Table 5, page **49**.",
+      "usage": {
+        "input_tokens": 238983,
+        "cached_input_tokens": 0,
+        "output_tokens": 47,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04785,
+      "elapsed_s": 177.33
+    },
+    {
+      "id": 13,
+      "question": "What is the minimum acceptable insulation resistance for a used stator winding?",
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER",
+      "source": "§7.6.4.3, p.91",
+      "expected_answer": "> 100 MΩ (R at 1–10 min, 40°C)",
+      "answer": "- The minimum acceptable insulation resistance for a **used stator winding** is **greater than 100 MΩ**, measured at **40°C** after the test voltage has been applied for **1 minute or longer**.  \n- **Page 92.**",
+      "usage": {
+        "input_tokens": 238979,
+        "cached_input_tokens": 0,
+        "output_tokens": 56,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04786,
+      "elapsed_s": 44.25
+    },
+    {
+      "id": 14,
+      "question": "What is the minimum acceptable insulation resistance for a wound rotor winding?",
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER",
+      "source": "§7.6.4.3, p.91",
+      "expected_answer": "> 5 MΩ (R at 1–10 min, 40°C)",
+      "answer": "- **Minimum acceptable insulation resistance:** $R_{(1\\text{–}10\\ \\mathrm{min},\\,40^\\circ\\mathrm{C})} > 5\\ \\mathrm{M}\\Omega$ for induction machines with wound rotors.  \n- The test voltage is **1000 VDC**, applied for **1 minute or longer**.\n\n**Source:** PDF page **92**.",
+      "usage": {
+        "input_tokens": 238978,
+        "cached_input_tokens": 0,
+        "output_tokens": 87,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.0479,
+      "elapsed_s": 32.15
+    },
+    {
+      "id": 15,
+      "question": "What insulation resistance is acceptable for a new stator under extremely warm and humid measuring conditions?",
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER",
+      "source": "§7.6.4.3, p.91",
+      "expected_answer": "values above 100 MΩ (vs >1000 MΩ for normal conditions)",
+      "answer": "For a **new stator** under extremely warm and humid measuring conditions, an insulation resistance of **more than 100 MΩ at 40°C** is acceptable, provided the test voltage has been applied for **1 minute or longer**.\n\n**Source:** Page 92.",
+      "usage": {
+        "input_tokens": 238983,
+        "cached_input_tokens": 0,
+        "output_tokens": 60,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04787,
+      "elapsed_s": 25.66
+    },
+    {
+      "id": 16,
+      "question": "What test voltage is used for the insulation resistance test on the space heater?",
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER",
+      "source": "§7.6.5, p.94",
+      "expected_answer": "500 VDC",
+      "answer": "The test voltage is **500 VDC**. **(Page 94)**",
+      "usage": {
+        "input_tokens": 238980,
+        "cached_input_tokens": 0,
+        "output_tokens": 20,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04782,
+      "elapsed_s": 21.32
+    },
+    {
+      "id": 17,
+      "question": "What test voltage is used for the insulation resistance test on auxiliaries other than the space heater?",
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER",
+      "source": "§7.6.5, p.94",
+      "expected_answer": "100 VDC",
+      "answer": "The test voltage is **100 VDC** for auxiliaries other than the space heater. The space heater uses **500 VDC**.  \n\n**Source: page 94, §7.6.5.**",
+      "usage": {
+        "input_tokens": 238984,
+        "cached_input_tokens": 0,
+        "output_tokens": 48,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04785,
+      "elapsed_s": 26.32
+    },
+    {
+      "id": 18,
+      "question": "At what percentage of filter surface obstruction does the open-air cooling intake filter's pressure alarm trigger?",
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER",
+      "source": "§7.8.1.1, p.97",
+      "expected_answer": "50%",
+      "answer": "The pressure alarm triggers when **50% of the air-filter surface is obstructed**. **(Page 97.)**",
+      "usage": {
+        "input_tokens": 238984,
+        "cached_input_tokens": 0,
+        "output_tokens": 29,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04783,
+      "elapsed_s": 24.69
+    },
+    {
+      "id": 19,
+      "question": "How often should the brush lifting device's movement and contacts be checked, in terms of number of starts?",
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER",
+      "source": "§7.7.4, p.96",
+      "expected_answer": "every 100 starts (or six months)",
+      "answer": "- The brush lifting device’s movement and contacts should be checked every **100 starts**.  \n- (Also specified as every **six months**.)  \n\n**Page 96.**",
+      "usage": {
+        "input_tokens": 238986,
+        "cached_input_tokens": 0,
+        "output_tokens": 41,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04785,
+      "elapsed_s": 76.13
+    },
+    {
+      "id": 20,
+      "question": "What is the guideline maximum number of starts per year for a typical direct-on-line application?",
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER",
+      "source": "§6.3, p.69",
+      "expected_answer": "1000 starts per year",
+      "answer": "- **Guideline maximum:** **1,000 starts per year** for a typical direct-on-line application.  \n- The actual allowable number depends on the load characteristics, inertia, machine type, and design; consult the machine’s performance data sheet for the specific limit.\n\n**Source:** Page 69.",
+      "usage": {
+        "input_tokens": 238983,
+        "cached_input_tokens": 0,
+        "output_tokens": 65,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04787,
+      "elapsed_s": 43.8
+    },
+    {
+      "id": 21,
+      "question": "What percentage of steel content is typical for cast iron frame induction machines?",
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER",
+      "source": "§10.2, p.123",
+      "expected_answer": "46–55%",
+      "answer": "- **Steel content:** **46–55%** for cast iron frame induction machines.  \n- **Source:** Page **123**.",
+      "usage": {
+        "input_tokens": 238979,
+        "cached_input_tokens": 0,
+        "output_tokens": 32,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04783,
+      "elapsed_s": 32.17
+    },
+    {
+      "id": 22,
+      "question": "What percentage of cast iron content is typical for modular steel frame induction machines?",
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER",
+      "source": "§10.2, p.123",
+      "expected_answer": "1–5%",
+      "answer": "- **Typical cast iron content:** **1–5%** for modular steel frame induction machines.  \n- **Page:** 123.",
+      "usage": {
+        "input_tokens": 238980,
+        "cached_input_tokens": 0,
+        "output_tokens": 32,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04783,
+      "elapsed_s": 201.5
+    },
+    {
+      "id": 23,
+      "question": "What is the formula for equivalent operating hours for a constant speed drive machine?",
+      "failure_type": "Conditional-content confusion",
+      "rag_target": "Chunking (topical)",
+      "source": "§7.3, p.74",
+      "expected_answer": "Actual operating hours + (Number of starts × 20)",
+      "answer": "For a constant-speed drive:\n\n$$\\text{Equivalent operating hours} = \\text{Actual operating hours} + (\\text{Number of starts} \\times 20)$$\n\n**Page:** 74",
+      "usage": {
+        "input_tokens": 238980,
+        "cached_input_tokens": 0,
+        "output_tokens": 46,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04785,
+      "elapsed_s": 42.51
+    },
+    {
+      "id": 24,
+      "question": "What is the formula for equivalent operating hours for a variable speed drive machine?",
+      "failure_type": "Conditional-content confusion",
+      "rag_target": "Chunking (topical)",
+      "source": "§7.3, p.74",
+      "expected_answer": "Actual operating hours (no starts term)",
+      "answer": "For a **variable speed drive** machine:\n\n\\[\n\\text{Equivalent operating hours (Eq. h)}=\\text{Actual operating hours}\n\\]\n\n**Page 74.**",
+      "usage": {
+        "input_tokens": 238980,
+        "cached_input_tokens": 0,
+        "output_tokens": 41,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04785,
+      "elapsed_s": 31.74
+    },
+    {
+      "id": 25,
+      "question": "In the worked R40 example, an insulation resistance of 30 MΩ is measured at 20°C with k=0.25. What is R40?",
+      "failure_type": "Cross-section arithmetic",
+      "rag_target": "Chunking (topical)",
+      "source": "§7.6.4.1, p.90",
+      "expected_answer": "7.5 MΩ",
+      "answer": "$R_{40} = k \\times R = 0.25 \\times 30\\,\\text{M}\\Omega = 7.5\\,\\text{M}\\Omega$.\n\n**Answer:** **7.5 MΩ** (page 91).",
+      "usage": {
+        "input_tokens": 238998,
+        "cached_input_tokens": 0,
+        "output_tokens": 59,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04787,
+      "elapsed_s": 25.28
+    },
+    {
+      "id": 26,
+      "question": "What is the normal oil supply pressure for a flood-lubricated sleeve bearing?",
+      "failure_type": "Cross-section synthesis",
+      "rag_target": "Chunking (topical)",
+      "source": "§5.7.3.2, p.66",
+      "expected_answer": "125 kPa ± 25 kPa (18 psi ± 4 psi)",
+      "answer": "- **Normal oil supply pressure:** **125 kPa ± 25 kPa** (**18 psi ± 4 psi**).  \n- **Page:** 66.",
+      "usage": {
+        "input_tokens": 238982,
+        "cached_input_tokens": 0,
+        "output_tokens": 38,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04784,
+      "elapsed_s": 25.9
+    },
+    {
+      "id": 27,
+      "question": "What is the minimum polarization index (PI) value for a class F stator winding?",
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)",
+      "source": "§7.6.6, p.94",
+      "expected_answer": "more than 2",
+      "answer": "The minimum polarization index for a **class F stator winding is greater than 2**.\n\n**Source:** Page 94.",
+      "usage": {
+        "input_tokens": 238983,
+        "cached_input_tokens": 0,
+        "output_tokens": 30,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04783,
+      "elapsed_s": 24.43
+    },
+    {
+      "id": 28,
+      "question": "Below what winding temperature is the polarization index test considered independent of temperature?",
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)",
+      "source": "§7.6.6, p.94",
+      "expected_answer": "50°C (122°F)",
+      "answer": "The polarization index test may be considered independent of temperature when the winding temperature is **below 50°C (122°F)**. **(Page 94.)**",
+      "usage": {
+        "input_tokens": 238979,
+        "cached_input_tokens": 0,
+        "output_tokens": 36,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04784,
+      "elapsed_s": 26.76
+    },
+    {
+      "id": 29,
+      "question": "What is the recommended brush pressure range on the slip ring, in mN/mm²?",
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)",
+      "source": "§7.7.2.1, p.95",
+      "expected_answer": "18–20 mN/mm² (180–200 g/cm²)",
+      "answer": "- Recommended brush pressure: **18–20 mN/mm²**.  \n- **Source:** PDF page **95**.",
+      "usage": {
+        "input_tokens": 238983,
+        "cached_input_tokens": 0,
+        "output_tokens": 30,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04783,
+      "elapsed_s": 24.53
+    },
+    {
+      "id": 30,
+      "question": "How long should the first test start of the machine last?",
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)",
+      "source": "§5.6.3, p.64",
+      "expected_answer": "about one (1) second",
+      "answer": "- The first test start should last **about one second**.  \n- Its purpose is to verify the **direction of rotation** and ensure rotating parts do not contact stationary parts.  \n\n**Source:** Page 64, Section 5.6.3 “Starting.”",
+      "usage": {
+        "input_tokens": 238977,
+        "cached_input_tokens": 0,
+        "output_tokens": 58,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04786,
+      "elapsed_s": 101.77
+    },
+    {
+      "id": 31,
+      "question": "If the brush wear limit mark is not evident, how far from the brush top is the wear limit?",
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)",
+      "source": "§7.7.4.1, p.96",
+      "expected_answer": "about 10 mm",
+      "answer": "- The wear limit is approximately **10 mm from the brush top**.  \n  **Page 96.**",
+      "usage": {
+        "input_tokens": 238986,
+        "cached_input_tokens": 0,
+        "output_tokens": 27,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04783,
+      "elapsed_s": 50.52
+    },
+    {
+      "id": 32,
+      "question": "As a thumb rule, how often should an insulation resistance test be performed?",
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)",
+      "source": "§7.6.2, p.90",
+      "expected_answer": "once a year",
+      "answer": "- As a thumb rule, perform an insulation resistance test **once a year**.  \n- This is generally sufficient for most machines and operating conditions. **(Page 90)**",
+      "usage": {
+        "input_tokens": 238980,
+        "cached_input_tokens": 0,
+        "output_tokens": 40,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04784,
+      "elapsed_s": 25.15
+    },
+    {
+      "id": 33,
+      "question": "How long should the initial start of the machine last?",
+      "failure_type": "Consistency (paraphrase of Q30)",
+      "rag_target": "Chunking/retrieval consistency",
+      "source": "§5.6.3, p.64",
+      "expected_answer": "about one (1) second",
+      "answer": "- The initial start should last **about 1 second** to verify the direction of rotation and ensure rotating parts do not contact stationary parts.  \n- **Page 64.**",
+      "usage": {
+        "input_tokens": 238976,
+        "cached_input_tokens": 0,
+        "output_tokens": 40,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04784,
+      "elapsed_s": 26.08
+    },
+    {
+      "id": 34,
+      "question": "What's the recommended duration for the first trial start of the machine?",
+      "failure_type": "Consistency (paraphrase of Q30)",
+      "rag_target": "Chunking/retrieval consistency",
+      "source": "§5.6.3, p.64",
+      "expected_answer": "about one (1) second",
+      "answer": "- The first trial start should last **about 1 second**.  \n- **Page 64**, section 5.6.3 “Starting.”",
+      "usage": {
+        "input_tokens": 238978,
+        "cached_input_tokens": 0,
+        "output_tokens": 35,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04784,
+      "elapsed_s": 76.67
+    },
+    {
+      "id": 35,
+      "question": "What test voltage is used to measure the insulation resistance of the stator winding?",
+      "failure_type": "Consistency (baseline)",
+      "rag_target": "Chunking/retrieval consistency",
+      "source": "§7.6.4.4, p.91",
+      "expected_answer": "1000 VDC",
+      "answer": "The stator winding insulation resistance is measured using a test voltage of **1000 VDC**. **(Page 92)**",
+      "usage": {
+        "input_tokens": 238981,
+        "cached_input_tokens": 0,
+        "output_tokens": 30,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04783,
+      "elapsed_s": 42.03
+    },
+    {
+      "id": 36,
+      "question": "At what voltage is the stator winding's insulation resistance tested?",
+      "failure_type": "Consistency (paraphrase)",
+      "rag_target": "Chunking/retrieval consistency",
+      "source": "§7.6.4.4, p.91",
+      "expected_answer": "1000 VDC",
+      "answer": "The stator winding’s insulation resistance is tested at **1,000 VDC**. **(Page 92.)**",
+      "usage": {
+        "input_tokens": 238978,
+        "cached_input_tokens": 0,
+        "output_tokens": 29,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04783,
+      "elapsed_s": 34.08
+    },
+    {
+      "id": 37,
+      "question": "How often should carbon dust be removed from the slip ring housing?",
+      "failure_type": "Consistency / fabrication probe",
+      "rag_target": "Chunking/retrieval consistency",
+      "source": "§7.7.4.5, p.96",
+      "expected_answer": "\"at regular intervals\" — no fixed numeric interval is given",
+      "answer": "- **No fixed interval is specified.** The carbon-dust filter’s cleaning interval depends on the **number of brushes and brush wear rate**, as shown in Figure 42.\n- The filter should also be **inspected frequently** and **changed immediately after a differential-pressure alarm**.  \n\n**Source: PDF page 96.**",
+      "usage": {
+        "input_tokens": 238978,
+        "cached_input_tokens": 0,
+        "output_tokens": 160,
+        "reasoning_tokens": 86
+      },
+      "cost_usd": 0.04799,
+      "elapsed_s": 45.72
+    },
+    {
+      "id": 38,
+      "question": "What is the carbon-dust cleaning schedule for the slip ring housing?",
+      "failure_type": "Consistency / fabrication probe (paraphrase)",
+      "rag_target": "Chunking/retrieval consistency",
+      "source": "§7.7.4.5, p.96",
+      "expected_answer": "\"at regular intervals\" — no fixed numeric interval is given",
+      "answer": "- The carbon-dust filter cleaning interval is determined from the graph based on:\n  - **Number of brushes**\n  - **Brush wear rate**, in mm per \\(10^3\\) operating hours\n- The filter must be **changed immediately after a differential-pressure alarm**.\n- Operating personnel should also **inspect the filter frequently**.\n\n**Source:** PDF page **96**, §7.7.3 and Figure 42.",
+      "usage": {
+        "input_tokens": 238979,
+        "cached_input_tokens": 0,
+        "output_tokens": 151,
+        "reasoning_tokens": 57
+      },
+      "cost_usd": 0.04798,
+      "elapsed_s": 44.36
+    },
+    {
+      "id": 39,
+      "question": "What is the maximum ambient temperature for which air-cooled models are typically designed?",
+      "failure_type": "Consistency (baseline)",
+      "rag_target": "Chunking/retrieval consistency",
+      "source": "Safety Instructions §2, p.3",
+      "expected_answer": "+40°C",
+      "answer": "- **Maximum ambient temperature:** **+40°C** (typically; air-cooled models are designed for **−20°C to +40°C**).\n- **Page:** 3.",
+      "usage": {
+        "input_tokens": 238981,
+        "cached_input_tokens": 0,
+        "output_tokens": 42,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04785,
+      "elapsed_s": 54.16
+    },
+    {
+      "id": 40,
+      "question": "Up to what ambient temperature are air-cooled machines normally rated?",
+      "failure_type": "Consistency (paraphrase)",
+      "rag_target": "Chunking/retrieval consistency",
+      "source": "Safety Instructions §2, p.3",
+      "expected_answer": "+40°C",
+      "answer": "Air-cooled machines are typically rated for ambient temperatures up to **+40°C** (and down to **−20°C**). **Page 3.**",
+      "usage": {
+        "input_tokens": 238978,
+        "cached_input_tokens": 0,
+        "output_tokens": 37,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04784,
+      "elapsed_s": 79.11
+    },
+    {
+      "id": 41,
+      "question": "From Figure 42, at 18 brushes with a carbon brush wear rate of 3 mm/10³h, what's the approximate maximum cleaning interval?",
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption",
+      "source": "Figure 42, p.96",
+      "expected_answer": "≈10–12 ×10³ h (approximate graph reading)",
+      "answer": "- **Approximate maximum cleaning interval:** **4.5 × 10³ hours** (about **4,500 hours**).\n\n*Source: Figure 42, page 96.*",
+      "usage": {
+        "input_tokens": 238996,
+        "cached_input_tokens": 0,
+        "output_tokens": 272,
+        "reasoning_tokens": 228
+      },
+      "cost_usd": 0.04813,
+      "elapsed_s": 28.15
+    },
+    {
+      "id": 42,
+      "question": "From Figure 42, at 6 brushes with the lowest wear rate (1 mm/10³h), what's the approximate maximum cleaning interval?",
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption",
+      "source": "Figure 42, p.96",
+      "expected_answer": "≈40 ×10³ h (approximate graph reading, near chart's upper limit)",
+      "answer": "Approximately **40 × 10³ hours** (about **40,000 hours**).  \n\n**Source:** Figure 42, page **96**.",
+      "usage": {
+        "input_tokens": 238994,
+        "cached_input_tokens": 0,
+        "output_tokens": 120,
+        "reasoning_tokens": 83
+      },
+      "cost_usd": 0.04794,
+      "elapsed_s": 44.01
+    },
+    {
+      "id": 43,
+      "question": "From Figure 38, approximately what is the coefficient Kt at a winding temperature of 80°C?",
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption",
+      "source": "Figure 38, p.91",
+      "expected_answer": "≈13–15 (approximate log-scale reading; no exact figure given in text)",
+      "answer": "- At **80°C**, the coefficient \\(K_t\\) is approximately **16**.  \n  **Source: page 91, Figure 38.**",
+      "usage": {
+        "input_tokens": 238986,
+        "cached_input_tokens": 0,
+        "output_tokens": 206,
+        "reasoning_tokens": 167
+      },
+      "cost_usd": 0.04804,
+      "elapsed_s": 148.92
+    },
+    {
+      "id": 44,
+      "question": "From Figure 38, approximately what is the coefficient Kt at a winding temperature of 60°C?",
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption",
+      "source": "Figure 38, p.91",
+      "expected_answer": "≈3.5–4 (approximate log-scale reading; no exact figure given in text)",
+      "answer": "At a winding temperature of **60°C**, the coefficient \\(K_t\\) is approximately **4**.  \n\n**Source:** Figure 38, page **91**.",
+      "usage": {
+        "input_tokens": 238986,
+        "cached_input_tokens": 0,
+        "output_tokens": 225,
+        "reasoning_tokens": 184
+      },
+      "cost_usd": 0.04807,
+      "elapsed_s": 35.12
+    },
+    {
+      "id": 45,
+      "question": "In the 'Typical main power cable connections' appendix, what is the tightening torque for the M12-steel cable-lug connection screw shown in the first diagram?",
+      "failure_type": "Diagram-to-caption matching",
+      "rag_target": "Image Caption",
+      "source": "Appendix, p.138",
+      "expected_answer": "55 Nm",
+      "answer": "- **Tightening torque:** **55 Nm**\n- **Page:** 139",
+      "usage": {
+        "input_tokens": 238998,
+        "cached_input_tokens": 0,
+        "output_tokens": 21,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04782,
+      "elapsed_s": 21.87
+    },
+    {
+      "id": 46,
+      "question": "In the same appendix, what is the tightening torque for the M16-bronze/brass bushing-style connection screw shown in the second diagram?",
+      "failure_type": "Diagram-to-caption matching",
+      "rag_target": "Image Caption",
+      "source": "Appendix, p.138",
+      "expected_answer": "40 Nm",
+      "answer": "- **Tightening torque:** **40 N·m**\n- The second diagram specifies an **M16 bronze screw** with an **M16 brass hexagon nut**. **Page 139.**",
+      "usage": {
+        "input_tokens": 238995,
+        "cached_input_tokens": 0,
+        "output_tokens": 46,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04785,
+      "elapsed_s": 26.26
+    },
+    {
+      "id": 47,
+      "question": "In the same appendix, what screw size is used for the round-terminal (DIN 46223) connection, and what's its tightening spec?",
+      "failure_type": "Diagram-to-caption matching (negative case)",
+      "rag_target": "Image Caption",
+      "source": "Appendix, p.139",
+      "expected_answer": "M10-steel; tightened until a reliable connection is obtained (no torque figure given)",
+      "answer": "- **Screw size:** M10 steel  \n- **Tightening specification:** Tighten until a reliable connection is obtained.  \n\n**Source:** Appendix “Typical main power cable connections,” **page 139**.",
+      "usage": {
+        "input_tokens": 238993,
+        "cached_input_tokens": 0,
+        "output_tokens": 48,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04786,
+      "elapsed_s": 49.58
+    },
+    {
+      "id": 48,
+      "question": "In the 'Typical position of plates' diagram, which letter (A or B) denotes the HXR machine mounted vertically?",
+      "failure_type": "Legend-to-diagram matching",
+      "rag_target": "Image Caption",
+      "source": "Appendix, p.137",
+      "expected_answer": "B",
+      "answer": "**B** denotes the HXR machine mounted vertically. (Page 137)",
+      "usage": {
+        "input_tokens": 238990,
+        "cached_input_tokens": 0,
+        "output_tokens": 20,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04782,
+      "elapsed_s": 25.27
+    },
+    {
+      "id": 49,
+      "question": "In the same diagram, which letter denotes the HXR machine mounted horizontally?",
+      "failure_type": "Legend-to-diagram matching",
+      "rag_target": "Image Caption",
+      "source": "Appendix, p.137",
+      "expected_answer": "A",
+      "answer": "The letter **A** denotes the HXR machine mounted horizontally. **(Page 137)**",
+      "usage": {
+        "input_tokens": 238980,
+        "cached_input_tokens": 0,
+        "output_tokens": 23,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04782,
+      "elapsed_s": 50.66
+    },
+    {
+      "id": 50,
+      "question": "In the direction-of-rotation diagram, which item number represents 'Reversing'?",
+      "failure_type": "Legend-to-diagram matching",
+      "rag_target": "Image Caption",
+      "source": "Appendix, p.138",
+      "expected_answer": "item 9",
+      "answer": "Item **9** represents **“Reversing.”** (Page **138**.)",
+      "usage": {
+        "input_tokens": 238982,
+        "cached_input_tokens": 0,
+        "output_tokens": 22,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04782,
+      "elapsed_s": 76.42
+    },
+    {
+      "id": 51,
+      "question": "For a 250–500 mm flexible coupling, what is the permissible axial misalignment?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 5, p.45",
+      "expected_answer": "0.10 mm (4 mil)",
+      "answer": "For a **250–500 mm flexible coupling**, the permissible axial misalignment is **0.10 mm (4 mil)**.  \n\n**Source:** Page 49, Table 5.",
+      "usage": {
+        "input_tokens": 238983,
+        "cached_input_tokens": 0,
+        "output_tokens": 42,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04785,
+      "elapsed_s": 25.75
+    },
+    {
+      "id": 52,
+      "question": "What is the tightening torque (Nm) for a dry M36 bolt of property class 8.8?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 7, p.79",
+      "expected_answer": "2300 Nm",
+      "answer": "- **Dry M36 bolt (property class 8.8): 2300 Nm**  \n- **Source:** Page 79, Table 7 “General tightening torques.”",
+      "usage": {
+        "input_tokens": 238987,
+        "cached_input_tokens": 0,
+        "output_tokens": 41,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04785,
+      "elapsed_s": 42.63
+    },
+    {
+      "id": 53,
+      "question": "What is the tightening torque (Nm) for an oiled M8 bolt of property class 8.8?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 7, p.79",
+      "expected_answer": "22 Nm",
+      "answer": "- **Oiled M8 bolt, property class 8.8:** **22 Nm**  \n- **Source:** Table 7, page **79**.",
+      "usage": {
+        "input_tokens": 238988,
+        "cached_input_tokens": 0,
+        "output_tokens": 37,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04784,
+      "elapsed_s": 74.47
+    },
+    {
+      "id": 54,
+      "question": "For a rigid-support machine, what is the rms velocity boundary between vibration Zone A and Zone B?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 8, p.81",
+      "expected_answer": "2.3 mm/s",
+      "answer": "- **Rigid-support machine:** The Zone A/B boundary is **2.3 mm/s RMS velocity**.  \n  **Source:** page 81, Table 8.",
+      "usage": {
+        "input_tokens": 238985,
+        "cached_input_tokens": 0,
+        "output_tokens": 39,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04784,
+      "elapsed_s": 84.42
+    },
+    {
+      "id": 55,
+      "question": "What is the initial ALARM value for bearing housing vibration on a flexible-support machine?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 9, p.82",
+      "expected_answer": "5.3 mm/s",
+      "answer": "- **Initial ALARM value:** **5.3 mm/s RMS** for a flexible-support machine.  \n- **Source:** Table 9, page **82**.",
+      "usage": {
+        "input_tokens": 238982,
+        "cached_input_tokens": 0,
+        "output_tokens": 39,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04784,
+      "elapsed_s": 25.48
+    },
+    {
+      "id": 56,
+      "question": "What is the tightening torque, in Nm, for an EF_LB 28 axially locating bearing?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 4, p.34",
+      "expected_answer": "1200 Nm",
+      "answer": "- **Tightening torque:** **1200 Nm**\n- **Page:** 34 (Table 4, “Tightening torque”)",
+      "usage": {
+        "input_tokens": 238986,
+        "cached_input_tokens": 0,
+        "output_tokens": 33,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04784,
+      "elapsed_s": 26.05
+    },
+    {
+      "id": 57,
+      "question": "According to Table 6, at how many equivalent operating hours does the L4 (Overhaul) maintenance level occur?",
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)",
+      "source": "Table 6, p.76",
+      "expected_answer": "80,000 equivalent operating hours",
+      "answer": "According to Table 6, **L4 (Overhaul)** occurs at **80,000 equivalent operating hours**. (Page 76)",
+      "usage": {
+        "input_tokens": 238989,
+        "cached_input_tokens": 0,
+        "output_tokens": 33,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04784,
+      "elapsed_s": 43.82
+    },
+    {
+      "id": 58,
+      "question": "What does the abbreviation 'D' mean in the recommended maintenance program tables (e.g., Table 6 and its sub-tables)?",
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)",
+      "source": "§7.3.1, p.75 (legend, 3 pages before data rows on p.78+)",
+      "expected_answer": "Disassembling and assembling",
+      "answer": "- **D** means **disassembling and assembling** in the recommended maintenance program tables.  \n- **Page used:** 75.",
+      "usage": {
+        "input_tokens": 238992,
+        "cached_input_tokens": 0,
+        "output_tokens": 32,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04784,
+      "elapsed_s": 45.4
+    },
+    {
+      "id": 59,
+      "question": "At maintenance level L3, what re-greasing check ('Check/Test' column) is specified for rolling bearings, per the maintenance program table?",
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)",
+      "source": "§7.3.1.6, p.78",
+      "expected_answer": "V/R — According to bearing plate",
+      "answer": "- **L3 re-greasing check:** According to the bearing plate.  \n- **Page:** 78.",
+      "usage": {
+        "input_tokens": 238995,
+        "cached_input_tokens": 0,
+        "output_tokens": 67,
+        "reasoning_tokens": 37
+      },
+      "cost_usd": 0.04788,
+      "elapsed_s": 55.05
+    },
+    {
+      "id": 60,
+      "question": "What does the abbreviation 'V/T/C' mean when it appears together in a maintenance program row?",
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)",
+      "source": "§7.3.1, p.75 legend + e.g. p.76 stator winding insulation row",
+      "expected_answer": "Visual checking / Testing and measurement / Cleaning, all required at that level",
+      "answer": "**V/T/C** means the maintenance task includes:\n\n- **V** — Visual checking  \n- **T** — Testing and measurement  \n- **C** — Cleaning  \n\n**Source:** Page 75 (maintenance-program abbreviations); examples appear on pages 76–79.",
+      "usage": {
+        "input_tokens": 238985,
+        "cached_input_tokens": 0,
+        "output_tokens": 116,
+        "reasoning_tokens": 54
+      },
+      "cost_usd": 0.04794,
+      "elapsed_s": 105.72
+    },
+    {
+      "id": 61,
+      "question": "When the machine is first switched on for a trial run, how briefly should it be kept energized?",
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness",
+      "source": "§5.6.3, p.64 (source text says 'first start', not 'switched on'/'energized')",
+      "expected_answer": "about one (1) second",
+      "answer": "- Keep the machine energized for **about 1 second** during the first test start.  \n- This is to verify the **direction of rotation** and ensure rotating parts do not contact stationary parts.  \n\n**Source:** PDF page **64**, section 5.6.3 “Starting.”",
+      "usage": {
+        "input_tokens": 238985,
+        "cached_input_tokens": 0,
+        "output_tokens": 63,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04787,
+      "elapsed_s": 25.46
+    },
+    {
+      "id": 62,
+      "question": "What symptoms suggest a faulty temperature sensor may be present in the winding or bearing?",
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness",
+      "source": "§8.3.2, p.114 (source text says 'Pt-100 detector', not 'temperature sensor')",
+      "expected_answer": "infinite or zero resistance; disappearance of measurement signal during/after startup; a significantly different resistance value in a single detector",
+      "answer": "Symptoms suggesting a faulty Pt-100 temperature sensor include:\n\n- **Infinite or zero resistance** across the detector.\n- **Loss of the measurement signal** during or after startup.\n- **A significantly different resistance reading** from one detector compared with the others.\n- A **seemingly abnormal temperature reading** caused by faulty instrumentation or the temperature detector.\n\nConfirm the fault by measuring the detector’s resistance at the connection box with its cables disconnected. **Pages 102, 105, and 114.**",
+      "usage": {
+        "input_tokens": 238981,
+        "cached_input_tokens": 0,
+        "output_tokens": 199,
+        "reasoning_tokens": 92
+      },
+      "cost_usd": 0.04804,
+      "elapsed_s": 52.77
+    },
+    {
+      "id": 63,
+      "question": "What megohm-meter voltage should be applied when megger-testing the main stator windings?",
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness",
+      "source": "§7.6.4.4, p.91 (source text says 'insulation resistance test', not 'megger'/'megohm-meter')",
+      "expected_answer": "1000 VDC",
+      "answer": "- Apply **1,000 V DC** when megger-testing the main stator windings.  \n- The test duration is **1 minute**.  \n\n**Source:** PDF page **92**, section 7.6.4.4.",
+      "usage": {
+        "input_tokens": 238985,
+        "cached_input_tokens": 0,
+        "output_tokens": 89,
+        "reasoning_tokens": 33
+      },
+      "cost_usd": 0.0479,
+      "elapsed_s": 49.37
+    },
+    {
+      "id": 64,
+      "question": "How tightly, in Nm, must an oiled M10 bolt of property class 8.8 be fastened?",
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness",
+      "source": "Table 7, p.79 (source uses 'tightening torque', not 'how tightly fastened')",
+      "expected_answer": "44 Nm",
+      "answer": "- **Oiled M10 bolt, property class 8.8:** **44 Nm**  \n- **Source:** Page **79**, Table 7 “General tightening torques.”",
+      "usage": {
+        "input_tokens": 238989,
+        "cached_input_tokens": 0,
+        "output_tokens": 66,
+        "reasoning_tokens": 23
+      },
+      "cost_usd": 0.04788,
+      "elapsed_s": 24.12
+    },
+    {
+      "id": 65,
+      "question": "How is the debris screen on the slip ring housing cleaned?",
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness",
+      "source": "§7.7.3, p.96 (source says 'carbon dust filter', not 'debris screen')",
+      "expected_answer": "by washing, beating, or spraying",
+      "answer": "- The debris screen/carbon dust filter on the slip-ring housing can be cleaned by **washing, beating, or spraying**.  \n- If the differential-pressure switch gives an alarm, the filter must be **changed immediately**.  \n\n**Page 96.**",
+      "usage": {
+        "input_tokens": 238977,
+        "cached_input_tokens": 0,
+        "output_tokens": 93,
+        "reasoning_tokens": 34
+      },
+      "cost_usd": 0.04791,
+      "elapsed_s": 100.95
+    },
+    {
+      "id": 66,
+      "question": "At what oscillation speed does the alarm trigger for a rigidly mounted bearing housing?",
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness",
+      "source": "Table 9, p.82 (source uses 'vibration', not 'oscillation speed')",
+      "expected_answer": "3.4 mm/s",
+      "answer": "- **Alarm trigger:** **3.4 mm/s RMS** vibration velocity for a rigidly supported bearing housing.  \n- **Page:** 82 (Table 9).",
+      "usage": {
+        "input_tokens": 238982,
+        "cached_input_tokens": 0,
+        "output_tokens": 69,
+        "reasoning_tokens": 28
+      },
+      "cost_usd": 0.04788,
+      "elapsed_s": 50.99
+    },
+    {
+      "id": 67,
+      "question": "What is the exact re-greasing interval, in hours, for rolling bearings?",
+      "failure_type": "Deferred-value / fabrication probe",
+      "rag_target": "Chunking (topical) + retrieval confidence",
+      "source": "§7.5.3.3, p.83",
+      "expected_answer": "No universal number — the interval is found on the bearing plate (machine-specific); regardless, re-greasing must occur at least once per year, and the interval halves per 15°C rise above the 70°C baseline",
+      "answer": "- The manual does **not specify one universal re-greasing interval** for all rolling bearings. The exact interval is listed on the machine’s **bearing plate** and must be followed.\n- Regardless of the listed interval, rolling bearings must be re-greased **at least once every 12 months**.\n\n**Pages used:** 21–23 and 84–85.",
+      "usage": {
+        "input_tokens": 238982,
+        "cached_input_tokens": 0,
+        "output_tokens": 151,
+        "reasoning_tokens": 68
+      },
+      "cost_usd": 0.04798,
+      "elapsed_s": 23.83
+    },
+    {
+      "id": 68,
+      "question": "What is the maximum permissible shaft key length for this motor?",
+      "failure_type": "Absence probe",
+      "rag_target": "Retrieval confidence / hallucination check",
+      "source": "N/A — deliberately fabricated question",
+      "expected_answer": "Not specified in this manual",
+      "answer": "The manual does **not specify a maximum permissible shaft key length** for the motor. It states only that the shaft key and coupling must be balanced according to the marked balancing method:\n\n- **H** = half-key balance  \n- **F** = full-key balance  \n\nThe required shaft-key dimensions must be obtained from the motor’s **project-specific dimensional drawing**. **Pages 3 and 38.**",
+      "usage": {
+        "input_tokens": 238977,
+        "cached_input_tokens": 0,
+        "output_tokens": 136,
+        "reasoning_tokens": 48
+      },
+      "cost_usd": 0.04796,
+      "elapsed_s": 27.26
+    },
+    {
+      "id": 69,
+      "question": "What is the warranty period, in months, for this machine?",
+      "failure_type": "Absence probe",
+      "rag_target": "Retrieval confidence / hallucination check",
+      "source": "N/A — deliberately fabricated question",
+      "expected_answer": "Not specified in this manual (warranty terms are contractual, not covered here)",
+      "answer": "- The warranty period **is not specified in months** in the manual. It is defined in the **sales agreement**.  \n- **Pages used:** 17 and 117.",
+      "usage": {
+        "input_tokens": 238978,
+        "cached_input_tokens": 0,
+        "output_tokens": 91,
+        "reasoning_tokens": 48
+      },
+      "cost_usd": 0.0479,
+      "elapsed_s": 43.36
+    },
+    {
+      "id": 70,
+      "question": "What is the list price of the carbon brush replacement kit?",
+      "failure_type": "Absence probe",
+      "rag_target": "Retrieval confidence / hallucination check",
+      "source": "N/A — deliberately fabricated question",
+      "expected_answer": "Not specified in this manual",
+      "answer": "The manual does not provide a list price for a carbon brush replacement kit. It only lists brushes as spare parts—typically **1 set** for some slip-ring machines (page 120) and **1 set** in the recommended spare-parts package for machines with a brush-lifting device (page 121).",
+      "usage": {
+        "input_tokens": 238977,
+        "cached_input_tokens": 0,
+        "output_tokens": 67,
+        "reasoning_tokens": 0
+      },
+      "cost_usd": 0.04788,
+      "elapsed_s": 74.63
+    }
+  ]
+}
