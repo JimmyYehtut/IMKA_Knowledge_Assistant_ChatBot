@@ -35,6 +35,8 @@ lerna-debug.log*
 # Local sample data
 /Dataset/
 /UI Mockup/
+/pdfs/
+/test-2/
 
 # Editor / OS
 .vscode/*

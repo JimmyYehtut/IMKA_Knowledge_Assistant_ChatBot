@@ -1,0 +1,7032 @@
+{
+  "generated_at": "2026-09-17T14:06:24",
+  "scored_file": "test\\output\\answers-qwen-imka.json",
+  "run": {
+    "mode": "rag",
+    "model": "qwen3.8-27b-q4",
+    "endpoint_id": "8vpnbt1cxz6z0c",
+    "generated_at": "2026-09-16T23:55:48",
+    "source_file": "D:\\git\\fumeng1994\\IMKA_Knowledge_Assistant_ChatBot\\test\\questions.json"
+  },
+  "method": {
+    "relevance": "chunk page matches a page named in the question's source",
+    "tolerances": {
+      "exact": 0,
+      "within_1_page": 1
+    },
+    "k": [
+      1,
+      3,
+      5
+    ],
+    "ranked_list": "final reranked context the answer was generated from",
+    "max_retrieved": 5,
+    "document_filter": null,
+    "documents_seen": {
+      "ABB Manual for Induction Motors and Generators EN": 350
+    },
+    "note": null
+  },
+  "questions_total": 70,
+  "count": 67,
+  "skipped": [
+    {
+      "id": 68,
+      "question": "What is the maximum permissible shaft key length for this motor?",
+      "reason": "source names no page (fabricated / nothing to retrieve)"
+    },
+    {
+      "id": 69,
+      "question": "What is the warranty period, in months, for this machine?",
+      "reason": "source names no page (fabricated / nothing to retrieve)"
+    },
+    {
+      "id": 70,
+      "question": "What is the list price of the carbon brush replacement kit?",
+      "reason": "source names no page (fabricated / nothing to retrieve)"
+    }
+  ],
+  "aggregate": {
+    "overall": {
+      "questions": 67,
+      "exact": {
+        "hit_rate@1": 0.6269,
+        "hit_rate@3": 0.6866,
+        "hit_rate@5": 0.7015,
+        "mrr": 0.6604
+      },
+      "within_1_page": {
+        "hit_rate@1": 0.7313,
+        "hit_rate@3": 0.9254,
+        "hit_rate@5": 0.9552,
+        "mrr": 0.8301
+      }
+    },
+    "by_failure_type": {
+      "Conditional-content confusion": {
+        "questions": 2,
+        "exact": {
+          "hit_rate@1": 1,
+          "hit_rate@3": 1,
+          "hit_rate@5": 1,
+          "mrr": 1.0
+        },
+        "within_1_page": {
+          "hit_rate@1": 1,
+          "hit_rate@3": 1,
+          "hit_rate@5": 1,
+          "mrr": 1.0
+        }
+      },
+      "Consistency (baseline)": {
+        "questions": 2,
+        "exact": {
+          "hit_rate@1": 0,
+          "hit_rate@3": 0.5,
+          "hit_rate@5": 0.5,
+          "mrr": 0.25
+        },
+        "within_1_page": {
+          "hit_rate@1": 0,
+          "hit_rate@3": 1,
+          "hit_rate@5": 1,
+          "mrr": 0.5
+        }
+      },
+      "Consistency (paraphrase of Q30)": {
+        "questions": 2,
+        "exact": {
+          "hit_rate@1": 0,
+          "hit_rate@3": 0,
+          "hit_rate@5": 0,
+          "mrr": 0.0
+        },
+        "within_1_page": {
+          "hit_rate@1": 0,
+          "hit_rate@3": 1,
+          "hit_rate@5": 1,
+          "mrr": 0.3333
+        }
+      },
+      "Consistency (paraphrase)": {
+        "questions": 2,
+        "exact": {
+          "hit_rate@1": 0,
+          "hit_rate@3": 0.5,
+          "hit_rate@5": 0.5,
+          "mrr": 0.25
+        },
+        "within_1_page": {
+          "hit_rate@1": 0,
+          "hit_rate@3": 1,
+          "hit_rate@5": 1,
+          "mrr": 0.5
+        }
+      },
+      "Consistency / fabrication probe": {
+        "questions": 1,
+        "exact": {
+          "hit_rate@1": 1,
+          "hit_rate@3": 1,
+          "hit_rate@5": 1,
+          "mrr": 1.0
+        },
+        "within_1_page": {
+          "hit_rate@1": 1,
+          "hit_rate@3": 1,
+          "hit_rate@5": 1,
+          "mrr": 1.0
+        }
+      },
+      "Consistency / fabrication probe (paraphrase)": {
+        "questions": 1,
+        "exact": {
+          "hit_rate@1": 1,
+          "hit_rate@3": 1,
+          "hit_rate@5": 1,
+          "mrr": 1.0
+        },
+        "within_1_page": {
+          "hit_rate@1": 1,
+          "hit_rate@3": 1,
+          "hit_rate@5": 1,
+          "mrr": 1.0
+        }
+      },
+      "Cross-page legend dependency": {
+        "questions": 4,
+        "exact": {
+          "hit_rate@1": 0.75,
+          "hit_rate@3": 1,
+          "hit_rate@5": 1,
+          "mrr": 0.875
+        },
+        "within_1_page": {
+          "hit_rate@1": 0.75,
+          "hit_rate@3": 1,
+          "hit_rate@5": 1,
+          "mrr": 0.875
+        }
+      },
+      "Cross-section arithmetic": {
+        "questions": 1,
+        "exact": {
+          "hit_rate@1": 0,
+          "hit_rate@3": 0,
+          "hit_rate@5": 0,
+          "mrr": 0.0
+        },
+        "within_1_page": {
+          "hit_rate@1": 1,
+          "hit_rate@3": 1,
+          "hit_rate@5": 1,
+          "mrr": 1.0
+        }
+      },
+      "Cross-section synthesis": {
+        "questions": 1,
+        "exact": {
+          "hit_rate@1": 1,
+          "hit_rate@3": 1,
+          "hit_rate@5": 1,
+          "mrr": 1.0
+        },
+        "within_1_page": {
+          "hit_rate@1": 1,
+          "hit_rate@3": 1,
+          "hit_rate@5": 1,
+          "mrr": 1.0
+        }
+      },
+      "Deferred-value / fabrication probe": {
+        "questions": 1,
+        "exact": {
+          "hit_rate@1": 0,
+          "hit_rate@3": 0,
+          "hit_rate@5": 0,
+          "mrr": 0.0
+        },
+        "within_1_page": {
+          "hit_rate@1": 0,
+          "hit_rate@3": 1,
+          "hit_rate@5": 1,
+          "mrr": 0.5
+        }
+      },
+      "Diagram-to-caption matching": {
+        "questions": 2,
+        "exact": {
+          "hit_rate@1": 0,
+          "hit_rate@3": 0,
+          "hit_rate@5": 0,
+          "mrr": 0.0
+        },
+        "within_1_page": {
+          "hit_rate@1": 1,
+          "hit_rate@3": 1,
+          "hit_rate@5": 1,
+          "mrr": 1.0
+        }
+      },
+      "Diagram-to-caption matching (negative case)": {
+        "questions": 1,
+        "exact": {
+          "hit_rate@1": 1,
+          "hit_rate@3": 1,
+          "hit_rate@5": 1,
+          "mrr": 1.0
+        },
+        "within_1_page": {
+          "hit_rate@1": 1,
+          "hit_rate@3": 1,
+          "hit_rate@5": 1,
+          "mrr": 1.0
+        }
+      },
+      "Figure-only value": {
+        "questions": 4,
+        "exact": {
+          "hit_rate@1": 1,
+          "hit_rate@3": 1,
+          "hit_rate@5": 1,
+          "mrr": 1.0
+        },
+        "within_1_page": {
+          "hit_rate@1": 1,
+          "hit_rate@3": 1,
+          "hit_rate@5": 1,
+          "mrr": 1.0
+        }
+      },
+      "Legend-to-diagram matching": {
+        "questions": 3,
+        "exact": {
+          "hit_rate@1": 0.6667,
+          "hit_rate@3": 0.6667,
+          "hit_rate@5": 0.6667,
+          "mrr": 0.6667
+        },
+        "within_1_page": {
+          "hit_rate@1": 0.6667,
+          "hit_rate@3": 0.6667,
+          "hit_rate@5": 0.6667,
+          "mrr": 0.6667
+        }
+      },
+      "Lookalike-section disambiguation": {
+        "questions": 10,
+        "exact": {
+          "hit_rate@1": 0.7,
+          "hit_rate@3": 0.7,
+          "hit_rate@5": 0.7,
+          "mrr": 0.7
+        },
+        "within_1_page": {
+          "hit_rate@1": 0.7,
+          "hit_rate@3": 1,
+          "hit_rate@5": 1,
+          "mrr": 0.85
+        }
+      },
+      "Needle-in-passage": {
+        "questions": 6,
+        "exact": {
+          "hit_rate@1": 0.5,
+          "hit_rate@3": 0.5,
+          "hit_rate@5": 0.6667,
+          "mrr": 0.5417
+        },
+        "within_1_page": {
+          "hit_rate@1": 0.8333,
+          "hit_rate@3": 1,
+          "hit_rate@5": 1,
+          "mrr": 0.9167
+        }
+      },
+      "Needle-in-table": {
+        "questions": 18,
+        "exact": {
+          "hit_rate@1": 0.7222,
+          "hit_rate@3": 0.7778,
+          "hit_rate@5": 0.7778,
+          "mrr": 0.75
+        },
+        "within_1_page": {
+          "hit_rate@1": 0.8333,
+          "hit_rate@3": 0.8333,
+          "hit_rate@5": 0.8889,
+          "mrr": 0.8472
+        }
+      },
+      "Vocabulary-mismatch retrieval stress": {
+        "questions": 6,
+        "exact": {
+          "hit_rate@1": 0.6667,
+          "hit_rate@3": 0.6667,
+          "hit_rate@5": 0.6667,
+          "mrr": 0.6667
+        },
+        "within_1_page": {
+          "hit_rate@1": 0.6667,
+          "hit_rate@3": 0.8333,
+          "hit_rate@5": 1,
+          "mrr": 0.7833
+        }
+      }
+    },
+    "by_rag_target": {
+      "Chunking (long-range/topical)": {
+        "questions": 4,
+        "exact": {
+          "hit_rate@1": 0.75,
+          "hit_rate@3": 1,
+          "hit_rate@5": 1,
+          "mrr": 0.875
+        },
+        "within_1_page": {
+          "hit_rate@1": 0.75,
+          "hit_rate@3": 1,
+          "hit_rate@5": 1,
+          "mrr": 0.875
+        }
+      },
+      "Chunking (table-aware)": {
+        "questions": 18,
+        "exact": {
+          "hit_rate@1": 0.7222,
+          "hit_rate@3": 0.7778,
+          "hit_rate@5": 0.7778,
+          "mrr": 0.75
+        },
+        "within_1_page": {
+          "hit_rate@1": 0.8333,
+          "hit_rate@3": 0.8333,
+          "hit_rate@5": 0.8889,
+          "mrr": 0.8472
+        }
+      },
+      "Chunking (topical)": {
+        "questions": 10,
+        "exact": {
+          "hit_rate@1": 0.6,
+          "hit_rate@3": 0.6,
+          "hit_rate@5": 0.7,
+          "mrr": 0.625
+        },
+        "within_1_page": {
+          "hit_rate@1": 0.9,
+          "hit_rate@3": 1,
+          "hit_rate@5": 1,
+          "mrr": 0.95
+        }
+      },
+      "Chunking (topical) + retrieval confidence": {
+        "questions": 1,
+        "exact": {
+          "hit_rate@1": 0,
+          "hit_rate@3": 0,
+          "hit_rate@5": 0,
+          "mrr": 0.0
+        },
+        "within_1_page": {
+          "hit_rate@1": 0,
+          "hit_rate@3": 1,
+          "hit_rate@5": 1,
+          "mrr": 0.5
+        }
+      },
+      "Chunking/retrieval consistency": {
+        "questions": 8,
+        "exact": {
+          "hit_rate@1": 0.25,
+          "hit_rate@3": 0.5,
+          "hit_rate@5": 0.5,
+          "mrr": 0.375
+        },
+        "within_1_page": {
+          "hit_rate@1": 0.25,
+          "hit_rate@3": 1,
+          "hit_rate@5": 1,
+          "mrr": 0.5833
+        }
+      },
+      "Chunking/retrieval robustness": {
+        "questions": 6,
+        "exact": {
+          "hit_rate@1": 0.6667,
+          "hit_rate@3": 0.6667,
+          "hit_rate@5": 0.6667,
+          "mrr": 0.6667
+        },
+        "within_1_page": {
+          "hit_rate@1": 0.6667,
+          "hit_rate@3": 0.8333,
+          "hit_rate@5": 1,
+          "mrr": 0.7833
+        }
+      },
+      "Image Caption": {
+        "questions": 10,
+        "exact": {
+          "hit_rate@1": 0.7,
+          "hit_rate@3": 0.7,
+          "hit_rate@5": 0.7,
+          "mrr": 0.7
+        },
+        "within_1_page": {
+          "hit_rate@1": 0.9,
+          "hit_rate@3": 0.9,
+          "hit_rate@5": 0.9,
+          "mrr": 0.9
+        }
+      },
+      "NER": {
+        "questions": 10,
+        "exact": {
+          "hit_rate@1": 0.7,
+          "hit_rate@3": 0.7,
+          "hit_rate@5": 0.7,
+          "mrr": 0.7
+        },
+        "within_1_page": {
+          "hit_rate@1": 0.7,
+          "hit_rate@3": 1,
+          "hit_rate@5": 1,
+          "mrr": 0.85
+        }
+      }
+    }
+  },
+  "results": [
+    {
+      "id": 1,
+      "question": "What is the Pt-100 resistance, in ohms, at exactly 100°C according to Table 11?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 11, p.114",
+      "expected_pages": [
+        114
+      ],
+      "retrieved_pages": [
+        114,
+        91,
+        114,
+        94,
+        94
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 2,
+      "question": "What is the Pt-100 resistance, in ohms, at exactly 40°C according to Table 11?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 11, p.113",
+      "expected_pages": [
+        113
+      ],
+      "retrieved_pages": [
+        114,
+        91,
+        114,
+        92,
+        94
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "hit@1": false,
+          "hit@3": false,
+          "hit@5": false
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 3,
+      "question": "What is the tightening torque (Nm) for an oiled M20 bolt of property class 8.8?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 7, p.79",
+      "expected_pages": [
+        79
+      ],
+      "retrieved_pages": [
+        79,
+        80,
+        41,
+        79,
+        83
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 4,
+      "question": "What is the tightening torque (Nm) for a dry M20 bolt of property class 8.8?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 7, p.79",
+      "expected_pages": [
+        79
+      ],
+      "retrieved_pages": [
+        79,
+        80,
+        128,
+        41,
+        34
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 5,
+      "question": "What is the tightening torque, in Nm, for an EF_LB 18 axially locating bearing?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 4, p.34",
+      "expected_pages": [
+        34
+      ],
+      "retrieved_pages": [
+        34,
+        32,
+        33,
+        33,
+        79
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 6,
+      "question": "What is the tightening torque, in Nm, for an EM_LB 9S axially locating bearing?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 4, p.34",
+      "expected_pages": [
+        34
+      ],
+      "retrieved_pages": [
+        34,
+        32,
+        33,
+        33,
+        80
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 7,
+      "question": "For a rigid-support machine, what is the rms velocity boundary between vibration Zone B and Zone C?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 8, p.81",
+      "expected_pages": [
+        81
+      ],
+      "retrieved_pages": [
+        81,
+        82,
+        81,
+        128,
+        49
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 8,
+      "question": "For a flexible-support machine, what is the rms velocity boundary between vibration Zone C and Zone D?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 8, p.82",
+      "expected_pages": [
+        82
+      ],
+      "retrieved_pages": [
+        81,
+        82,
+        81,
+        82,
+        80
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "hit@1": false,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 9,
+      "question": "What is the initial ALARM value for bearing housing vibration on a rigid-support machine?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 9, p.82",
+      "expected_pages": [
+        82
+      ],
+      "retrieved_pages": [
+        82,
+        82,
+        80,
+        62,
+        80
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 10,
+      "question": "What is the initial TRIP value for bearing housing vibration on a flexible-support machine?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 9, p.82",
+      "expected_pages": [
+        82
+      ],
+      "retrieved_pages": [
+        82,
+        82,
+        80,
+        62,
+        80
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 11,
+      "question": "For a 100–250 mm rigid flange coupling, what is the permissible parallel misalignment?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 5, p.44",
+      "expected_pages": [
+        44
+      ],
+      "retrieved_pages": [
+        49,
+        49,
+        47,
+        43,
+        43
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "hit@1": false,
+          "hit@3": false,
+          "hit@5": false
+        },
+        "within_1_page": {
+          "first_relevant_rank": 4,
+          "reciprocal_rank": 0.25,
+          "hit@1": false,
+          "hit@3": false,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 12,
+      "question": "For a 250–500 mm gear coupling, what is the permissible angular misalignment?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 5, p.45",
+      "expected_pages": [
+        45
+      ],
+      "retrieved_pages": [
+        49,
+        49,
+        47,
+        38,
+        48
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "hit@1": false,
+          "hit@3": false,
+          "hit@5": false
+        },
+        "within_1_page": {
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "hit@1": false,
+          "hit@3": false,
+          "hit@5": false
+        }
+      }
+    },
+    {
+      "id": 13,
+      "question": "What is the minimum acceptable insulation resistance for a used stator winding?",
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER",
+      "source": "§7.6.4.3, p.91",
+      "expected_pages": [
+        91
+      ],
+      "retrieved_pages": [
+        94,
+        92,
+        92,
+        92,
+        93
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "hit@1": false,
+          "hit@3": false,
+          "hit@5": false
+        },
+        "within_1_page": {
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "hit@1": false,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 14,
+      "question": "What is the minimum acceptable insulation resistance for a wound rotor winding?",
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER",
+      "source": "§7.6.4.3, p.91",
+      "expected_pages": [
+        91
+      ],
+      "retrieved_pages": [
+        94,
+        92,
+        92,
+        93,
+        94
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "hit@1": false,
+          "hit@3": false,
+          "hit@5": false
+        },
+        "within_1_page": {
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "hit@1": false,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 15,
+      "question": "What insulation resistance is acceptable for a new stator under extremely warm and humid measuring conditions?",
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER",
+      "source": "§7.6.4.3, p.91",
+      "expected_pages": [
+        91
+      ],
+      "retrieved_pages": [
+        94,
+        92,
+        90,
+        94,
+        90
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "hit@1": false,
+          "hit@3": false,
+          "hit@5": false
+        },
+        "within_1_page": {
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "hit@1": false,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 16,
+      "question": "What test voltage is used for the insulation resistance test on the space heater?",
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER",
+      "source": "§7.6.5, p.94",
+      "expected_pages": [
+        94
+      ],
+      "retrieved_pages": [
+        94,
+        130,
+        130,
+        92,
+        92
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 17,
+      "question": "What test voltage is used for the insulation resistance test on auxiliaries other than the space heater?",
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER",
+      "source": "§7.6.5, p.94",
+      "expected_pages": [
+        94
+      ],
+      "retrieved_pages": [
+        94,
+        130,
+        130,
+        14,
+        61
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 18,
+      "question": "At what percentage of filter surface obstruction does the open-air cooling intake filter's pressure alarm trigger?",
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER",
+      "source": "§7.8.1.1, p.97",
+      "expected_pages": [
+        97
+      ],
+      "retrieved_pages": [
+        97,
+        98,
+        105,
+        98,
+        98
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 19,
+      "question": "How often should the brush lifting device's movement and contacts be checked, in terms of number of starts?",
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER",
+      "source": "§7.7.4, p.96",
+      "expected_pages": [
+        96
+      ],
+      "retrieved_pages": [
+        96,
+        96,
+        67,
+        116,
+        142
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 20,
+      "question": "What is the guideline maximum number of starts per year for a typical direct-on-line application?",
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER",
+      "source": "§6.3, p.69",
+      "expected_pages": [
+        69
+      ],
+      "retrieved_pages": [
+        69,
+        58,
+        69,
+        20,
+        10
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 21,
+      "question": "What percentage of steel content is typical for cast iron frame induction machines?",
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER",
+      "source": "§10.2, p.123",
+      "expected_pages": [
+        123
+      ],
+      "retrieved_pages": [
+        123,
+        123,
+        18,
+        4,
+        51
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 22,
+      "question": "What percentage of cast iron content is typical for modular steel frame induction machines?",
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER",
+      "source": "§10.2, p.123",
+      "expected_pages": [
+        123
+      ],
+      "retrieved_pages": [
+        123,
+        123,
+        18,
+        4,
+        51
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 23,
+      "question": "What is the formula for equivalent operating hours for a constant speed drive machine?",
+      "failure_type": "Conditional-content confusion",
+      "rag_target": "Chunking (topical)",
+      "source": "§7.3, p.74",
+      "expected_pages": [
+        74
+      ],
+      "retrieved_pages": [
+        74,
+        85,
+        75,
+        69,
+        75
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 24,
+      "question": "What is the formula for equivalent operating hours for a variable speed drive machine?",
+      "failure_type": "Conditional-content confusion",
+      "rag_target": "Chunking (topical)",
+      "source": "§7.3, p.74",
+      "expected_pages": [
+        74
+      ],
+      "retrieved_pages": [
+        74,
+        4,
+        59,
+        74,
+        69
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 25,
+      "question": "In the worked R40 example, an insulation resistance of 30 MΩ is measured at 20°C with k=0.25. What is R40?",
+      "failure_type": "Cross-section arithmetic",
+      "rag_target": "Chunking (topical)",
+      "source": "§7.6.4.1, p.90",
+      "expected_pages": [
+        90
+      ],
+      "retrieved_pages": [
+        91,
+        92,
+        92,
+        92,
+        92
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "hit@1": false,
+          "hit@3": false,
+          "hit@5": false
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 26,
+      "question": "What is the normal oil supply pressure for a flood-lubricated sleeve bearing?",
+      "failure_type": "Cross-section synthesis",
+      "rag_target": "Chunking (topical)",
+      "source": "§5.7.3.2, p.66",
+      "expected_pages": [
+        66
+      ],
+      "retrieved_pages": [
+        66,
+        52,
+        82,
+        111,
+        109
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 27,
+      "question": "What is the minimum polarization index (PI) value for a class F stator winding?",
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)",
+      "source": "§7.6.6, p.94",
+      "expected_pages": [
+        94
+      ],
+      "retrieved_pages": [
+        94,
+        94,
+        94,
+        92,
+        15
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 28,
+      "question": "Below what winding temperature is the polarization index test considered independent of temperature?",
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)",
+      "source": "§7.6.6, p.94",
+      "expected_pages": [
+        94
+      ],
+      "retrieved_pages": [
+        94,
+        94,
+        94,
+        15,
+        92
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 29,
+      "question": "What is the recommended brush pressure range on the slip ring, in mN/mm²?",
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)",
+      "source": "§7.7.2.1, p.95",
+      "expected_pages": [
+        95
+      ],
+      "retrieved_pages": [
+        96,
+        70,
+        97,
+        95,
+        95
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 4,
+          "reciprocal_rank": 0.25,
+          "hit@1": false,
+          "hit@3": false,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 30,
+      "question": "How long should the first test start of the machine last?",
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)",
+      "source": "§5.6.3, p.64",
+      "expected_pages": [
+        64
+      ],
+      "retrieved_pages": [
+        74,
+        63,
+        75,
+        63,
+        65
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "hit@1": false,
+          "hit@3": false,
+          "hit@5": false
+        },
+        "within_1_page": {
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "hit@1": false,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 31,
+      "question": "If the brush wear limit mark is not evident, how far from the brush top is the wear limit?",
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)",
+      "source": "§7.7.4.1, p.96",
+      "expected_pages": [
+        96
+      ],
+      "retrieved_pages": [
+        96,
+        151,
+        95,
+        115,
+        96
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 32,
+      "question": "As a thumb rule, how often should an insulation resistance test be performed?",
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)",
+      "source": "§7.6.2, p.90",
+      "expected_pages": [
+        90
+      ],
+      "retrieved_pages": [
+        89,
+        130,
+        92,
+        92,
+        15
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "hit@1": false,
+          "hit@3": false,
+          "hit@5": false
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 33,
+      "question": "How long should the initial start of the machine last?",
+      "failure_type": "Consistency (paraphrase of Q30)",
+      "rag_target": "Chunking/retrieval consistency",
+      "source": "§5.6.3, p.64",
+      "expected_pages": [
+        64
+      ],
+      "retrieved_pages": [
+        74,
+        75,
+        63,
+        65,
+        74
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "hit@1": false,
+          "hit@3": false,
+          "hit@5": false
+        },
+        "within_1_page": {
+          "first_relevant_rank": 3,
+          "reciprocal_rank": 0.3333,
+          "hit@1": false,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 34,
+      "question": "What's the recommended duration for the first trial start of the machine?",
+      "failure_type": "Consistency (paraphrase of Q30)",
+      "rag_target": "Chunking/retrieval consistency",
+      "source": "§5.6.3, p.64",
+      "expected_pages": [
+        64
+      ],
+      "retrieved_pages": [
+        74,
+        75,
+        65,
+        132,
+        63
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "hit@1": false,
+          "hit@3": false,
+          "hit@5": false
+        },
+        "within_1_page": {
+          "first_relevant_rank": 3,
+          "reciprocal_rank": 0.3333,
+          "hit@1": false,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 35,
+      "question": "What test voltage is used to measure the insulation resistance of the stator winding?",
+      "failure_type": "Consistency (baseline)",
+      "rag_target": "Chunking/retrieval consistency",
+      "source": "§7.6.4.4, p.91",
+      "expected_pages": [
+        91
+      ],
+      "retrieved_pages": [
+        93,
+        92,
+        92,
+        94,
+        93
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "hit@1": false,
+          "hit@3": false,
+          "hit@5": false
+        },
+        "within_1_page": {
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "hit@1": false,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 36,
+      "question": "At what voltage is the stator winding's insulation resistance tested?",
+      "failure_type": "Consistency (paraphrase)",
+      "rag_target": "Chunking/retrieval consistency",
+      "source": "§7.6.4.4, p.91",
+      "expected_pages": [
+        91
+      ],
+      "retrieved_pages": [
+        93,
+        92,
+        92,
+        94,
+        130
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "hit@1": false,
+          "hit@3": false,
+          "hit@5": false
+        },
+        "within_1_page": {
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "hit@1": false,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 37,
+      "question": "How often should carbon dust be removed from the slip ring housing?",
+      "failure_type": "Consistency / fabrication probe",
+      "rag_target": "Chunking/retrieval consistency",
+      "source": "§7.7.4.5, p.96",
+      "expected_pages": [
+        96
+      ],
+      "retrieved_pages": [
+        96,
+        70,
+        4,
+        97,
+        70
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 38,
+      "question": "What is the carbon-dust cleaning schedule for the slip ring housing?",
+      "failure_type": "Consistency / fabrication probe (paraphrase)",
+      "rag_target": "Chunking/retrieval consistency",
+      "source": "§7.7.4.5, p.96",
+      "expected_pages": [
+        96
+      ],
+      "retrieved_pages": [
+        96,
+        70,
+        70,
+        97,
+        95
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 39,
+      "question": "What is the maximum ambient temperature for which air-cooled models are typically designed?",
+      "failure_type": "Consistency (baseline)",
+      "rag_target": "Chunking/retrieval consistency",
+      "source": "Safety Instructions §2, p.3",
+      "expected_pages": [
+        3
+      ],
+      "retrieved_pages": [
+        63,
+        3,
+        3,
+        62,
+        90
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "hit@1": false,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "hit@1": false,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 40,
+      "question": "Up to what ambient temperature are air-cooled machines normally rated?",
+      "failure_type": "Consistency (paraphrase)",
+      "rag_target": "Chunking/retrieval consistency",
+      "source": "Safety Instructions §2, p.3",
+      "expected_pages": [
+        3
+      ],
+      "retrieved_pages": [
+        20,
+        3,
+        11,
+        90,
+        3
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "hit@1": false,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "hit@1": false,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 41,
+      "question": "From Figure 42, at 18 brushes with a carbon brush wear rate of 3 mm/10³h, what's the approximate maximum cleaning interval?",
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption",
+      "source": "Figure 42, p.96",
+      "expected_pages": [
+        96
+      ],
+      "retrieved_pages": [
+        96,
+        143,
+        95,
+        142,
+        95
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 42,
+      "question": "From Figure 42, at 6 brushes with the lowest wear rate (1 mm/10³h), what's the approximate maximum cleaning interval?",
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption",
+      "source": "Figure 42, p.96",
+      "expected_pages": [
+        96
+      ],
+      "retrieved_pages": [
+        96,
+        147,
+        143,
+        95,
+        96
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 43,
+      "question": "From Figure 38, approximately what is the coefficient Kt at a winding temperature of 80°C?",
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption",
+      "source": "Figure 38, p.91",
+      "expected_pages": [
+        91
+      ],
+      "retrieved_pages": [
+        91,
+        94,
+        92,
+        93,
+        92
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 44,
+      "question": "From Figure 38, approximately what is the coefficient Kt at a winding temperature of 60°C?",
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption",
+      "source": "Figure 38, p.91",
+      "expected_pages": [
+        91
+      ],
+      "retrieved_pages": [
+        91,
+        94,
+        92,
+        93,
+        92
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 45,
+      "question": "In the 'Typical main power cable connections' appendix, what is the tightening torque for the M12-steel cable-lug connection screw shown in the first diagram?",
+      "failure_type": "Diagram-to-caption matching",
+      "rag_target": "Image Caption",
+      "source": "Appendix, p.138",
+      "expected_pages": [
+        138
+      ],
+      "retrieved_pages": [
+        139,
+        140,
+        30,
+        80,
+        58
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "hit@1": false,
+          "hit@3": false,
+          "hit@5": false
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 46,
+      "question": "In the same appendix, what is the tightening torque for the M16-bronze/brass bushing-style connection screw shown in the second diagram?",
+      "failure_type": "Diagram-to-caption matching",
+      "rag_target": "Image Caption",
+      "source": "Appendix, p.138",
+      "expected_pages": [
+        138
+      ],
+      "retrieved_pages": [
+        139,
+        80,
+        34,
+        33,
+        32
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "hit@1": false,
+          "hit@3": false,
+          "hit@5": false
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 47,
+      "question": "In the same appendix, what screw size is used for the round-terminal (DIN 46223) connection, and what's its tightening spec?",
+      "failure_type": "Diagram-to-caption matching (negative case)",
+      "rag_target": "Image Caption",
+      "source": "Appendix, p.139",
+      "expected_pages": [
+        139
+      ],
+      "retrieved_pages": [
+        139,
+        4,
+        30,
+        40,
+        58
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 48,
+      "question": "In the 'Typical position of plates' diagram, which letter (A or B) denotes the HXR machine mounted vertically?",
+      "failure_type": "Legend-to-diagram matching",
+      "rag_target": "Image Caption",
+      "source": "Appendix, p.137",
+      "expected_pages": [
+        137
+      ],
+      "retrieved_pages": [
+        137,
+        28,
+        80,
+        18,
+        64
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 49,
+      "question": "In the same diagram, which letter denotes the HXR machine mounted horizontally?",
+      "failure_type": "Legend-to-diagram matching",
+      "rag_target": "Image Caption",
+      "source": "Appendix, p.137",
+      "expected_pages": [
+        137
+      ],
+      "retrieved_pages": [
+        137,
+        80,
+        28,
+        18,
+        71
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 50,
+      "question": "In the direction-of-rotation diagram, which item number represents 'Reversing'?",
+      "failure_type": "Legend-to-diagram matching",
+      "rag_target": "Image Caption",
+      "source": "Appendix, p.138",
+      "expected_pages": [
+        138
+      ],
+      "retrieved_pages": [
+        99,
+        5,
+        64,
+        68,
+        57
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "hit@1": false,
+          "hit@3": false,
+          "hit@5": false
+        },
+        "within_1_page": {
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "hit@1": false,
+          "hit@3": false,
+          "hit@5": false
+        }
+      }
+    },
+    {
+      "id": 51,
+      "question": "For a 250–500 mm flexible coupling, what is the permissible axial misalignment?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 5, p.45",
+      "expected_pages": [
+        45
+      ],
+      "retrieved_pages": [
+        49,
+        49,
+        47,
+        37,
+        48
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "hit@1": false,
+          "hit@3": false,
+          "hit@5": false
+        },
+        "within_1_page": {
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "hit@1": false,
+          "hit@3": false,
+          "hit@5": false
+        }
+      }
+    },
+    {
+      "id": 52,
+      "question": "What is the tightening torque (Nm) for a dry M36 bolt of property class 8.8?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 7, p.79",
+      "expected_pages": [
+        79
+      ],
+      "retrieved_pages": [
+        79,
+        80,
+        40,
+        128,
+        34
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 53,
+      "question": "What is the tightening torque (Nm) for an oiled M8 bolt of property class 8.8?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 7, p.79",
+      "expected_pages": [
+        79
+      ],
+      "retrieved_pages": [
+        79,
+        80,
+        41,
+        79,
+        33
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 54,
+      "question": "For a rigid-support machine, what is the rms velocity boundary between vibration Zone A and Zone B?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 8, p.81",
+      "expected_pages": [
+        81
+      ],
+      "retrieved_pages": [
+        81,
+        82,
+        81,
+        49,
+        80
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 55,
+      "question": "What is the initial ALARM value for bearing housing vibration on a flexible-support machine?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 9, p.82",
+      "expected_pages": [
+        82
+      ],
+      "retrieved_pages": [
+        82,
+        82,
+        80,
+        62,
+        80
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 56,
+      "question": "What is the tightening torque, in Nm, for an EF_LB 28 axially locating bearing?",
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)",
+      "source": "Table 4, p.34",
+      "expected_pages": [
+        34
+      ],
+      "retrieved_pages": [
+        34,
+        32,
+        33,
+        33,
+        80
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 57,
+      "question": "According to Table 6, at how many equivalent operating hours does the L4 (Overhaul) maintenance level occur?",
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)",
+      "source": "Table 6, p.76",
+      "expected_pages": [
+        76
+      ],
+      "retrieved_pages": [
+        76,
+        74,
+        75,
+        75,
+        75
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 58,
+      "question": "What does the abbreviation 'D' mean in the recommended maintenance program tables (e.g., Table 6 and its sub-tables)?",
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)",
+      "source": "§7.3.1, p.75 (legend, 3 pages before data rows on p.78+)",
+      "expected_pages": [
+        75,
+        78
+      ],
+      "retrieved_pages": [
+        75,
+        74,
+        90,
+        75,
+        75
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 59,
+      "question": "At maintenance level L3, what re-greasing check ('Check/Test' column) is specified for rolling bearings, per the maintenance program table?",
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)",
+      "source": "§7.3.1.6, p.78",
+      "expected_pages": [
+        78
+      ],
+      "retrieved_pages": [
+        76,
+        78,
+        77,
+        75,
+        74
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "hit@1": false,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "hit@1": false,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 60,
+      "question": "What does the abbreviation 'V/T/C' mean when it appears together in a maintenance program row?",
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)",
+      "source": "§7.3.1, p.75 legend + e.g. p.76 stator winding insulation row",
+      "expected_pages": [
+        75,
+        76
+      ],
+      "retrieved_pages": [
+        75,
+        90,
+        74,
+        74,
+        73
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 61,
+      "question": "When the machine is first switched on for a trial run, how briefly should it be kept energized?",
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness",
+      "source": "§5.6.3, p.64 (source text says 'first start', not 'switched on'/'energized')",
+      "expected_pages": [
+        64
+      ],
+      "retrieved_pages": [
+        3,
+        63,
+        67,
+        63,
+        65
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "hit@1": false,
+          "hit@3": false,
+          "hit@5": false
+        },
+        "within_1_page": {
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "hit@1": false,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 62,
+      "question": "What symptoms suggest a faulty temperature sensor may be present in the winding or bearing?",
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness",
+      "source": "§8.3.2, p.114 (source text says 'Pt-100 detector', not 'temperature sensor')",
+      "expected_pages": [
+        114
+      ],
+      "retrieved_pages": [
+        114,
+        106,
+        97,
+        105,
+        102
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 63,
+      "question": "What megohm-meter voltage should be applied when megger-testing the main stator windings?",
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness",
+      "source": "§7.6.4.4, p.91 (source text says 'insulation resistance test', not 'megger'/'megohm-meter')",
+      "expected_pages": [
+        91
+      ],
+      "retrieved_pages": [
+        89,
+        93,
+        130,
+        62,
+        92
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "hit@1": false,
+          "hit@3": false,
+          "hit@5": false
+        },
+        "within_1_page": {
+          "first_relevant_rank": 5,
+          "reciprocal_rank": 0.2,
+          "hit@1": false,
+          "hit@3": false,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 64,
+      "question": "How tightly, in Nm, must an oiled M10 bolt of property class 8.8 be fastened?",
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness",
+      "source": "Table 7, p.79 (source uses 'tightening torque', not 'how tightly fastened')",
+      "expected_pages": [
+        79
+      ],
+      "retrieved_pages": [
+        79,
+        80,
+        79,
+        83,
+        83
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 65,
+      "question": "How is the debris screen on the slip ring housing cleaned?",
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness",
+      "source": "§7.7.3, p.96 (source says 'carbon dust filter', not 'debris screen')",
+      "expected_pages": [
+        96
+      ],
+      "retrieved_pages": [
+        96,
+        70,
+        123,
+        70,
+        95
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 66,
+      "question": "At what oscillation speed does the alarm trigger for a rigidly mounted bearing housing?",
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness",
+      "source": "Table 9, p.82 (source uses 'vibration', not 'oscillation speed')",
+      "expected_pages": [
+        82
+      ],
+      "retrieved_pages": [
+        82,
+        111,
+        62,
+        63,
+        80
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        },
+        "within_1_page": {
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "hit@1": true,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    },
+    {
+      "id": 67,
+      "question": "What is the exact re-greasing interval, in hours, for rolling bearings?",
+      "failure_type": "Deferred-value / fabrication probe",
+      "rag_target": "Chunking (topical) + retrieval confidence",
+      "source": "§7.5.3.3, p.83",
+      "expected_pages": [
+        83
+      ],
+      "retrieved_pages": [
+        85,
+        84,
+        65,
+        85,
+        66
+      ],
+      "n_retrieved": 5,
+      "metrics": {
+        "exact": {
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "hit@1": false,
+          "hit@3": false,
+          "hit@5": false
+        },
+        "within_1_page": {
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "hit@1": false,
+          "hit@3": true,
+          "hit@5": true
+        }
+      }
+    }
+  ],
+  "rows": [
+    {
+      "question_id": 1,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 1,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 1,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 1,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 1,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 1,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 1,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 1,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 2,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 2,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 0.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 2,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 0.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 2,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 0.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 2,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 2,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 2,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 2,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 3,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 3,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 3,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 3,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 3,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 3,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 3,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 3,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 4,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 4,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 4,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 4,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 4,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 4,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 4,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 4,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 5,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 5,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 5,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 5,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 5,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 5,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 5,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 5,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 6,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 6,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 6,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 6,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 6,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 6,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 6,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 6,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 7,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 7,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 7,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 7,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 7,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 7,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 7,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 7,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 8,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 8,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 8,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 8,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 0.5,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 8,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 8,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 8,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 8,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 9,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 9,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 9,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 9,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 9,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 9,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 9,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 9,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 10,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 10,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 10,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 10,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 10,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 10,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 10,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 10,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 11,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 11,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 0.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 11,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 0.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 11,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 0.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 11,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 11,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 0.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 11,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 11,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 0.25,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 12,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 12,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 0.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 12,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 0.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 12,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 0.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 12,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 12,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 0.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 12,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 0.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 12,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 0.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 13,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 13,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 0.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 13,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 0.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 13,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 0.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 13,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 13,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 13,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 13,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 0.5,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 14,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 14,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 0.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 14,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 0.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 14,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 0.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 14,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 14,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 14,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 14,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 0.5,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 15,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 15,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 0.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 15,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 0.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 15,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 0.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 15,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 15,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 15,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 15,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 0.5,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 16,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 16,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 16,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 16,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 16,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 16,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 16,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 16,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 17,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 17,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 17,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 17,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 17,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 17,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 17,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 17,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 18,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 18,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 18,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 18,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 18,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 18,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 18,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 18,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 19,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 19,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 19,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 19,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 19,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 19,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 19,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 19,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 20,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 20,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 20,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 20,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 20,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 20,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 20,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 20,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 21,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 21,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 21,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 21,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 21,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 21,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 21,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 21,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 22,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 22,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 22,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 22,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 22,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 22,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 22,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 22,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Lookalike-section disambiguation",
+      "rag_target": "NER"
+    },
+    {
+      "question_id": 23,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Conditional-content confusion",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 23,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Conditional-content confusion",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 23,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Conditional-content confusion",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 23,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Conditional-content confusion",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 23,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Conditional-content confusion",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 23,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Conditional-content confusion",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 23,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Conditional-content confusion",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 23,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Conditional-content confusion",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 24,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Conditional-content confusion",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 24,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Conditional-content confusion",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 24,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Conditional-content confusion",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 24,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Conditional-content confusion",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 24,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Conditional-content confusion",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 24,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Conditional-content confusion",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 24,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Conditional-content confusion",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 24,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Conditional-content confusion",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 25,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Cross-section arithmetic",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 25,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 0.0,
+      "failure_type": "Cross-section arithmetic",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 25,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 0.0,
+      "failure_type": "Cross-section arithmetic",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 25,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 0.0,
+      "failure_type": "Cross-section arithmetic",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 25,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Cross-section arithmetic",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 25,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Cross-section arithmetic",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 25,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Cross-section arithmetic",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 25,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Cross-section arithmetic",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 26,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Cross-section synthesis",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 26,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Cross-section synthesis",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 26,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Cross-section synthesis",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 26,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Cross-section synthesis",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 26,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Cross-section synthesis",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 26,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Cross-section synthesis",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 26,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Cross-section synthesis",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 26,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Cross-section synthesis",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 27,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 27,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 27,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 27,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 27,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 27,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 27,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 27,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 28,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 28,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 28,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 28,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 28,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 28,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 28,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 28,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 29,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 29,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 0.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 29,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 29,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 0.25,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 29,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 29,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 29,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 29,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 30,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 30,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 0.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 30,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 0.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 30,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 0.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 30,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 30,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 30,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 30,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 0.5,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 31,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 31,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 31,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 31,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 31,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 31,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 31,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 31,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 32,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 32,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 0.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 32,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 0.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 32,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 0.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 32,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 32,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 32,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 32,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-passage",
+      "rag_target": "Chunking (topical)"
+    },
+    {
+      "question_id": 33,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Consistency (paraphrase of Q30)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 33,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 0.0,
+      "failure_type": "Consistency (paraphrase of Q30)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 33,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 0.0,
+      "failure_type": "Consistency (paraphrase of Q30)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 33,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 0.0,
+      "failure_type": "Consistency (paraphrase of Q30)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 33,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Consistency (paraphrase of Q30)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 33,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Consistency (paraphrase of Q30)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 33,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Consistency (paraphrase of Q30)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 33,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 0.3333,
+      "failure_type": "Consistency (paraphrase of Q30)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 34,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Consistency (paraphrase of Q30)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 34,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 0.0,
+      "failure_type": "Consistency (paraphrase of Q30)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 34,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 0.0,
+      "failure_type": "Consistency (paraphrase of Q30)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 34,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 0.0,
+      "failure_type": "Consistency (paraphrase of Q30)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 34,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Consistency (paraphrase of Q30)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 34,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Consistency (paraphrase of Q30)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 34,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Consistency (paraphrase of Q30)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 34,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 0.3333,
+      "failure_type": "Consistency (paraphrase of Q30)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 35,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Consistency (baseline)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 35,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 0.0,
+      "failure_type": "Consistency (baseline)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 35,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 0.0,
+      "failure_type": "Consistency (baseline)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 35,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 0.0,
+      "failure_type": "Consistency (baseline)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 35,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Consistency (baseline)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 35,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Consistency (baseline)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 35,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Consistency (baseline)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 35,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 0.5,
+      "failure_type": "Consistency (baseline)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 36,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Consistency (paraphrase)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 36,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 0.0,
+      "failure_type": "Consistency (paraphrase)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 36,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 0.0,
+      "failure_type": "Consistency (paraphrase)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 36,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 0.0,
+      "failure_type": "Consistency (paraphrase)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 36,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Consistency (paraphrase)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 36,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Consistency (paraphrase)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 36,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Consistency (paraphrase)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 36,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 0.5,
+      "failure_type": "Consistency (paraphrase)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 37,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Consistency / fabrication probe",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 37,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Consistency / fabrication probe",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 37,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Consistency / fabrication probe",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 37,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Consistency / fabrication probe",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 37,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Consistency / fabrication probe",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 37,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Consistency / fabrication probe",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 37,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Consistency / fabrication probe",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 37,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Consistency / fabrication probe",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 38,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Consistency / fabrication probe (paraphrase)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 38,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Consistency / fabrication probe (paraphrase)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 38,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Consistency / fabrication probe (paraphrase)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 38,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Consistency / fabrication probe (paraphrase)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 38,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Consistency / fabrication probe (paraphrase)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 38,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Consistency / fabrication probe (paraphrase)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 38,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Consistency / fabrication probe (paraphrase)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 38,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Consistency / fabrication probe (paraphrase)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 39,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Consistency (baseline)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 39,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Consistency (baseline)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 39,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Consistency (baseline)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 39,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 0.5,
+      "failure_type": "Consistency (baseline)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 39,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Consistency (baseline)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 39,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Consistency (baseline)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 39,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Consistency (baseline)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 39,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 0.5,
+      "failure_type": "Consistency (baseline)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 40,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Consistency (paraphrase)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 40,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Consistency (paraphrase)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 40,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Consistency (paraphrase)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 40,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 0.5,
+      "failure_type": "Consistency (paraphrase)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 40,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Consistency (paraphrase)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 40,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Consistency (paraphrase)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 40,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Consistency (paraphrase)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 40,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 0.5,
+      "failure_type": "Consistency (paraphrase)",
+      "rag_target": "Chunking/retrieval consistency"
+    },
+    {
+      "question_id": 41,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 41,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 41,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 41,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 41,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 41,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 41,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 41,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 42,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 42,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 42,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 42,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 42,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 42,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 42,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 42,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 43,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 43,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 43,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 43,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 43,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 43,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 43,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 43,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 44,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 44,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 44,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 44,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 44,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 44,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 44,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 44,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Figure-only value",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 45,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Diagram-to-caption matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 45,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 0.0,
+      "failure_type": "Diagram-to-caption matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 45,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 0.0,
+      "failure_type": "Diagram-to-caption matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 45,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 0.0,
+      "failure_type": "Diagram-to-caption matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 45,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Diagram-to-caption matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 45,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Diagram-to-caption matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 45,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Diagram-to-caption matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 45,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Diagram-to-caption matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 46,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Diagram-to-caption matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 46,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 0.0,
+      "failure_type": "Diagram-to-caption matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 46,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 0.0,
+      "failure_type": "Diagram-to-caption matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 46,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 0.0,
+      "failure_type": "Diagram-to-caption matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 46,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Diagram-to-caption matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 46,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Diagram-to-caption matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 46,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Diagram-to-caption matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 46,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Diagram-to-caption matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 47,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Diagram-to-caption matching (negative case)",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 47,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Diagram-to-caption matching (negative case)",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 47,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Diagram-to-caption matching (negative case)",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 47,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Diagram-to-caption matching (negative case)",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 47,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Diagram-to-caption matching (negative case)",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 47,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Diagram-to-caption matching (negative case)",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 47,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Diagram-to-caption matching (negative case)",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 47,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Diagram-to-caption matching (negative case)",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 48,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Legend-to-diagram matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 48,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Legend-to-diagram matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 48,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Legend-to-diagram matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 48,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Legend-to-diagram matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 48,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Legend-to-diagram matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 48,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Legend-to-diagram matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 48,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Legend-to-diagram matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 48,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Legend-to-diagram matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 49,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Legend-to-diagram matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 49,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Legend-to-diagram matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 49,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Legend-to-diagram matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 49,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Legend-to-diagram matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 49,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Legend-to-diagram matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 49,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Legend-to-diagram matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 49,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Legend-to-diagram matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 49,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Legend-to-diagram matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 50,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Legend-to-diagram matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 50,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 0.0,
+      "failure_type": "Legend-to-diagram matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 50,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 0.0,
+      "failure_type": "Legend-to-diagram matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 50,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 0.0,
+      "failure_type": "Legend-to-diagram matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 50,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Legend-to-diagram matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 50,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 0.0,
+      "failure_type": "Legend-to-diagram matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 50,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 0.0,
+      "failure_type": "Legend-to-diagram matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 50,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 0.0,
+      "failure_type": "Legend-to-diagram matching",
+      "rag_target": "Image Caption"
+    },
+    {
+      "question_id": 51,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 51,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 0.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 51,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 0.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 51,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 0.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 51,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 51,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 0.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 51,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 0.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 51,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 0.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 52,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 52,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 52,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 52,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 52,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 52,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 52,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 52,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 53,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 53,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 53,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 53,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 53,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 53,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 53,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 53,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 54,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 54,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 54,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 54,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 54,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 54,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 54,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 54,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 55,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 55,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 55,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 55,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 55,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 55,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 55,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 55,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 56,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 56,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 56,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 56,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 56,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 56,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 56,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 56,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Needle-in-table",
+      "rag_target": "Chunking (table-aware)"
+    },
+    {
+      "question_id": 57,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 57,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 57,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 57,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 57,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 57,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 57,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 57,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 58,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 58,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 58,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 58,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 58,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 58,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 58,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 58,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 59,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 59,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 59,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 59,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 0.5,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 59,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 59,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 59,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 59,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 0.5,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 60,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 60,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 60,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 60,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 60,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 60,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 60,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 60,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Cross-page legend dependency",
+      "rag_target": "Chunking (long-range/topical)"
+    },
+    {
+      "question_id": 61,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 61,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 0.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 61,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 0.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 61,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 0.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 61,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 61,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 61,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 61,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 0.5,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 62,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 62,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 62,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 62,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 62,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 62,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 62,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 62,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 63,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 63,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 0.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 63,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 0.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 63,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 0.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 63,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 63,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 0.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 63,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 63,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 0.2,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 64,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 64,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 64,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 64,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 64,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 64,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 64,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 64,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 65,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 65,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 65,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 65,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 65,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 65,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 65,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 65,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 66,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 66,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 66,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 66,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 66,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 66,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 66,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 66,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 1.0,
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "rag_target": "Chunking/retrieval robustness"
+    },
+    {
+      "question_id": 67,
+      "tolerance": "exact",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Deferred-value / fabrication probe",
+      "rag_target": "Chunking (topical) + retrieval confidence"
+    },
+    {
+      "question_id": 67,
+      "tolerance": "exact",
+      "metric": "hit@3",
+      "value": 0.0,
+      "failure_type": "Deferred-value / fabrication probe",
+      "rag_target": "Chunking (topical) + retrieval confidence"
+    },
+    {
+      "question_id": 67,
+      "tolerance": "exact",
+      "metric": "hit@5",
+      "value": 0.0,
+      "failure_type": "Deferred-value / fabrication probe",
+      "rag_target": "Chunking (topical) + retrieval confidence"
+    },
+    {
+      "question_id": 67,
+      "tolerance": "exact",
+      "metric": "reciprocal_rank",
+      "value": 0.0,
+      "failure_type": "Deferred-value / fabrication probe",
+      "rag_target": "Chunking (topical) + retrieval confidence"
+    },
+    {
+      "question_id": 67,
+      "tolerance": "within_1_page",
+      "metric": "hit@1",
+      "value": 0.0,
+      "failure_type": "Deferred-value / fabrication probe",
+      "rag_target": "Chunking (topical) + retrieval confidence"
+    },
+    {
+      "question_id": 67,
+      "tolerance": "within_1_page",
+      "metric": "hit@3",
+      "value": 1.0,
+      "failure_type": "Deferred-value / fabrication probe",
+      "rag_target": "Chunking (topical) + retrieval confidence"
+    },
+    {
+      "question_id": 67,
+      "tolerance": "within_1_page",
+      "metric": "hit@5",
+      "value": 1.0,
+      "failure_type": "Deferred-value / fabrication probe",
+      "rag_target": "Chunking (topical) + retrieval confidence"
+    },
+    {
+      "question_id": 67,
+      "tolerance": "within_1_page",
+      "metric": "reciprocal_rank",
+      "value": 0.5,
+      "failure_type": "Deferred-value / fabrication probe",
+      "rag_target": "Chunking (topical) + retrieval confidence"
+    }
+  ]
+}

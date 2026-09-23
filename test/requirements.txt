@@ -1,0 +1,31 @@
+# Dependencies for test/run-questions-imka.py (answers via the backend API),
+# test/evaluate-ragas.py (RAGAS scoring of an answers-*.json run) and the summary notebook.
+#
+# Deliberately a SEPARATE venv (test/.venv) from backend/.venv: ragas pins its own
+# langchain-community range (<0.4), and the backend venv runs the pipeline under
+# test — an accidental downgrade there would change what we are measuring.
+#
+#   python -m venv test\.venv
+#   test\.venv\Scripts\python.exe -m pip install -r test\requirements.txt
+ragas==0.4.3
+
+# ragas 0.4.3 imports langchain_community.chat_models.vertexai, which was removed
+# in langchain-community 0.4 — installing ragas alone pulls 0.4.2 and every import
+# of ragas then fails with ModuleNotFoundError. Keep this pin.
+langchain-community<0.4
+
+python-dotenv>=1.0.0
+
+# run-questions-imka.py — calls the running backend API on localhost.
+httpx>=0.27.0
+
+# Trusts the Windows certificate store for outbound HTTPS (same reason as
+# backend/requirements.txt — TLS-inspecting corporate proxy).
+pip-system-certs>=4.0
+
+# summary-*.ipynb — plots answers/ragas/retrieval output; ipykernel lets VS Code
+# run the notebook on this venv.
+pandas
+jinja2  # pandas DataFrame.style (failures table)
+matplotlib
+ipykernel<7
