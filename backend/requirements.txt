@@ -15,6 +15,9 @@ docx2txt>=0.8
 chardet>=5.2.0
 rank-bm25>=0.2.2
 
+# Standard pipeline: converts every supported format to Markdown before chunking
+markitdown[pdf,docx,pptx,xlsx,xls,outlook]>=0.1.8
+
 # Docling-based PDF ingestion (layout/table-aware alternative to the
 # PyPDFLoader + RecursiveCharacterTextSplitter pipeline in ingest/embed_and_store.py)
 docling>=2.0.0
@@ -28,3 +31,4 @@ asyncpg>=0.29.0
 # Trusts the Windows certificate store for outbound HTTPS (fixes SSL verification
 # failures to api.openai.com on machines behind a TLS-inspecting corporate proxy)
 pip-system-certs>=4.0
+truststore>=0.10.0   # imported optionally in api/main.py and app.py

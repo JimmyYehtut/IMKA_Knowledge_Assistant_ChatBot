@@ -1,12 +1,13 @@
 import os
 
 from dotenv import load_dotenv
+from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.orm import DeclarativeBase
 
 load_dotenv()
 
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql+asyncpg://postgres:postgres@localhost:5433/rag_pipeline")
+DATABASE_URL = os.getenv("DATABASE_URL", "postgresql+asyncpg://postgres:postgres@localhost:5433/imka")
 
 engine = create_async_engine(DATABASE_URL, echo=False)
 AsyncSessionLocal = async_sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
@@ -26,3 +27,6 @@ async def create_tables():
 
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
+        # create_all never alters existing tables — add columns introduced after first deploy.
+        await conn.execute(text("ALTER TABLE conversations ADD COLUMN IF NOT EXISTS persona VARCHAR(30)"))
+        await conn.execute(text("ALTER TABLE messages ADD COLUMN IF NOT EXISTS topic VARCHAR(120)"))

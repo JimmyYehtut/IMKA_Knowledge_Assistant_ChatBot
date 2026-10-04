@@ -2,8 +2,10 @@
 Docling-based ingestion pipeline (alternative to ingest/embed_and_store.py).
 
 Parses PDFs with Docling (layout + table structure aware), chunks them with
-Docling's HybridChunker (header-aware, table-atomic, token-budget aware),
-optionally captions figures with a VLM, then reuses this app's existing
+Docling's HybridChunker (header-aware, table-atomic, token-budget aware, tables
+serialized as Markdown), saves each captioned figure's image under
+data/diagrams/<document_id>/ with a retrievable figure chunk, optionally adds a
+VLM description to figures, then reuses this app's existing
 embedding config and Qdrant collection (rag.vectorstore.create_or_load_vectorstore)
 and document registry (ingest.registry.add_document) so results show up
 alongside documents ingested via the existing pipeline.
@@ -17,6 +19,7 @@ Requires: pip install docling  (see requirements.txt)
 import base64
 import io
 import os
+import re
 import sys
 import uuid
 from pathlib import Path
@@ -32,13 +35,27 @@ load_dotenv()
 CHUNK_MAX_TOKENS = int(os.getenv("DOCLING_CHUNK_MAX_TOKENS", "700"))
 VLM_CAPTION_MODEL = os.getenv("DOCLING_CAPTION_MODEL", "gpt-4o-mini")
 
+# Served by the API at /data/diagrams/... (see the StaticFiles mount in api/main.py).
+DIAGRAMS_DIR = Path(__file__).resolve().parent.parent / "data" / "diagrams"
+
+_FIGURE_CAPTION_RE = re.compile(r"^Figure\s+(\d+)\b")
+_FIGURE_REF_RE = re.compile(r"\bFigure\s+(\d+)\b")
+
 
 def _parse_pdf(pdf_path: str):
     """Layout-aware parse: returns Docling's DoclingDocument with structure
     (headings, tables as structured objects, figure regions) intact."""
-    from docling.document_converter import DocumentConverter
+    from docling.datamodel.base_models import InputFormat
+    from docling.datamodel.pipeline_options import PdfPipelineOptions
+    from docling.document_converter import DocumentConverter, PdfFormatOption
 
-    converter = DocumentConverter()
+    # Figure extraction needs the cropped picture images; Docling skips
+    # rendering them unless generate_picture_images is set. Scale 2 keeps
+    # diagram labels legible when shown in the chat.
+    pipeline_options = PdfPipelineOptions(generate_picture_images=True, images_scale=2.0)
+    converter = DocumentConverter(
+        format_options={InputFormat.PDF: PdfFormatOption(pipeline_options=pipeline_options)}
+    )
     result = converter.convert(pdf_path)
     return result.document
 
@@ -49,19 +66,48 @@ def _chunk_document(doc, source_path: str) -> list[Document]:
     their heading path, keeps tables as single atomic chunks, and respects
     a max token budget per chunk. Returned as langchain Documents so they
     can flow through the same vectorstore/registry as the existing pipeline.
+
+    Tables are serialized as Markdown tables (the chunker's default is
+    "row, column = value" triplets) so the answer can reproduce them as tables.
+    Each chunk records the figure numbers its text mentions (`figure_refs`),
+    which is how an instruction is linked to its diagram at query time.
     """
     from docling.chunking import HybridChunker
+    from docling_core.transforms.chunker.hierarchical_chunker import (
+        ChunkingDocSerializer,
+        ChunkingSerializerProvider,
+    )
+    from docling_core.transforms.serializer.markdown import MarkdownTableSerializer
 
-    chunker = HybridChunker(max_tokens=CHUNK_MAX_TOKENS)
+    # Compact tables: the default pads every cell to the column width, which
+    # multiplies the token count of wide tables and makes the chunker shred them.
+    params = ChunkingDocSerializer.model_fields["params"].default.model_copy(update={"compact_tables": True})
+
+    class _MarkdownTableProvider(ChunkingSerializerProvider):
+        def get_serializer(self, doc):
+            return ChunkingDocSerializer(doc=doc, table_serializer=MarkdownTableSerializer(), params=params)
+
+    chunker = HybridChunker(max_tokens=CHUNK_MAX_TOKENS, serializer_provider=_MarkdownTableProvider())
 
     chunks: list[Document] = []
+    seen_texts: set[str] = set()
     for raw_chunk in chunker.chunk(doc):
         meta = raw_chunk.meta
         headings = getattr(meta, "headings", None) or []
         section_path = " > ".join(headings) if headings else ""
+        doc_items = getattr(meta, "doc_items", None) or []
+
+        # The table of contents carries no answerable content, and an oversized
+        # table can be emitted as repeated identical pieces — keep neither.
+        if doc_items and all("document_index" in str(getattr(item, "label", "")).lower() for item in doc_items):
+            continue
+        if headings and headings[-1].strip().lower() in ("contents", "table of contents"):
+            continue
+        if raw_chunk.text in seen_texts:
+            continue
+        seen_texts.add(raw_chunk.text)
 
         page_no = None
-        doc_items = getattr(meta, "doc_items", None) or []
         for item in doc_items:
             prov = getattr(item, "prov", None)
             if prov:
@@ -82,79 +128,132 @@ def _chunk_document(doc, source_path: str) -> list[Document]:
                 "page_no": page_no,
                 "section_path": section_path,
                 "chunk_type": chunk_type,
+                "figure_refs": sorted({int(n) for n in _FIGURE_REF_RE.findall(raw_chunk.text)}),
             },
         ))
 
     return chunks
 
 
-def _caption_figures(doc, source_path: str) -> list[Document]:
+def _describe_image(client, pil_image) -> str | None:
+    """VLM description of a figure, for retrieval beyond what its caption says."""
+    buf = io.BytesIO()
+    pil_image.save(buf, format="PNG")
+    b64 = base64.b64encode(buf.getvalue()).decode("utf-8")
+    try:
+        resp = client.chat.completions.create(
+            model=VLM_CAPTION_MODEL,
+            messages=[{
+                "role": "user",
+                "content": [
+                    {"type": "text", "text": (
+                        "Describe this technical diagram/figure precisely and "
+                        "factually, in 2-4 sentences. Name the components, callout "
+                        "numbers, and what the figure illustrates (e.g. wiring "
+                        "diagram, rating plate, dimension drawing). Do not "
+                        "speculate beyond what is visibly labeled."
+                    )},
+                    {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{b64}"}},
+                ],
+            }],
+            max_tokens=250,
+        )
+        return resp.choices[0].message.content.strip()
+    except Exception as e:
+        print(f"  [warn] figure description failed: {e}", file=sys.stderr)
+        return None
+
+
+def _extract_figures(doc, source_path: str, document_id: str, describe: bool = False) -> list[Document]:
+    """One retrievable chunk per captioned figure, with its image(s) saved to disk.
+
+    Walks the document in reading order. A picture takes Docling's own caption
+    when it has one; pictures without one (extra panels of a multi-image
+    figure, or figures whose caption Docling labelled as a heading) take the
+    next "Figure N ..." line that follows them. Pictures that never get a
+    caption (logos, warning icons) are skipped.
+
+    Each chunk's text is the caption (plus a VLM description when `describe`
+    is set) and its metadata carries `figure_number`, `figure_caption` and
+    `image_paths` (relative to data/, e.g. "diagrams/<document_id>/fig7_1.png").
     """
-    OpenAI text embeddings can't see images. Pull figure/picture regions out
-    of the DoclingDocument, get a crop, and ask a VLM to describe it in
-    words a retriever can match against. Skip if the doc has no pictures.
-    """
-    from openai import OpenAI
+    from docling_core.types.doc import PictureItem, TextItem
 
-    client = OpenAI()
-    figure_chunks: list[Document] = []
+    figures: dict[int, dict] = {}
+    pending: list = []  # pictures still waiting for a caption
+    section = ""
 
-    pictures = getattr(doc, "pictures", None) or []
-    if not pictures:
-        return figure_chunks
+    def assign(caption: str, pictures: list) -> None:
+        match = _FIGURE_CAPTION_RE.match(caption)
+        if not match:
+            return
+        figure = figures.setdefault(int(match.group(1)), {"caption": caption, "section": section, "pictures": []})
+        figure["pictures"].extend(pictures)
 
-    for i, pic in enumerate(pictures):
-        try:
-            pil_image = pic.get_image(doc)
-        except Exception as e:
-            print(f"  [warn] could not extract image {i}: {e}", file=sys.stderr)
-            continue
-        if pil_image is None:
-            continue
+    for item, _level in doc.iterate_items():
+        if isinstance(item, PictureItem):
+            caption = item.caption_text(doc).strip()
+            if caption:
+                assign(caption, pending + [item])
+                pending = []
+            else:
+                pending.append(item)
+        elif isinstance(item, TextItem):
+            text = item.text.strip()
+            if _FIGURE_CAPTION_RE.match(text):
+                if pending:
+                    assign(text, pending)
+                    pending = []
+            elif "section_header" in str(item.label):
+                section = text
 
-        buf = io.BytesIO()
-        pil_image.save(buf, format="PNG")
-        b64 = base64.b64encode(buf.getvalue()).decode("utf-8")
+    client = None
+    if describe:
+        from openai import OpenAI
+        client = OpenAI()
 
+    dest_dir = DIAGRAMS_DIR / document_id
+    chunks: list[Document] = []
+    for number in sorted(figures):
+        figure = figures[number]
+        image_paths: list[str] = []
+        descriptions: list[str] = []
         page_no = None
-        prov = getattr(pic, "prov", None)
-        if prov:
-            page_no = prov[0].page_no
-
-        try:
-            resp = client.chat.completions.create(
-                model=VLM_CAPTION_MODEL,
-                messages=[{
-                    "role": "user",
-                    "content": [
-                        {"type": "text", "text": (
-                            "Describe this technical diagram/figure precisely and "
-                            "factually, in 2-4 sentences. Name the components, callout "
-                            "numbers, and what the figure illustrates (e.g. wiring "
-                            "diagram, rating plate, dimension drawing). Do not "
-                            "speculate beyond what is visibly labeled."
-                        )},
-                        {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{b64}"}},
-                    ],
-                }],
-                max_tokens=250,
-            )
-            caption = resp.choices[0].message.content.strip()
-        except Exception as e:
-            print(f"  [warn] captioning failed for figure {i}: {e}", file=sys.stderr)
+        for picture in figure["pictures"]:
+            try:
+                pil_image = picture.get_image(doc)
+            except Exception as e:
+                print(f"  [warn] could not extract image for Figure {number}: {e}", file=sys.stderr)
+                continue
+            if pil_image is None:
+                continue
+            dest_dir.mkdir(parents=True, exist_ok=True)
+            name = f"fig{number}_{len(image_paths) + 1}.png"
+            pil_image.save(dest_dir / name, format="PNG")
+            image_paths.append(f"diagrams/{document_id}/{name}")
+            if page_no is None and picture.prov:
+                page_no = picture.prov[0].page_no
+            if client is not None:
+                description = _describe_image(client, pil_image)
+                if description:
+                    descriptions.append(description)
+        if not image_paths:
             continue
 
-        figure_chunks.append(Document(
-            page_content=f"[Figure, page {page_no}] {caption}",
+        chunks.append(Document(
+            page_content="\n".join([figure["caption"], *descriptions]),
             metadata={
                 "source": source_path,
                 "page_no": page_no,
-                "section_path": "",
+                "section_path": figure["section"],
                 "chunk_type": "figure",
+                "figure_number": number,
+                "figure_caption": figure["caption"],
+                "image_paths": image_paths,
             },
         ))
 
-    return figure_chunks
+    return chunks
 
 
 def _attach_metadata(chunks: list[Document], document_id: str, document_name: str, version: str, metadata: dict):
@@ -178,9 +277,9 @@ def ingest_files_docling(
     """Docling-based alternative to ingest.embed_and_store.ingest_files.
 
     Parses each PDF with Docling (layout + table structure aware), chunks
-    with HybridChunker (header-aware, table-atomic, token-budget aware),
-    optionally captions figures with a VLM, and stores in the same Qdrant
-    collection / document registry as the existing ingestion pipeline.
+    with HybridChunker (header-aware, table-atomic, Markdown tables), saves
+    captioned figures as images with a figure chunk each, and stores in the
+    same Qdrant collection / document registry as the existing ingestion pipeline.
 
     Only PDF files are supported (Docling's layout/table analysis targets
     PDFs); pass files of other types through ingest.embed_and_store.ingest_files
@@ -194,8 +293,9 @@ def ingest_files_docling(
         original_names: Human-readable file names to record as document_name,
             parallel to file_paths. Defaults to each path's own file name —
             pass this when file_paths point at temp files with generated names.
-        caption_figures: If True, run each figure/picture through a VLM and
-            add the caption as its own retrievable chunk.
+        caption_figures: If True, also run each figure through a VLM and add
+            its description to the figure chunk's text (the document's own
+            caption is always used).
     """
     metadata = metadata or {}
     if original_names is None:
@@ -216,13 +316,12 @@ def ingest_files_docling(
         path_chunks = _chunk_document(doc, source_path=path)
         print(f"  -> {len(path_chunks)} text/table chunks")
 
-        if caption_figures:
-            print("Captioning figures with VLM...")
-            fig_chunks = _caption_figures(doc, source_path=path)
-            print(f"  -> {len(fig_chunks)} figure chunks")
-            path_chunks.extend(fig_chunks)
-
         doc_id = str(uuid.uuid4())
+        print("Extracting figures" + (" (with VLM descriptions)..." if caption_figures else "..."))
+        fig_chunks = _extract_figures(doc, source_path=path, document_id=doc_id, describe=caption_figures)
+        print(f"  -> {len(fig_chunks)} figure chunks")
+        path_chunks.extend(fig_chunks)
+
         _attach_metadata(path_chunks, document_id=doc_id, document_name=doc_name, version=version, metadata=metadata)
         document_records.append({"document_id": doc_id, "document_name": doc_name, "chunk_count": len(path_chunks)})
         all_chunks.extend(path_chunks)

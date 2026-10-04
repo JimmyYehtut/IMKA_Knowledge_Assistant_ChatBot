@@ -12,6 +12,7 @@ import streamlit as st
 from dotenv import load_dotenv
 
 from ingest.embed_and_store import ingest_files
+from ingest.load_documents import SUPPORTED_EXTENSIONS
 from rag.retrieval_chain import build_retrieval_chain
 
 load_dotenv()
@@ -100,8 +101,8 @@ with col1:
     st.markdown("Upload files, set department access, then click **Start Ingest Pipeline**.")
 
     uploaded_files = st.file_uploader(
-        "Choose PDF, TXT, MD, or DOCX files",
-        type=["pdf", "txt", "md", "docx", "doc"],
+        "Choose documents (PDF, Office, HTML, CSV, text, ...)",
+        type=sorted(ext.lstrip(".") for ext in SUPPORTED_EXTENSIONS),
         accept_multiple_files=True,
     )
 

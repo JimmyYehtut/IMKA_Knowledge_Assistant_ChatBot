@@ -4,17 +4,15 @@ the assistant) get a short LLM-written reply immediately instead of an
 unnecessary retrieval/rerank/answer pass through the knowledge base.
 """
 import asyncio
-import os
 from typing import Literal
 
 from dotenv import load_dotenv
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_openai import ChatOpenAI
 from pydantic import BaseModel, Field
 
-load_dotenv()
+from rag.llm import chat_llm
 
-_CHAT_MODEL = os.getenv("OPENAI_CHAT_MODEL", "gpt-4o-mini")
+load_dotenv()
 
 _SYSTEM_PROMPT = (
     "You are the front-door intent classifier for a maintenance knowledge assistant chatbot.\n"
@@ -27,7 +25,10 @@ _SYSTEM_PROMPT = (
     "answer that addresses the message directly, without needing to search any documents. "
     "For 'capability', mention that you answer questions about equipment, SOPs, and troubleshooting "
     "from the uploaded knowledge base.\n"
-    "If the intent is 'knowledge', leave `reply` empty — it will be answered separately using retrieved context."
+    "If the intent is 'knowledge', leave `reply` empty — it will be answered separately using retrieved context.\n\n"
+    "For 'knowledge', also write `topic`: a 2-6 word noun-phrase label of what the question is about "
+    "(e.g. 'Sleeve bearing oil leakage'), with no question words and no trailing punctuation. "
+    "Leave `topic` empty for 'greeting' and 'capability'."
 )
 
 
@@ -39,10 +40,14 @@ class Intent(BaseModel):
         default="",
         description="Short direct reply for 'greeting'/'capability' intents; empty for 'knowledge'.",
     )
+    topic: str = Field(
+        default="",
+        description="2-6 word topic label of a 'knowledge' question; empty otherwise.",
+    )
 
 
 def _classify_sync(query: str, metadata: dict | None = None) -> Intent:
-    llm = ChatOpenAI(model=_CHAT_MODEL, temperature=0)
+    llm = chat_llm()
     structured_llm = llm.with_structured_output(Intent)
     prompt = ChatPromptTemplate.from_messages([("system", _SYSTEM_PROMPT), ("human", "{query}")])
     chain = prompt | structured_llm

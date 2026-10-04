@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:8000"
+export const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:8000"
 
 export interface DocumentRecord {
   document_id: string
@@ -110,6 +110,11 @@ export interface Citation {
   chunk_index: number
   bm25_score: number | null
   page: number | null
+  image_path: string | null
+  /** Absent on messages stored before answers carried inline [n] citations. */
+  number?: number | null
+  section_path?: string | null
+  chunk_type?: string | null
 }
 
 export interface OpenAIMessage {
@@ -121,6 +126,7 @@ interface ChatCompletionChunk {
   choices: { delta: { role?: string; content?: string }; finish_reason: string | null }[]
   conversation_id?: string
   message_id?: string
+  topic?: string
   citations?: Citation[]
 }
 
@@ -130,13 +136,18 @@ interface ChatCompletionChunk {
  */
 export async function streamChatCompletion(
   token: string,
-  params: { messages: OpenAIMessage[]; conversation_id?: string | null },
+  params: { messages: OpenAIMessage[]; conversation_id?: string | null; persona?: string },
   onToken: (delta: string) => void,
-): Promise<{ conversationId: string; messageId: string; citations: Citation[] }> {
+): Promise<{ conversationId: string; messageId: string; citations: Citation[]; topic: string | null }> {
   const res = await fetch(`${API_URL}/v1/chat/completions`, {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-    body: JSON.stringify({ messages: params.messages, conversation_id: params.conversation_id, stream: true }),
+    body: JSON.stringify({
+      messages: params.messages,
+      conversation_id: params.conversation_id,
+      persona: params.persona,
+      stream: true,
+    }),
   })
 
   if (!res.ok || !res.body) {
@@ -150,6 +161,7 @@ export async function streamChatCompletion(
   let conversationId = ""
   let messageId = ""
   let citations: Citation[] = []
+  let topic: string | null = null
 
   while (true) {
     const { done, value } = await reader.read()
@@ -171,10 +183,11 @@ export async function streamChatCompletion(
       if (chunk.conversation_id) conversationId = chunk.conversation_id
       if (chunk.message_id) messageId = chunk.message_id
       if (chunk.citations) citations = chunk.citations
+      if (chunk.topic !== undefined) topic = chunk.topic
     }
   }
 
-  return { conversationId, messageId, citations }
+  return { conversationId, messageId, citations, topic }
 }
 
 export interface FeedbackResult {
@@ -199,6 +212,7 @@ export interface HistoryMessage {
   id: string
   role: string
   content: string
+  topic: string | null
   citations: Citation[]
   rating: "up" | "down" | null
   feedback_comment: string | null
@@ -207,7 +221,22 @@ export interface HistoryMessage {
 export interface Conversation {
   id: string
   created_at: string
+  persona: string | null
   messages: HistoryMessage[]
+}
+
+export interface DocumentTopic {
+  title: string
+  chapter: string
+  document_name: string
+  page: number | null
+}
+
+/** Topics the ingested documents cover that suit the given answer persona. */
+export function getTopics(persona: string): Promise<DocumentTopic[]> {
+  return fetch(`${API_URL}/api/topics?persona=${encodeURIComponent(persona)}`).then((res) =>
+    handle<DocumentTopic[]>(res),
+  )
 }
 
 export function getHistory(token: string): Promise<Conversation[]> {

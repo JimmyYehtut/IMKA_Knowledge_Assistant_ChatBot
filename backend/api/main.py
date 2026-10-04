@@ -1,8 +1,10 @@
 import hashlib
 import json
 import os
+import shutil
 import tempfile
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 try:
     import truststore
@@ -12,14 +14,18 @@ except ImportError:
 
 from dotenv import load_dotenv
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
+from fastapi.concurrency import run_in_threadpool
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 from qdrant_client.http.models import FieldCondition, Filter, MatchValue
 
 from ingest.embed_and_store import ingest_files
 from ingest.embed_and_store_docling import ingest_files_docling
+from ingest.load_documents import SUPPORTED_EXTENSIONS
 from ingest.registry import get_document, list_documents, remove_document
 from rag.qdrant_init import get_qdrant_client
+from rag.topics import get_topics
 from rag.vectorstore import QDRANT_COLLECTION_NAME
 
 from . import auth as auth_module
@@ -31,7 +37,7 @@ from .schemas import HealthResponse, IngestResponse
 
 load_dotenv()
 
-ALLOWED_EXTENSIONS = {".pdf", ".txt", ".md", ".docx", ".doc"}
+ALLOWED_EXTENSIONS = SUPPORTED_EXTENSIONS
 DOCLING_ALLOWED_EXTENSIONS = {".pdf"}
 
 
@@ -57,6 +63,10 @@ app.include_router(chat_module.router)
 app.include_router(feedback_module.router)
 app.include_router(openai_compat.router)
 
+DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+(DATA_DIR / "diagrams").mkdir(parents=True, exist_ok=True)
+app.mount("/data", StaticFiles(directory=str(DATA_DIR)), name="data")
+
 
 @app.get("/api/health", response_model=HealthResponse)
 def health():
@@ -76,6 +86,12 @@ def health():
 @app.get("/api/documents", response_model=list[dict])
 def get_documents():
     return list_documents()
+
+
+@app.get("/api/topics", response_model=list[dict])
+def get_document_topics(persona: str | None = None):
+    """Topics the ingested documents cover, optionally only those suited to one answer persona."""
+    return get_topics(persona)
 
 
 @app.post("/api/documents", response_model=IngestResponse)
@@ -120,7 +136,10 @@ async def upload_documents(
 
         try:
             ingest_fn = ingest_files_docling if pipeline == "docling" else ingest_files
-            result = ingest_fn(
+            # Ingestion is blocking and can take minutes (Docling parsing, embedding);
+            # run it off the event loop so chat and other requests keep being served.
+            result = await run_in_threadpool(
+                ingest_fn,
                 temp_paths,
                 metadata=metadata_dict,
                 version=version,
@@ -157,5 +176,6 @@ def delete_document(document_id: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to delete vectors: {e}") from e
 
+    shutil.rmtree(DATA_DIR / "diagrams" / document_id, ignore_errors=True)
     remove_document(document_id)
     return {"deleted": True, "document_id": document_id}

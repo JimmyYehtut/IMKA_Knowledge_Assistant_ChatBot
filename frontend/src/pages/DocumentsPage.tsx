@@ -12,11 +12,15 @@ import {
 } from "@/lib/api"
 import { cn } from "@/lib/utils"
 
-const ACCEPTED_EXTENSIONS = [".pdf", ".txt", ".md", ".docx", ".doc"]
+// Keep in sync with SUPPORTED_EXTENSIONS in backend/ingest/load_documents.py
+const ACCEPTED_EXTENSIONS = [
+  ".pdf", ".docx", ".pptx", ".xlsx", ".xls", ".csv",
+  ".html", ".htm", ".txt", ".md", ".json", ".xml", ".epub", ".msg",
+]
 const DOCLING_ACCEPTED_EXTENSIONS = [".pdf"]
 
 const PIPELINE_OPTIONS: { value: IngestPipeline; label: string; hint: string }[] = [
-  { value: "standard", label: "Standard", hint: "PyPDF + recursive text splitter. PDF, TXT, MD, DOCX." },
+  { value: "standard", label: "Standard", hint: "MarkItDown → Markdown, then Markdown-aware splitter. PDF, Office, HTML, CSV, text." },
   { value: "docling", label: "Docling (layout-aware)", hint: "Header/table-aware parsing via Docling. PDF only." },
 ]
 
@@ -163,7 +167,7 @@ export function DocumentsPage() {
           </div>
 
           <label
-            className="mt-3 flex cursor-pointer flex-col items-center gap-2 rounded-lg border border-dashed border-border px-4 py-6 text-center transition-all hover:border-primary/50 hover:bg-accent hover:glow-ring"
+            className="mt-3 flex cursor-pointer flex-col items-center gap-2 rounded-lg border border-dashed border-border px-4 py-6 text-center transition-all hover:border-primary/50 hover:bg-accent"
             onDragOver={(e) => e.preventDefault()}
             onDrop={(e) => {
               e.preventDefault()
@@ -173,7 +177,7 @@ export function DocumentsPage() {
             <UploadCloud className="size-6 text-muted-foreground" />
             <span className="text-sm font-medium text-foreground">Choose or drop files</span>
             <span className="text-xs text-muted-foreground">
-              {pipeline === "docling" ? "PDF only" : "PDF, TXT, MD, or DOCX"}
+              {pipeline === "docling" ? "PDF only" : "PDF, DOCX, PPTX, XLSX, HTML, CSV, TXT, MD, and more"}
             </span>
             <input
               type="file"

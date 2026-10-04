@@ -2,12 +2,16 @@ import { useEffect, useState } from "react"
 import { Bot, FileText, MessageSquarePlus, PanelRightClose, PanelRightOpen } from "lucide-react"
 import { ChatThread } from "@/components/chat/ChatThread"
 import { CitationsCard } from "@/components/chat/CitationsCard"
+import { PersonaTopicsCard } from "@/components/chat/PersonaTopicsCard"
+import { SessionTopicsCard } from "@/components/chat/SessionTopicsCard"
 import { ApiError, streamChatCompletion, submitFeedback, type Conversation } from "@/lib/api"
 import { useAuth } from "@/lib/AuthContext"
 import { useChatHistory } from "@/lib/ChatHistoryContext"
+import { DEFAULT_PERSONA, getPersona, type PersonaId } from "@/lib/personas"
 import type { ChatMessage } from "@/lib/types"
 
 const SIDE_PANEL_COLLAPSED_KEY = "chat_side_panel_collapsed"
+const LAST_PERSONA_KEY = "chat_last_persona"
 
 function timeNow() {
   return new Date().toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" })
@@ -20,6 +24,8 @@ export function ChatPage() {
   const [conversationId, setConversationId] = useState<string | null>(null)
   const [sending, setSending] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  // Chosen on the new-chat screen; the backend fixes it on the conversation at the first message.
+  const [persona, setPersona] = useState<PersonaId>(() => getPersona(localStorage.getItem(LAST_PERSONA_KEY)).id)
 
   const [panelCollapsed, setPanelCollapsed] = useState(
     () => localStorage.getItem(SIDE_PANEL_COLLAPSED_KEY) === "1",
@@ -29,6 +35,7 @@ export function ChatPage() {
     localStorage.setItem(SIDE_PANEL_COLLAPSED_KEY, panelCollapsed ? "1" : "0")
   }, [panelCollapsed])
 
+  const activePersona = getPersona(persona)
   const lastCitations = [...messages].reverse().find((m) => m.role === "assistant")?.citations ?? []
 
   useEffect(() => {
@@ -42,20 +49,32 @@ export function ChatPage() {
     setMessages((prev) => prev.map((m) => (m.id === localId ? { ...m, content: m.content + delta } : m)))
   }
 
-  async function runCompletion(history: { role: string; content: string }[], assistantLocalId: string) {
+  async function runCompletion(
+    history: { role: string; content: string }[],
+    assistantLocalId: string,
+    userLocalId?: string,
+  ) {
     if (!token) return
     setError(null)
     setSending(true)
     try {
-      const { conversationId: newConversationId, messageId, citations } = await streamChatCompletion(
+      const { conversationId: newConversationId, messageId, citations, topic } = await streamChatCompletion(
         token,
-        { messages: history as { role: "user" | "assistant" | "system"; content: string }[], conversation_id: conversationId },
+        {
+          messages: history as { role: "user" | "assistant" | "system"; content: string }[],
+          conversation_id: conversationId,
+          persona,
+        },
         (delta) => appendToMessage(assistantLocalId, delta),
       )
       setConversationId(newConversationId)
       setActiveConversationId(newConversationId)
       setMessages((prev) =>
-        prev.map((m) => (m.id === assistantLocalId ? { ...m, citations, serverId: messageId } : m)),
+        prev.map((m) => {
+          if (m.id === assistantLocalId) return { ...m, citations, serverId: messageId }
+          if (m.id === userLocalId) return { ...m, topic }
+          return m
+        }),
       )
       refreshHistory()
     } catch (e) {
@@ -87,7 +106,7 @@ export function ChatPage() {
     }
     const history = [...messages, userMessage].map((m) => ({ role: m.role, content: m.content }))
     setMessages((prev) => [...prev, userMessage, assistantMessage])
-    await runCompletion(history, assistantId)
+    await runCompletion(history, assistantId, userMessage.id)
   }
 
   async function handleRegenerate(assistantLocalId: string) {
@@ -105,7 +124,7 @@ export function ChatPage() {
           : m,
       ),
     )
-    await runCompletion(history, assistantLocalId)
+    await runCompletion(history, assistantLocalId, messages[userIdx].id)
   }
 
   async function handleEditUser(userLocalId: string, newContent: string) {
@@ -130,7 +149,7 @@ export function ChatPage() {
     }
     const history = [...truncated, editedUserMessage].map((m) => ({ role: m.role, content: m.content }))
     setMessages([...truncated, editedUserMessage, assistantMessage])
-    await runCompletion(history, assistantId)
+    await runCompletion(history, assistantId, editedUserMessage.id)
   }
 
   async function handleFeedback(localId: string, rating: "up" | "down") {
@@ -162,6 +181,11 @@ export function ChatPage() {
     }
   }
 
+  function handlePersonaChange(next: PersonaId) {
+    setPersona(next)
+    localStorage.setItem(LAST_PERSONA_KEY, next)
+  }
+
   function handleNewChat() {
     setMessages([])
     setConversationId(null)
@@ -171,6 +195,7 @@ export function ChatPage() {
 
   function applyConversation(conversation: Conversation) {
     setConversationId(conversation.id)
+    setPersona(conversation.persona ? getPersona(conversation.persona).id : DEFAULT_PERSONA)
     setError(null)
     setMessages(
       conversation.messages.map((m) => ({
@@ -180,6 +205,7 @@ export function ChatPage() {
         author: m.role === "assistant" ? "AI Assistant" : (user?.name ?? "You"),
         time: new Date(conversation.created_at).toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" }),
         content: m.content,
+        topic: m.topic,
         citations: m.citations,
         rating: m.rating,
         comment: m.feedback_comment,
@@ -192,16 +218,25 @@ export function ChatPage() {
       <div className="glass flex min-w-0 flex-1 flex-col rounded-xl border border-border">
         <div className="flex shrink-0 items-center justify-between border-b border-border px-5 py-4">
           <div className="flex items-center gap-3">
-            <div className="brand-gradient glow-ring flex size-9 items-center justify-center rounded-full">
+            <div className="brand-gradient flex size-9 items-center justify-center rounded-full">
               <Bot className="size-4.5 text-white" />
             </div>
             <div>
               <div className="flex items-center gap-2">
                 <span className="font-display font-semibold tracking-tight text-foreground">AI Assistant</span>
                 <span className="flex items-center gap-1 font-mono text-xs text-emerald-600 dark:text-emerald-400">
-                  <span className="pulse-dot size-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400" />
+                  <span className="size-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400" />
                   Online
                 </span>
+                {messages.length > 0 && (
+                  <span
+                    className="flex items-center gap-1 rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground"
+                    title={`Answers for: ${activePersona.name} (${activePersona.detailLevel})`}
+                  >
+                    <activePersona.icon className="size-3" />
+                    {activePersona.name} · {activePersona.detailLevel}
+                  </span>
+                )}
               </div>
               <p className="text-xs text-muted-foreground">
                 Ask questions about maintenance, SOPs, equipment and troubleshooting.
@@ -240,6 +275,8 @@ export function ChatPage() {
             messages={messages}
             onSend={handleSend}
             sending={sending}
+            persona={persona}
+            onPersonaChange={handlePersonaChange}
             onFeedback={handleFeedback}
             onComment={handleComment}
             onRegenerate={handleRegenerate}
@@ -262,6 +299,8 @@ export function ChatPage() {
         </div>
       ) : (
         <div className="hidden w-80 shrink-0 space-y-4 overflow-y-auto lg:block">
+          <PersonaTopicsCard persona={persona} onAsk={handleSend} disabled={sending} />
+          <SessionTopicsCard messages={messages} />
           <CitationsCard citations={lastCitations} />
         </div>
       )}

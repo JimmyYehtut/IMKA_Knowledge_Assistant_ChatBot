@@ -38,11 +38,13 @@ async def get_history(
         ConversationOut(
             id=conv.id,
             created_at=conv.created_at.isoformat(),
+            persona=conv.persona,
             messages=[
                 MessageOut(
                     id=msg.id,
                     role=msg.role,
                     content=msg.content,
+                    topic=msg.topic,
                     citations=[Citation(**c) for c in json.loads(msg.citations)],
                     rating=msg.rating,
                     feedback_comment=msg.feedback_comment,

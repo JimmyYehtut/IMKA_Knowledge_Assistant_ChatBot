@@ -27,7 +27,7 @@ def ingest_files(
     version: str = "1.0",
     original_names: list[str] | None = None,
 ):
-    """Load, chunk, attach metadata, and store documents in Qdrant.
+    """Convert to Markdown (MarkItDown), chunk, attach metadata, and store documents in Qdrant.
 
     Args:
         file_paths: Paths to documents to ingest.
@@ -42,13 +42,13 @@ def ingest_files(
     if original_names is None:
         original_names = [Path(p).name for p in file_paths]
 
-    print(f"Loading documents from: {file_paths}")
+    print(f"Converting to Markdown with MarkItDown: {file_paths}")
     docs = load_documents_from_paths(file_paths)
     if not docs:
         print("⚠️ No documents loaded.")
         return None
 
-    print(f"Splitting {len(docs)} pages/documents into chunks...")
+    print(f"Splitting {len(docs)} Markdown documents into chunks...")
     chunks = chunk_documents(docs)
     print(f"Created {len(chunks)} text chunks.")
 

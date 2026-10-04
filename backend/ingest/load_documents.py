@@ -1,37 +1,44 @@
 import os
 from typing import List
 from langchain_core.documents import Document
-from langchain_community.document_loaders import PyPDFLoader, TextLoader, Docx2txtLoader
+
+# Formats MarkItDown converts to Markdown with the extras installed via
+# requirements.txt. Legacy binary .doc is not supported by MarkItDown.
+SUPPORTED_EXTENSIONS = {
+    ".pdf", ".docx", ".pptx", ".xlsx", ".xls", ".csv",
+    ".html", ".htm", ".txt", ".md", ".json", ".xml", ".epub", ".msg",
+}
+
+_converter = None
 
 
-def load_pdf(path: str) -> List[Document]:
+def _get_converter():
+    global _converter
+    if _converter is None:
+        from markitdown import MarkItDown
+        _converter = MarkItDown()
+    return _converter
+
+
+def convert_to_markdown(path: str) -> str:
+    """Convert any supported document to Markdown. PDF page boundaries are
+    kept as form-feed characters (\\f) so the chunker can recover page numbers."""
     if not os.path.exists(path):
         raise FileNotFoundError(f"File not found: {path}")
-    return PyPDFLoader(path).load()
-
-
-def load_txt(path: str) -> List[Document]:
-    if not os.path.exists(path):
-        raise FileNotFoundError(f"File not found: {path}")
-    return TextLoader(path, encoding="utf-8", autodetect_encoding=True).load()
-
-
-def load_docx(path: str) -> List[Document]:
-    if not os.path.exists(path):
-        raise FileNotFoundError(f"File not found: {path}")
-    return Docx2txtLoader(path).load()
+    ext = os.path.splitext(path)[1].lower()
+    if ext not in SUPPORTED_EXTENSIONS:
+        raise ValueError(f"Unsupported file format: {ext} for path: {path}")
+    return _get_converter().convert(path).markdown
 
 
 def load_documents_from_paths(paths: List[str]) -> List[Document]:
+    """One Markdown Document per file; files that yield no text are skipped."""
     docs = []
     for path in paths:
+        markdown = convert_to_markdown(path)
+        if not markdown.strip():
+            print(f"⚠️ No text extracted from {path}, skipping.")
+            continue
         ext = os.path.splitext(path)[1].lower()
-        if ext == ".pdf":
-            docs.extend(load_pdf(path))
-        elif ext in [".txt", ".md"]:
-            docs.extend(load_txt(path))
-        elif ext in [".docx", ".doc"]:
-            docs.extend(load_docx(path))
-        else:
-            raise ValueError(f"Unsupported file format: {ext} for path: {path}")
+        docs.append(Document(page_content=markdown, metadata={"source": path, "format": ext.lstrip(".")}))
     return docs
