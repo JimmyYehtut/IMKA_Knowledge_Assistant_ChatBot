@@ -4,6 +4,11 @@ export interface ChatCitation {
   chunk_index: number
   bm25_score: number | null
   page: number | null
+  image_path: string | null
+  /** Absent on messages stored before answers carried inline [n] citations. */
+  number?: number | null
+  section_path?: string | null
+  chunk_type?: string | null
 }
 
 export interface ChatMessage {
@@ -14,6 +19,8 @@ export interface ChatMessage {
   author: string
   time: string
   content: string
+  /** User messages: short topic label of the question; "" for greetings, unset when unknown. */
+  topic?: string | null
   citations?: ChatCitation[]
   rating?: "up" | "down" | null
   comment?: string | null

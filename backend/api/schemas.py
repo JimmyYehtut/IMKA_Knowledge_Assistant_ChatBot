@@ -38,12 +38,18 @@ class Citation(BaseModel):
     chunk_index: int
     bm25_score: float | None = None
     page: int | None = None
+    image_path: str | None = None
+    # Absent on messages stored before answers carried inline [n] citations.
+    number: int | None = None
+    section_path: str | None = None
+    chunk_type: str | None = None
 
 
 class MessageOut(BaseModel):
     id: str
     role: str
     content: str
+    topic: str | None = None
     citations: list[Citation]
     rating: Literal["up", "down"] | None = None
     feedback_comment: str | None = None
@@ -54,6 +60,7 @@ class MessageOut(BaseModel):
 class ConversationOut(BaseModel):
     id: str
     created_at: str
+    persona: str | None = None
     messages: list[MessageOut]
 
 

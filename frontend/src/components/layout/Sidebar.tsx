@@ -34,7 +34,7 @@ export function Sidebar({ collapsed = false }: SidebarProps) {
       )}
     >
       <div className={cn("flex items-center gap-3 px-5 py-5", collapsed && "justify-center px-0")}>
-        <div className="brand-gradient glow-ring flex size-9 shrink-0 items-center justify-center rounded-lg">
+        <div className="brand-gradient flex size-9 shrink-0 items-center justify-center rounded-lg">
           <Wrench className="size-5 text-white" />
         </div>
         {!collapsed && (
@@ -58,7 +58,7 @@ export function Sidebar({ collapsed = false }: SidebarProps) {
                 "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium whitespace-nowrap text-sidebar-foreground/65 transition-all",
                 collapsed && "justify-center px-0",
                 isActive
-                  ? "brand-gradient glow-ring text-white"
+                  ? "brand-gradient text-white"
                   : "hover:bg-sidebar-accent hover:text-sidebar-foreground",
               )
             }
@@ -80,7 +80,7 @@ export function Sidebar({ collapsed = false }: SidebarProps) {
               "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium whitespace-nowrap text-sidebar-foreground/65 transition-all",
               collapsed && "justify-center px-0",
               isActive
-                ? "brand-gradient glow-ring text-white"
+                ? "brand-gradient text-white"
                 : "hover:bg-sidebar-accent hover:text-sidebar-foreground",
             )
           }
@@ -97,7 +97,7 @@ export function Sidebar({ collapsed = false }: SidebarProps) {
           <div className="flex min-h-0 flex-1 flex-col px-3">
             <div className="flex shrink-0 items-center gap-2 px-2 pb-2">
               <History className="size-3.5 text-sidebar-foreground/50" />
-              <span className="font-mono text-[11px] font-medium tracking-wide text-sidebar-foreground/50 uppercase">
+              <span className="font-mono text-xs font-medium tracking-wide text-sidebar-foreground/70 uppercase">
                 History
               </span>
             </div>
@@ -139,20 +139,20 @@ export function Sidebar({ collapsed = false }: SidebarProps) {
       <div className="mt-auto shrink-0 p-4">
         {collapsed ? (
           <div className="flex justify-center" title="AI System Status: Healthy">
-            <span className="pulse-dot size-2 rounded-full bg-emerald-500 dark:bg-emerald-400" />
+            <span className="size-2 rounded-full bg-emerald-500 dark:bg-emerald-400" />
           </div>
         ) : (
           <div className="rounded-xl border border-sidebar-border bg-sidebar-accent/60 p-4">
             <div className="flex items-center justify-between">
-              <span className="font-mono text-[11px] font-medium tracking-wide text-sidebar-foreground/90 uppercase">
+              <span className="font-mono text-xs font-medium tracking-wide text-sidebar-foreground/90 uppercase">
                 AI System Status
               </span>
               <span className="rounded-full bg-emerald-500/15 px-2 py-0.5 text-xs font-medium text-emerald-600 dark:text-emerald-400">
                 Healthy
               </span>
             </div>
-            <div className="mt-2 flex items-center gap-1.5 font-mono text-xs text-sidebar-foreground/60">
-              <span className="pulse-dot size-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400" />
+            <div className="mt-2 flex items-center gap-1.5 font-mono text-xs text-sidebar-foreground/75">
+              <span className="size-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400" />
               Last updated: 10:15 AM
             </div>
           </div>

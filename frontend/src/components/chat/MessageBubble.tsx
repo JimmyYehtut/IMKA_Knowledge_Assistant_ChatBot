@@ -13,7 +13,7 @@ import {
 } from "lucide-react"
 import { MarkdownContent } from "@/components/chat/MarkdownContent"
 import type { ChatMessage } from "@/lib/types"
-import { cn } from "@/lib/utils"
+import { citationLocation, cn, groupCitationsByDocument } from "@/lib/utils"
 
 interface MessageBubbleProps {
   message: ChatMessage
@@ -85,7 +85,7 @@ export function MessageBubble({ message, busy, onFeedback, onComment, onRegenera
 
   if (message.role === "user") {
     return (
-      <div className="group flex justify-end">
+      <div id={`msg-${message.id}`} className="group flex justify-end">
         <div className="max-w-[80%]">
           <div className="mb-1 flex items-baseline justify-end gap-2 text-xs text-muted-foreground">
             <span className="font-medium text-foreground">{message.author}</span>
@@ -137,7 +137,7 @@ export function MessageBubble({ message, busy, onFeedback, onComment, onRegenera
 
   return (
     <div className="flex gap-3">
-      <div className="brand-gradient glow-ring flex size-8 shrink-0 items-center justify-center rounded-full">
+      <div className="brand-gradient flex size-8 shrink-0 items-center justify-center rounded-full">
         <Bot className="size-4 text-white" />
       </div>
       <div className="min-w-0 flex-1">
@@ -148,7 +148,11 @@ export function MessageBubble({ message, busy, onFeedback, onComment, onRegenera
 
         <div className="space-y-3 text-sm text-foreground">
           {message.content ? (
-            <MarkdownContent content={message.content} />
+            <MarkdownContent
+              content={message.content}
+              citations={message.citations}
+              citationAnchorPrefix={`cite-${message.id}`}
+            />
           ) : (
             <div className="flex items-center gap-2 py-1 text-muted-foreground">
               <div className="flex gap-1">
@@ -161,16 +165,36 @@ export function MessageBubble({ message, busy, onFeedback, onComment, onRegenera
           )}
 
           {message.citations && message.citations.length > 0 && (
-            <div className="flex flex-wrap gap-1.5">
-              {message.citations.map((c) => (
-                <span
-                  key={`${c.document_id}-${c.chunk_index}`}
-                  className="flex items-center gap-1.5 rounded-full bg-muted px-2.5 py-1 text-xs text-muted-foreground"
-                >
-                  <FileText className="size-3" />
-                  {c.document_name}
-                  {c.page !== null && <span className="font-mono">· p. {c.page}</span>}
-                </span>
+            <div className="space-y-1.5">
+              {groupCitationsByDocument(message.citations).map((group) => (
+                <div key={group.documentId} className="flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground">
+                  <span className="flex items-center gap-1.5 font-medium text-foreground">
+                    <FileText className="size-3.5 shrink-0 text-muted-foreground" />
+                    {group.documentName}
+                  </span>
+                  {group.pages.map((page) => (
+                    <span
+                      key={page.page ?? "none"}
+                      title={page.citations.map(citationLocation).join("\n")}
+                      className="flex items-center gap-1 rounded-full bg-muted px-2 py-0.5"
+                    >
+                      {/* Each number keeps its own anchor so every [n] badge in the answer has a target. */}
+                      {page.citations.map(
+                        (c) =>
+                          c.number != null && (
+                            <span
+                              key={c.number}
+                              id={`cite-${message.id}-${c.number}`}
+                              className="font-mono font-medium text-primary"
+                            >
+                              [{c.number}]
+                            </span>
+                          ),
+                      )}
+                      <span className="font-mono">{page.page !== null ? `p. ${page.page}` : "no page"}</span>
+                    </span>
+                  ))}
+                </div>
               ))}
             </div>
           )}

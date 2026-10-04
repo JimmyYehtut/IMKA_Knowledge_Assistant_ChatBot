@@ -48,13 +48,15 @@ cp .env.example .env
 # then edit .env and add your OpenAI API key / Qdrant settings
 ```
 
-Start Qdrant (vector database) via Docker:
+Start Qdrant (vector database) and Postgres via Docker:
 
 ```bash
 docker compose up -d
 ```
 
-Qdrant will be reachable at `http://localhost:6333` (dashboard at `http://localhost:6333/dashboard`).
+This creates the `imka` compose project with the containers `imka-qdrant` and `imka-postgres` (volumes `imka-qdrant-data`, `imka-postgres-data`). Both use `restart: unless-stopped`, so they come back automatically with Docker Desktop.
+
+Qdrant will be reachable at `http://localhost:6333` (dashboard at `http://localhost:6333/dashboard`) and Postgres at `localhost:5433` (database `imka`). If another project's container already holds port 6333 or 5433, stop it first.
 
 ### 3. Frontend setup
 

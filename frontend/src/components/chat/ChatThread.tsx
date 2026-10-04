@@ -1,12 +1,16 @@
 import { useEffect, useRef, useState } from "react"
-import { Bot, Mic, Paperclip, Send } from "lucide-react"
+import { Mic, Paperclip, Send } from "lucide-react"
+import type { PersonaId } from "@/lib/personas"
 import type { ChatMessage } from "@/lib/types"
+import { ChatEmptyState } from "@/components/chat/ChatEmptyState"
 import { MessageBubble } from "@/components/chat/MessageBubble"
 
 interface ChatThreadProps {
   messages: ChatMessage[]
   onSend?: (text: string) => void
   sending?: boolean
+  persona: PersonaId
+  onPersonaChange?: (persona: PersonaId) => void
   onFeedback?: (localId: string, rating: "up" | "down") => void
   onComment?: (localId: string, comment: string) => void
   onRegenerate?: (localId: string) => void
@@ -17,6 +21,8 @@ export function ChatThread({
   messages,
   onSend,
   sending = false,
+  persona,
+  onPersonaChange,
   onFeedback,
   onComment,
   onRegenerate,
@@ -42,10 +48,7 @@ export function ChatThread({
     <div className="flex h-full min-h-0 flex-col">
       <div ref={scrollRef} className="min-h-0 flex-1 space-y-6 overflow-y-auto p-6">
         {messages.length === 0 && !sending && (
-          <div className="flex h-full flex-col items-center justify-center gap-2 text-center text-muted-foreground">
-            <Bot className="size-8" />
-            <p className="text-sm">Ask a question to get started.</p>
-          </div>
+          <ChatEmptyState persona={persona} onPersonaChange={onPersonaChange} onAsk={onSend} />
         )}
         {messages.map((message) => (
           <MessageBubble
@@ -61,7 +64,7 @@ export function ChatThread({
       </div>
 
       <div className="shrink-0 border-t border-border p-4">
-        <div className="glass focus-within:glow-ring flex items-center gap-2 rounded-full border border-border px-2 py-1.5 transition-shadow">
+        <div className="glass focus-within:ring-2 focus-within:ring-ring flex items-center gap-2 rounded-full border border-border px-2 py-1.5 transition-shadow">
           <button type="button" className="rounded-full p-1.5 text-muted-foreground hover:bg-accent" aria-label="Attach file">
             <Paperclip className="size-4" />
           </button>

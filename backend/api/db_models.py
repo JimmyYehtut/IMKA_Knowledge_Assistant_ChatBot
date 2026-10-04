@@ -33,6 +33,7 @@ class Conversation(Base):
     id: Mapped[str] = mapped_column(String, primary_key=True, default=_uuid)
     user_id: Mapped[str] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now, nullable=False)
+    persona: Mapped[str | None] = mapped_column(String(30), nullable=True)  # answer persona chosen at chat start
 
     user: Mapped["User"] = relationship(back_populates="conversations")
     messages: Mapped[list["Message"]] = relationship(
@@ -49,6 +50,8 @@ class Message(Base):
     )
     role: Mapped[str] = mapped_column(String(20), nullable=False)  # "user" | "assistant"
     content: Mapped[str] = mapped_column(Text, nullable=False)
+    # User messages only: short topic label of the question ("" for greetings); null on older rows.
+    topic: Mapped[str | None] = mapped_column(String(120), nullable=True)
     citations: Mapped[str] = mapped_column(Text, nullable=False, default="[]")  # JSON-encoded list
     rating: Mapped[str | None] = mapped_column(String(10), nullable=True)  # "up" | "down" | null
     feedback_comment: Mapped[str | None] = mapped_column(Text, nullable=True)

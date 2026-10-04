@@ -47,9 +47,9 @@ export function LoginPage() {
         }}
       />
 
-      <div className="glass glow-ring relative w-full max-w-sm rounded-2xl border border-border p-6">
+      <div className="glass relative w-full max-w-sm rounded-2xl border border-border p-6">
         <div className="mb-6 flex flex-col items-center gap-3 text-center">
-          <div className="brand-gradient glow-ring flex size-11 items-center justify-center rounded-xl">
+          <div className="brand-gradient flex size-11 items-center justify-center rounded-xl">
             <Wrench className="size-5 text-white" />
           </div>
           <h1 className="font-display text-lg font-semibold tracking-tight text-foreground">

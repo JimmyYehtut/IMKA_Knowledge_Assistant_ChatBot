@@ -46,3 +46,12 @@ lerna-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Generated topic catalogue cache (rebuilt from Qdrant when documents change)
+backend/data/topics_cache.json
+
+# Generated at ingestion: figure images per document (rebuilt by re-ingesting)
+backend/data/diagrams/
+
+# Backup of a previous virtual environment
+.venv-old/
