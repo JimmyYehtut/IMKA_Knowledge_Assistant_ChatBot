@@ -34,6 +34,43 @@ load_dotenv()
 
 CHUNK_MAX_TOKENS = int(os.getenv("DOCLING_CHUNK_MAX_TOKENS", "700"))
 VLM_CAPTION_MODEL = os.getenv("DOCLING_CAPTION_MODEL", "gpt-4o-mini")
+# Room for the 4-6 sentences the prompt asks for plus a formula and a worked
+# example. At 250, 7 of the ABB manual's 44 descriptions (Figure 38 among them)
+# stopped mid-sentence.
+VLM_MAX_TOKENS = int(os.getenv("DOCLING_CAPTION_MAX_TOKENS", "600"))
+# Manual text sent with each figure is cut to this many characters, so a page
+# of prose cannot crowd out the image or run up the cost of every call.
+VLM_CONTEXT_CHARS = 2000
+
+_FIGURE_PROMPT = (
+    "Describe this technical figure from an industrial equipment manual for "
+    "maintenance engineers, in 4-6 concise sentences focused on what the "
+    "figure is for and how it is used.\n"
+    "\n"
+    "First decide what kind of figure it is, and follow only the matching rule:\n"
+    "- Graph or chart: name each axis with its quantity, unit and scale "
+    "(say when a scale is logarithmic) and describe the plotted relationship. "
+    "Do not call a relationship linear just because the line looks straight.\n"
+    "- Drawing, photo, or wiring/connection diagram: describe the visible "
+    "components and connections, and refer to numbered markers as callouts "
+    "(callout 1, callout 2), never as axes.\n"
+    "- Rating plate, table or label: name the fields shown, not their values, "
+    "unless the values are legible.\n"
+    "\n"
+    "Use the manual text below, if any, only to interpret callouts, symbols "
+    "and axes; do not contradict it or substitute another quantity or unit. "
+    "If that text gives a formula or a worked example for this figure, "
+    "include it. Keep these sources apart:\n"
+    "- Values, formulas and worked examples that appear in the manual text "
+    "are printed in the manual: copy them exactly and present them as the "
+    "manual's (\"the manual's example uses k = 0.25\"), never as readings "
+    "from the figure.\n"
+    "- Give a value read off the figure only if it is clearly legible, and "
+    "mark it \"approximately\".\n"
+    "- Do not calculate new values or invent specifications.\n"
+    "Keep any caution or limit the manual states for the figure. If something "
+    "is unclear, say so instead of guessing."
+)
 
 # Served by the API at /data/diagrams/... (see the StaticFiles mount in api/main.py).
 DIAGRAMS_DIR = Path(__file__).resolve().parent.parent / "data" / "diagrams"
@@ -174,50 +211,13 @@ def _describe_image(client, pil_image, context: str = "") -> str | None:
     pil_image.save(buf, format="PNG")
     b64 = base64.b64encode(buf.getvalue()).decode("utf-8")
 
-    
-    
-    prompt = (
-        "Describe this technical figure for industrial maintenance engineers. "
-        "Use the supplied manual context to interpret numbered axis labels, "
-        "symbols, and components. When the context explicitly defines numbered "
-        "axes, reproduce those definitions accurately; never substitute a "
-        "different quantity or unit for an axis. Treat the context as the source "
-        "of technical meaning, while distinguishing information stated in the "
-        "context from features directly visible in the image. "
-
-        "For graphs, identify the axes, units, and scales. Explain the engineering "
-        "purpose and plotted relationship only when supported by the image and "
-        "context. Do not infer a direct or linear relationship merely because a "
-        "plotted line appears straight, especially when an axis is logarithmic. "
-
-        "Preserve important technical formulas and their symbols accurately. "
-        "When the supplied context contains a formula relevant to the figure, "
-        "include it and explain its variables using the context. Preserve printed "
-        "numerical examples, including input values, coefficients, units, and "
-        "calculated results, when relevant to understanding the figure. Do not "
-        "change or recalculate a printed example incorrectly. "
-
-        "Clearly distinguish values explicitly printed in the manual from "
-        "approximate values read from the graph and from calculated results. "
-        "Only provide a numerical graph reading when the image supports it, and "
-        "label it as approximate. Do not invent numerical values or unsupported "
-        "specifications. Preserve relevant cautions and limitations stated in "
-        "the manual. "
-
-        "For wiring diagrams, describe visible components and connections. "
-        "If information is unclear or unsupported, say so instead of guessing. "
-        "Use 5-8 concise sentences focused on the figure's practical meaning."
+    context = context.strip()
+    if len(context) > VLM_CONTEXT_CHARS:
+        context = context[:VLM_CONTEXT_CHARS].rsplit(" ", 1)[0] + " ..."
+    prompt = _FIGURE_PROMPT + (
+        f"\n\nManual text around this figure:\n{context}" if context
+        else "\n\nNo manual text was found for this figure; describe only what is visible."
     )
-  
-
-
-    if context.strip():
-        prompt += (
-            "\n\nRelevant text extracted from the manual:\n"
-            + context.strip()
-        )
-    else:
-        prompt += "\n\nNo surrounding manual text was supplied."
 
     try:
         resp = client.chat.completions.create(
@@ -234,9 +234,17 @@ def _describe_image(client, pil_image, context: str = "") -> str | None:
                     },
                 ],
             }],
-            max_tokens=250,
+            max_tokens=VLM_MAX_TOKENS,
         )
-        return resp.choices[0].message.content.strip()
+        choice = resp.choices[0]
+        text = (choice.message.content or "").strip()
+        if choice.finish_reason == "length":
+            # Ran out of tokens: keep the complete sentences rather than index
+            # a description that stops mid-word.
+            complete = re.match(r".*[.!?](?=\s|$)", text, re.DOTALL)
+            text = complete.group(0) if complete else text
+            print(f"  [warn] figure description hit max_tokens={VLM_MAX_TOKENS}; trimmed", file=sys.stderr)
+        return text or None
     except Exception as e:
         print(f"  [warn] figure description failed: {e}", file=sys.stderr)
         return None

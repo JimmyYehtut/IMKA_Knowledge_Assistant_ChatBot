@@ -126,3 +126,42 @@ def test_caption_labelled_as_heading_still_captions_the_picture_above_it(extract
     assert chunk.metadata["chunk_type"] == "figure"
     assert chunk.metadata["figure_caption"] == chunk.page_content
     assert chunk.metadata["section_path"] == "7.6.4.1 Conversion of measured insulation resistance"
+
+
+class _FakeVLM:
+    """Stands in for the OpenAI client: records each request, returns a canned reply."""
+
+    def __init__(self, reply: str, finish_reason: str = "stop"):
+        self.requests = []
+        message = type("Message", (), {"content": reply})()
+        choice = type("Choice", (), {"message": message, "finish_reason": finish_reason})()
+        self.response = type("Response", (), {"choices": [choice]})()
+        self.chat = type("Chat", (), {"completions": self})()
+
+    def create(self, **kwargs):
+        self.requests.append(kwargs)
+        return self.response
+
+    def prompt(self) -> str:
+        return self.requests[-1]["messages"][0]["content"][0]["text"]
+
+
+def test_figure_description_is_trimmed_to_the_last_full_sentence_when_cut_off():
+    vlm = _FakeVLM("The graph converts R to R40 with k = 0.25. The manual cautions that", "length")
+    text = docling_ingest._describe_image(vlm, Image.new("RGB", (8, 8)))
+    assert text == "The graph converts R to R40 with k = 0.25."
+    assert vlm.requests[-1]["max_tokens"] == docling_ingest.VLM_MAX_TOKENS
+
+
+def test_figure_description_sends_capped_manual_text_as_context():
+    vlm = _FakeVLM("A graph.")
+    docling_ingest._describe_image(vlm, Image.new("RGB", (8, 8)), context="R40 = k x R " * 1000)
+    prompt = vlm.prompt()
+    assert "Manual text around this figure:\nR40 = k x R" in prompt
+    assert len(prompt) < len(docling_ingest._FIGURE_PROMPT) + docling_ingest.VLM_CONTEXT_CHARS + 100
+
+
+def test_figure_description_without_context_asks_for_visible_content_only():
+    vlm = _FakeVLM("A drawing.")
+    docling_ingest._describe_image(vlm, Image.new("RGB", (8, 8)), context="  ")
+    assert "describe only what is visible" in vlm.prompt()
