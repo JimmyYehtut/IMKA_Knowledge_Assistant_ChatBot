@@ -1,11 +1,47 @@
 [
   {
-    "document_id": "27d93714-6f4a-47f9-9932-52862b595a8e",
-    "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+    "document_id": "e1aa039d-16b0-4c50-b50d-b36ef8d654b7",
+    "document_name": "electricity-acdc-motors-controls-and-maintenance-10th-edition-by-jeff-keljik-min.pdf",
     "version": "1.0",
-    "chunk_count": 566,
+    "chunk_count": 452,
     "metadata": {},
     "status": "indexed",
-    "uploaded_at": "2026-08-22T08:10:56.234230+00:00"
+    "uploaded_at": "2026-10-08T13:59:57.548077+00:00"
+  },
+  {
+    "document_id": "718aebcb-eb7c-4cf2-85de-5827ae931397",
+    "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+    "version": "1.0",
+    "chunk_count": 482,
+    "metadata": {},
+    "status": "indexed",
+    "uploaded_at": "2026-10-08T14:39:20.818750+00:00"
+  },
+  {
+    "document_id": "bb89ee3d-219c-4c3d-ade8-8d356319fcb9",
+    "document_name": "Siemens_Manual_Vertiical_Induction_Motors_EN.pdf",
+    "version": "1.0",
+    "chunk_count": 117,
+    "metadata": {},
+    "status": "indexed",
+    "uploaded_at": "2026-10-08T14:39:20.824038+00:00"
+  },
+  {
+    "document_id": "11a72ba6-4297-4f71-be06-977e14ae0693",
+    "document_name": "EMSA Diesel Generator manual-en.pdf",
+    "version": "1.0",
+    "chunk_count": 255,
+    "metadata": {},
+    "status": "indexed",
+    "uploaded_at": "2026-10-08T15:39:46.005085+00:00"
+  },
+  {
+    "document_id": "c4f1c67d-e9fd-4844-8232-38cf871ed2cb",
+    "document_name": "Kohler Generator Manual.pdf",
+    "version": "1.0",
+    "chunk_count": 238,
+    "metadata": {},
+    "status": "indexed",
+    "uploaded_at": "2026-10-08T15:39:46.005085+00:00"
   }
 ]
