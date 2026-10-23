@@ -294,7 +294,7 @@ def _extract_figures(
         from openai import OpenAI
         client = OpenAI()
 
-        dest_dir = DIAGRAMS_DIR / document_id
+    dest_dir = DIAGRAMS_DIR / document_id
     chunks: list[Document] = []
 
     for number in sorted(figures):
