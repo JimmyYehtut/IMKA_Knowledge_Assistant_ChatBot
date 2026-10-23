@@ -43,6 +43,7 @@ class Citation(BaseModel):
     number: int | None = None
     section_path: str | None = None
     chunk_type: str | None = None
+    figure_caption: str | None = None
 
 
 class MessageOut(BaseModel):

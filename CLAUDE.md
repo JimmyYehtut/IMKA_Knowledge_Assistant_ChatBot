@@ -51,7 +51,17 @@ python -m ingest.embed_and_store path/to/document1.pdf path/to/document2.docx
 python -m ingest.embed_and_store_docling path/to/document.pdf   # Docling pipeline, PDF only
 ```
 
-There is no configured test suite in `backend/requirements.txt` (no pytest present) — verify backend changes by running the API and hitting endpoints (`/docs`) or via `python -m ingest...` for pipeline changes.
+Tests and lint (dev tools in `backend/requirements-dev.txt`, config in `backend/pyproject.toml`):
+
+```powershell
+pip install -r requirements-dev.txt
+python -m ruff check .
+python -m pytest -q                       # unit tests: no network, OpenAI/Qdrant/Postgres faked
+python -m evals.run_figure_eval           # live diagram eval: needs the running stack, spends OpenAI tokens
+python -m evals.audit_figures <pdf|parse.json> [--document-id ID]   # dry-run figure extraction, no writes
+```
+
+`tests/conftest.py` blocks outbound connections and turns LangSmith tracing off. A test that reaches OpenAI fails instead of hanging. Tests that need the stack are marked `live` and run only with `IMKA_LIVE=1`.
 
 ### Frontend
 
@@ -63,10 +73,18 @@ cp .env.example .env   # VITE_API_URL, default http://localhost:8000
 npm run dev       # http://localhost:5173
 npm run build      # tsc -b && vite build
 npm run lint       # oxlint
+npm test           # vitest (jsdom), tests beside the source as *.test.ts(x)
 npm run preview
 ```
 
-No frontend test runner is configured.
+### Quality gates and the Claude Code harness
+
+`python scripts/check.py [backend|frontend]` runs ruff, pytest, oxlint, tsc and vitest and prints a summary; CI (`.github/workflows/ci.yml`) runs the same plus `npm run build`.
+
+- `.claude/settings.json`: a PostToolUse hook (`.claude/hooks/post_edit.py`) lints each edited file and runs the tests mapped to it (`BACKEND_TESTS` in the hook, `vitest related` for the frontend). Deny rules block edits to `.env` files and `backend/data/**`, and force-pushes.
+- `.claude/agents/`: `rag-eval` (live diagram eval and failure diagnosis), `ingest-checker` (dry-run figure audit of a PDF), `frontend-reviewer` (review of `frontend/src` changes).
+- `.claude/commands/`: `/check`, `/eval-diagrams`, `/audit-figures`, `/run-stack`.
+- `backend/evals/figures.yaml` is the diagram golden set for the ABB manual. Add a case whenever a diagram question goes wrong.
 
 ### Windows convenience scripts
 
@@ -82,7 +100,7 @@ Both ingestion pipelines write to the same Qdrant collection and JSON document r
 - Document registry: `ingest/registry.py` -> `backend/data/documents_registry.json`
 
 - **Standard** (`ingest/embed_and_store.py`): converts every file to Markdown with MarkItDown (`ingest/load_documents.py`; `SUPPORTED_EXTENSIONS` there is the single source of truth for allowed types: PDF, DOCX, PPTX, XLSX/XLS, CSV, HTML, TXT, MD, JSON, XML, EPUB, MSG). It then splits the Markdown with the Markdown-aware `RecursiveCharacterTextSplitter.from_language(Language.MARKDOWN)` (`chunk_size=1000`, `chunk_overlap=200`) in `ingest/chunk_documents.py`, and embeds and upserts the chunks. PDF chunks carry a 1-indexed `page_no`, recovered from pdfminer's `\f` page breaks. Chunks under Markdown headings carry `section_path`. Older chunks ingested by PyPDFLoader may still carry a 0-indexed `page`.
-- **Docling** (`ingest/embed_and_store_docling.py`): processes PDF files with Docling's `DocumentConverter` and `HybridChunker` for layout-aware, table-aware, and header-aware chunking. Tables remain atomic and are serialized as compact Markdown tables (not the chunker's default triplets), section headings are tracked as `section_path`, and chunk metadata carries a 1-indexed `page_no`. Table-of-contents chunks and exact duplicate chunks are dropped. Figures: every captioned picture is saved to `backend/data/diagrams/<document_id>/figN_k.png` (served at `/data/diagrams/...`, removed when the document is deleted) with one `chunk_type="figure"` chunk per figure (`figure_number`, `figure_caption`, `image_paths`); text chunks record the figure numbers they mention in `figure_refs`. `caption_figures=True` additionally adds a VLM description to each figure chunk. At query time `rag/pipeline.py` `_figures_for_chunks()` offers each retrieved chunk's figures (caption + image path) to the answer prompt, which embeds relevant ones as Markdown images; `MarkdownContent.tsx` renders only `diagrams/...` image paths.
+- **Docling** (`ingest/embed_and_store_docling.py`): processes PDF files with Docling's `DocumentConverter` and `HybridChunker` for layout-aware, table-aware, and header-aware chunking. Tables remain atomic and are serialized as compact Markdown tables (not the chunker's default triplets), section headings are tracked as `section_path`, and chunk metadata carries a 1-indexed `page_no`. Table-of-contents chunks and exact duplicate chunks are dropped. Figures: every captioned picture is saved to `backend/data/diagrams/<document_id>/figN_k.png` (served at `/data/diagrams/...`, removed when the document is deleted) with one `chunk_type="figure"` chunk per figure (`figure_number`, `figure_caption`, `image_paths`); text chunks record the figure numbers they mention in `figure_refs`. A picture without its own caption joins the next "Figure N" caption only if it sits on that caption's page or the page before (`_CAPTION_PAGE_REACH`). Without that check, cover photos and warning signs were glued onto unrelated figures. `caption_figures=True` additionally adds a VLM description to each figure chunk. At query time `rag/pipeline.py` `_figures_for_chunks()` offers each retrieved chunk's figures (caption + image path) to the answer prompt, which embeds relevant ones as Markdown images. In the chat, `lib/diagrams.ts` allows only `diagrams/...` paths, and `DiagramImage.tsx` draws each one with a click-to-enlarge dialog and a caption fallback when the file is missing. `MarkdownContent.tsx` groups the panels of one figure under one caption, and `MessageBubble.tsx` shows cited figures the answer did not draw ("Diagrams cited in this answer").
 
 `POST /api/documents` runs ingestion in a threadpool so the API keeps serving chat during a long ingest.
 
@@ -96,12 +114,12 @@ Implementation: `backend/rag/pipeline.py`
 
 The pipeline has six conceptual stages. Stage 5 is handled separately because it is the LLM streaming call:
 
-1. Query rewrite (LLM cleans/disambiguates the query for semantic search)
+1. Query rewrite (LLM cleans/disambiguates the query for semantic search, told it is searching industrial equipment manuals so terms keep their maintenance sense). The rewrite only drives retrieval; stage 5 answers the user's original question.
 2. Retrieve — Qdrant similarity search, top `RETRIEVAL_TOP_K` (default 15)
 3. Hybrid rerank — dedupe identical chunks, then fuse each candidate's semantic rank with its `rank_bm25` keyword rank by weighted Reciprocal Rank Fusion (`RERANK_SEMANTIC_WEIGHT`, default 2) down to `RERANK_TOP_N` (default 5). BM25 alone must not decide the order: it ranks long prose that repeats query words above a compact table that holds the answer. Tokenization is regex-based (`_tokenize`) so table cells and punctuated words match.
 4. Context assembly — chunks numbered and labeled `[n] Document Name, p. N · section path (type)` (page resolved via `_page_number`, which prefers `page_no` over PyPDFLoader's 0-indexed `page`)
 5. Answer generation — separate LCEL chain (`build_answer_chain()`), streamed token-by-token via `.astream()`. The prompt makes inline `[n]` citation markers mandatory.
-6. Citations — one per reranked chunk, carrying the same `number` as its stage 4 label plus `page`, `section_path`, `chunk_type`. After the answer is complete, `select_cited()` (called in `api/openai_compat.py`) keeps only the citations whose `[n]` appears in the answer; that cited-only list is what is persisted and returned. The frontend renders the markers as badges (`MarkdownContent.tsx`) that jump to the source chip under the same message.
+6. Citations — one per reranked chunk, carrying the same `number` as its stage 4 label plus `page`, `section_path`, `chunk_type`, and for figure passages `image_path` and `figure_caption`. After the answer is complete, `select_cited()` (called in `api/openai_compat.py`) keeps only the citations whose `[n]` appears in the answer; that cited-only list is what is persisted and returned. The frontend renders the markers as badges (`MarkdownContent.tsx`) that jump to the source chip under the same message.
 
 Before the pipeline runs, `rag/intent.py` classifies the query as `greeting` / `capability` / `knowledge`; only `knowledge` triggers the full retrieval pipeline — the other two get a short LLM-written reply directly, skipping retrieval.
 
@@ -135,6 +153,7 @@ JWT bearer authentication is implemented in `api/auth.py` with `python-jose` and
 ### Frontend Structure
 
 - `lib/api.ts` — API client (talks to `VITE_API_URL`, defaults to `http://localhost:8000`)
+- `lib/diagrams.ts` — which image paths may load, diagram URLs, cited-but-not-drawn figures, hiding half-streamed image Markdown
 - `lib/AuthContext.tsx`, `lib/ChatHistoryContext.tsx`, `lib/ThemeContext.tsx` — app-wide React contexts
 - `components/layout/RequireAuth.tsx` — route guard wrapping all authenticated routes in `App.tsx`
 - `components/chat/` — chat UI incl. `MarkdownContent.tsx` (renders assistant answers: `react-markdown` + `remark-gfm`/`remark-math` + `rehype-katex` for LaTeX, since the backend prompt instructs the LLM to emit Markdown/LaTeX) and `CitationsCard.tsx` (renders the `citations` array from chat responses)

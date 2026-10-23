@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python 'C:\\Users\\yehtu\\Documents\\Ye Htut\\NUS-ISS\\Year2-Semester2\\Practice Module Files\\.codex\\hooks\\post_edit.py'",
+            "timeout": 180,
+            "statusMessage": "Linting and testing the edited file..."
+          }
+        ]
+      }
+    ]
+  }
+}

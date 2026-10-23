@@ -1,10 +1,11 @@
 import { useMemo, type ReactNode } from "react"
-import ReactMarkdown, { type Components } from "react-markdown"
+import ReactMarkdown, { type Components, type ExtraProps } from "react-markdown"
 import rehypeKatex from "rehype-katex"
 import remarkGfm from "remark-gfm"
 import remarkMath from "remark-math"
 import "katex/dist/katex.min.css"
-import { API_URL } from "@/lib/api"
+import { DiagramImage } from "@/components/chat/DiagramImage"
+import { hideUnfinishedImage, isDiagramPath, type Diagram } from "@/lib/diagrams"
 import type { ChatCitation } from "@/lib/types"
 import { citationLocation } from "@/lib/utils"
 
@@ -20,7 +21,6 @@ function normalizeMathDelimiters(content: string): string {
 }
 
 const CITE_HREF_PREFIX = "#cite-"
-const DIAGRAM_PATH_PREFIX = "diagrams/"
 
 /**
  * Turns the answer's inline citation markers ("[2]", "[1, 3]") into links the
@@ -36,8 +36,66 @@ function linkCitationMarkers(content: string, citations: ChatCitation[]): string
   })
 }
 
+type ParagraphNode = ExtraProps["node"]
+
+/**
+ * The diagrams of a paragraph made only of diagram images (the answer puts each
+ * figure on its own line), or null for any other paragraph. Such a paragraph is
+ * drawn as a figure, so a multi-panel figure ("fig9_1", "fig9_2", ... all
+ * captioned "Figure 9 ...") sits side by side under one caption.
+ */
+function diagramOnlyParagraph(node: ParagraphNode): Diagram[] | null {
+  const diagrams: Diagram[] = []
+  for (const child of node?.children ?? []) {
+    if (child.type === "text" && !child.value.trim()) continue
+    if (child.type === "element" && child.tagName === "br") continue
+    if (child.type !== "element" || child.tagName !== "img") return null
+    const src = String(child.properties.src ?? "")
+    if (!isDiagramPath(src)) return null
+    diagrams.push({ path: src, caption: String(child.properties.alt ?? "") })
+  }
+  return diagrams.length > 0 ? diagrams : null
+}
+
+/** Consecutive diagrams with the same caption, as one group each. */
+function groupByCaption(diagrams: Diagram[]): Diagram[][] {
+  const groups: Diagram[][] = []
+  for (const diagram of diagrams) {
+    const last = groups.at(-1)
+    if (last && last[0].caption === diagram.caption) last.push(diagram)
+    else groups.push([diagram])
+  }
+  return groups
+}
+
+function DiagramFigure({ diagrams }: { diagrams: Diagram[] }) {
+  const caption = diagrams[0].caption
+  return (
+    <figure className="my-2" data-testid="diagram-figure">
+      <div className="flex flex-wrap items-start gap-2">
+        {diagrams.map((d) => (
+          <DiagramImage key={d.path} path={d.path} caption={caption} />
+        ))}
+      </div>
+      {caption && <figcaption className="mt-1.5 text-xs font-medium text-muted-foreground">{caption}</figcaption>}
+    </figure>
+  )
+}
+
 const components: Components = {
-  p: ({ children }) => <p className="leading-relaxed whitespace-pre-wrap">{children}</p>,
+  p: ({ node, children }) => {
+    const diagrams = diagramOnlyParagraph(node)
+    if (diagrams) {
+      return (
+        <>
+          {groupByCaption(diagrams).map((group) => (
+            <DiagramFigure key={group[0].path} diagrams={group} />
+          ))}
+        </>
+      )
+    }
+    return <p className="leading-relaxed whitespace-pre-wrap">{children}</p>
+  },
   h1: ({ children }) => <h1 className="mt-3 mb-1.5 font-display text-base font-semibold tracking-tight first:mt-0">{children}</h1>,
   h2: ({ children }) => <h2 className="mt-3 mb-1.5 font-display text-[0.95rem] font-semibold tracking-tight first:mt-0">{children}</h2>,
   h3: ({ children }) => <h3 className="mt-2.5 mb-1 font-display text-sm font-semibold tracking-tight first:mt-0">{children}</h3>,
@@ -50,24 +108,17 @@ const components: Components = {
       {children}
     </a>
   ),
-  // Diagrams the answer embeds from the knowledge base ("diagrams/<document_id>/figN_k.png",
-  // served by the API under /data). Any other image source is not loaded; only its caption shows.
+  // A diagram inside running text, e.g. on the line after a list item's instruction
+  // ("diagrams/<document_id>/figN_k.png", served by the API under /data). Any other
+  // image source is not loaded; only its caption shows.
   img: ({ src, alt }) => {
     const path = typeof src === "string" ? src : ""
-    if (!path.startsWith(DIAGRAM_PATH_PREFIX)) {
+    if (!isDiagramPath(path)) {
       return <span className="text-muted-foreground italic">{alt}</span>
     }
-    const url = `${API_URL}/data/${path}`
     return (
-      <span className="my-2 block">
-        <a href={url} target="_blank" rel="noopener noreferrer" title="Open diagram in a new tab">
-          <img
-            src={url}
-            alt={alt ?? "Diagram"}
-            loading="lazy"
-            className="max-h-96 max-w-full rounded-lg border border-border bg-white object-contain p-2"
-          />
-        </a>
+      <span className="my-2 block" data-testid="diagram-inline">
+        <DiagramImage path={path} caption={alt ?? ""} className="inline-block" />
         {alt && <span className="mt-1.5 block text-xs font-medium text-muted-foreground">{alt}</span>}
       </span>
     )
@@ -154,7 +205,7 @@ export function MarkdownContent({ content, citations, citationAnchorPrefix = "ci
     }
   }, [numbered, citationAnchorPrefix])
 
-  const text = normalizeMathDelimiters(content)
+  const text = hideUnfinishedImage(normalizeMathDelimiters(content))
 
   return (
     <div className="space-y-2 text-sm text-foreground [&>*:first-child]:mt-0 [&_.katex]:text-foreground">

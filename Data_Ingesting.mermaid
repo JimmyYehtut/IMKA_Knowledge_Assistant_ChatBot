@@ -1,0 +1,66 @@
+flowchart TD
+    %% ---------- Entry points ----------
+    A1["POST /api/documents<br/>pipeline = standard | docling"] --> SEL{Which pipeline?}
+    A2["CLI: python -m ingest.embed_and_store"] --> S0
+    A3["CLI: python -m ingest.embed_and_store_docling<br/>(CAPTION_FIGURES=1 optional)"] --> D0
+    A4["CLI: python -m ingest.embed_and_store_prextracted<br/>entities.jsonl + images_dir + doc_name"] --> P0
+
+    SEL -->|standard| S0
+    SEL -->|docling| D0
+
+    %% ---------- Standard pipeline ----------
+    subgraph STD["Standard pipeline — embed_and_store.py"]
+        S0["ingest_files(file_paths, metadata, version)"] --> S1{"File extension?<br/>load_documents.py"}
+        S1 -->|.pdf| S2a["PyPDFLoader<br/>(one Document per page, 0-indexed page)"]
+        S1 -->|.txt / .md| S2b["TextLoader<br/>(utf-8, autodetect)"]
+        S1 -->|.docx / .doc| S2c["Docx2txtLoader"]
+        S1 -->|other| SERR["ValueError: unsupported format"]
+        S2a --> S3
+        S2b --> S3
+        S2c --> S3
+        S3{"Any docs loaded?"} -->|no| SSTOP["Return None"]
+        S3 -->|yes| S4["chunk_documents.py<br/>RecursiveCharacterTextSplitter<br/>chunk_size=1000, overlap=200, add_start_index"]
+        S4 --> S5["Per file: generate document_id (uuid4)<br/>group chunks by metadata.source"]
+        S5 --> S6["_attach_metadata:<br/>document_id, document_name, version, + caller metadata"]
+    end
+
+    %% ---------- Docling pipeline ----------
+    subgraph DOC["Docling pipeline — embed_and_store_docling.py"]
+        D0["ingest_files_docling(..., caption_figures)"] --> D1{"All files .pdf?"}
+        D1 -->|no| DERR["ValueError: PDF only"]
+        D1 -->|yes| D2["For each PDF:<br/>_parse_pdf → DocumentConverter<br/>(layout + table structure, picture images)"]
+        D2 --> D3["_chunk_document → HybridChunker<br/>max_tokens = DOCLING_CHUNK_MAX_TOKENS (700)<br/>header-aware, tables kept atomic"]
+        D3 --> D4["Chunk metadata:<br/>page_no (1-indexed), section_path,<br/>chunk_type = text | table"]
+        D4 --> D5{"caption_figures?"}
+        D5 -->|yes| D6["_caption_figures:<br/>crop each picture → base64 PNG →<br/>VLM (DOCLING_CAPTION_MODEL, gpt-4o-mini)<br/>→ chunk_type = figure"]
+        D5 -->|no| D7
+        D6 --> D7["document_id (uuid4) + _attach_metadata"]
+        D7 --> D8{"Any chunks produced?"}
+        D8 -->|no| DSTOP["Return None"]
+    end
+
+    %% ---------- Pre-extracted pipeline ----------
+    subgraph PRE["Pre-extracted pipeline — embed_and_store_prextracted.py"]
+        P0["ingest_prextracted(entities.jsonl, images_dir, doc_name)"] --> P1["_load_chunks: read entities.jsonl line by line"]
+        P1 --> P2{"Any chunks?"}
+        P2 -->|no| PSTOP["Return None"]
+        P2 -->|yes| P3["document_id (uuid4)"]
+        P3 --> P4["For each image pNNN_imgNN.*:<br/>_pick_best_chunk_for_image<br/>single-page table/chunk → high<br/>'Figure N' reference → medium<br/>page range covers it → low"]
+        P4 --> P5["Build Documents: page_no, page_end,<br/>section_path, chunk_type, entity_types"]
+        P5 --> P6["Matched image → copy to data/diagrams/&lt;doc_id&gt;/<br/>set image_path + image_match_confidence"]
+    end
+
+    %% ---------- Shared sink ----------
+    S6 --> V
+    D8 -->|yes| V
+    P6 --> V
+
+    V["rag.vectorstore.create_or_load_vectorstore(documents)<br/>OpenAI embeddings (OPENAI_EMBEDDING_MODEL)"] --> Q[("Qdrant collection<br/>QDRANT_COLLECTION_NAME")]
+    V --> R["registry.add_document per document<br/>(thread-locked JSON write)"]
+    R --> RJ[("data/documents_registry.json<br/>document_id, name, version,<br/>chunk_count, metadata,<br/>status=indexed, uploaded_at")]
+    RJ --> OUT["Return total_chunks + document records"]
+
+    classDef store fill:#e8f1ff,stroke:#3b6fd8;
+    classDef err fill:#fdeaea,stroke:#c0392b;
+    class Q,RJ store;
+    class SERR,DERR,SSTOP,DSTOP,PSTOP err;

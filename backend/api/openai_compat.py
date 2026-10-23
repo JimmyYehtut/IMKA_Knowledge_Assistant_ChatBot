@@ -76,13 +76,14 @@ async def _generate_answer(
     if intent.intent != "knowledge" and intent.reply:
         return intent.reply, [], ""
 
-    context, citations, rewritten = await prepare_context(query, trace_metadata)
+    # The rewritten query only drives retrieval; the answer responds to what the user asked.
+    context, citations, _rewritten = await prepare_context(query, trace_metadata)
     if not context:
         return "No relevant documents found for your query in the knowledge base.", [], intent.topic
 
     chain = build_answer_chain()
     answer = await chain.ainvoke(
-        {"context": context, "question": rewritten, "persona_instructions": persona_instructions(persona)},
+        {"context": context, "question": query, "persona_instructions": persona_instructions(persona)},
         config={"run_name": "rag_answer_generation", "tags": ["rag", "stage5"], "metadata": trace_metadata or {}},
     )
     return answer, select_cited(answer, citations), intent.topic
@@ -182,7 +183,7 @@ async def _stream_sse(
         yield _chunk(completion_id, {"content": full_answer})
     else:
         topic = intent.topic
-        context, citations, rewritten = await prepare_context(query, trace_metadata)
+        context, citations, _rewritten = await prepare_context(query, trace_metadata)
         if not context:
             full_answer = "No relevant documents found for your query in the knowledge base."
             yield _chunk(completion_id, {"content": full_answer})
@@ -195,7 +196,7 @@ async def _stream_sse(
             }
             chain_input = {
                 "context": context,
-                "question": rewritten,
+                "question": query,
                 "persona_instructions": persona_instructions(conversation.persona),
             }
             async for token in chain.astream(chain_input, config=stream_config):

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(python scripts/check.py *)",
+      "Bash(python scripts/check.py)",
+      "Bash(backend/.venv/Scripts/python.exe -m pytest *)",
+      "Bash(backend/.venv/Scripts/python.exe -m ruff check *)",
+      "Bash(.venv/Scripts/python.exe -m pytest *)",
+      "Bash(.venv/Scripts/python.exe -m ruff check *)",
+      "Bash(npm run lint *)",
+      "Bash(npm run lint)",
+      "Bash(npm run test *)",
+      "Bash(npm run test)",
+      "Bash(npm test)",
+      "Bash(npx tsc -b)",
+      "Bash(npx vitest *)",
+      "Bash(npx oxlint *)",
+      "Bash(git status *)",
+      "Bash(git status)",
+      "Bash(git diff *)",
+      "Bash(git diff)",
+      "Bash(git log *)",
+      "Bash(docker ps *)",
+      "Bash(docker ps)"
+    ],
+    "deny": [
+      "Edit(./backend/.env)",
+      "Edit(./frontend/.env)",
+      "Edit(./backend/data/**)",
+      "Bash(git push --force *)",
+      "Bash(git push -f *)",
+      "Bash(git push --force-with-lease *)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"$CLAUDE_PROJECT_DIR/.claude/hooks/post_edit.py\"",
+            "timeout": 180,
+            "statusMessage": "Linting and testing the edited file..."
+          }
+        ]
+      }
+    ]
+  }
+}
