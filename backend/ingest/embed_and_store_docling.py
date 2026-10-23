@@ -132,32 +132,106 @@ def _chunk_document(doc, source_path: str) -> list[Document]:
                 "page_no": page_no,
                 "section_path": section_path,
                 "chunk_type": chunk_type,
-                "figure_refs": sorted({int(n) for n in _FIGURE_REF_RE.findall(raw_chunk.text)}),
+                "figure_refs": sorted({
+                    int(n)
+                    for n in _FIGURE_REF_RE.findall(
+                        raw_chunk.text + "\n" + section_path
+                    )
+                }),
             },
         ))
 
+    # Link a figure heading to the preceding text chunk
+    # when both chunks are on the same page.
+    for i, chunk in enumerate(chunks):
+        if chunk.metadata.get("chunk_type") != "text":
+            continue
+
+        section_path = chunk.metadata.get("section_path", "")
+        match = _FIGURE_REF_RE.search(section_path)
+        if not match:
+            continue
+
+        figure_number = int(match.group(1))
+        page_no = chunk.metadata.get("page_no")
+
+        # Attach the figure reference to the immediately preceding
+        # text chunk on the same page.
+        if i > 0:
+            previous = chunks[i - 1]
+            if (
+                previous.metadata.get("chunk_type") == "text"
+                and previous.metadata.get("page_no") == page_no
+                and previous.metadata.get("figure_refs") == []
+            ):
+                previous.metadata["figure_refs"] = [figure_number]
+
     return chunks
 
-
-def _describe_image(client, pil_image) -> str | None:
-    """VLM description of a figure, for retrieval beyond what its caption says."""
+def _describe_image(client, pil_image, context: str = "") -> str | None:
+    """Describe a technical figure using its image and surrounding manual text."""
     buf = io.BytesIO()
     pil_image.save(buf, format="PNG")
     b64 = base64.b64encode(buf.getvalue()).decode("utf-8")
+
+    
+    
+    prompt = (
+        "Describe this technical figure for industrial maintenance engineers. "
+        "Use the supplied manual context to interpret numbered axis labels, "
+        "symbols, and components. When the context explicitly defines numbered "
+        "axes, reproduce those definitions accurately; never substitute a "
+        "different quantity or unit for an axis. Treat the context as the source "
+        "of technical meaning, while distinguishing information stated in the "
+        "context from features directly visible in the image. "
+
+        "For graphs, identify the axes, units, and scales. Explain the engineering "
+        "purpose and plotted relationship only when supported by the image and "
+        "context. Do not infer a direct or linear relationship merely because a "
+        "plotted line appears straight, especially when an axis is logarithmic. "
+
+        "Preserve important technical formulas and their symbols accurately. "
+        "When the supplied context contains a formula relevant to the figure, "
+        "include it and explain its variables using the context. Preserve printed "
+        "numerical examples, including input values, coefficients, units, and "
+        "calculated results, when relevant to understanding the figure. Do not "
+        "change or recalculate a printed example incorrectly. "
+
+        "Clearly distinguish values explicitly printed in the manual from "
+        "approximate values read from the graph and from calculated results. "
+        "Only provide a numerical graph reading when the image supports it, and "
+        "label it as approximate. Do not invent numerical values or unsupported "
+        "specifications. Preserve relevant cautions and limitations stated in "
+        "the manual. "
+
+        "For wiring diagrams, describe visible components and connections. "
+        "If information is unclear or unsupported, say so instead of guessing. "
+        "Use 5-8 concise sentences focused on the figure's practical meaning."
+    )
+  
+
+
+    if context.strip():
+        prompt += (
+            "\n\nRelevant text extracted from the manual:\n"
+            + context.strip()
+        )
+    else:
+        prompt += "\n\nNo surrounding manual text was supplied."
+
     try:
         resp = client.chat.completions.create(
             model=VLM_CAPTION_MODEL,
             messages=[{
                 "role": "user",
                 "content": [
-                    {"type": "text", "text": (
-                        "Describe this technical diagram/figure precisely and "
-                        "factually, in 2-4 sentences. Name the components, callout "
-                        "numbers, and what the figure illustrates (e.g. wiring "
-                        "diagram, rating plate, dimension drawing). Do not "
-                        "speculate beyond what is visibly labeled."
-                    )},
-                    {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{b64}"}},
+                    {"type": "text", "text": prompt},
+                    {
+                        "type": "image_url",
+                        "image_url": {
+                            "url": f"data:image/png;base64,{b64}"
+                        },
+                    },
                 ],
             }],
             max_tokens=250,
@@ -168,7 +242,15 @@ def _describe_image(client, pil_image) -> str | None:
         return None
 
 
-def _extract_figures(doc, source_path: str, document_id: str, describe: bool = False) -> list[Document]:
+def _extract_figures(
+    doc,
+    source_path: str,
+    document_id: str,
+    describe: bool = False,
+    text_chunks: list[Document] | None = None,
+    figure_numbers: set[int] | None = None,
+) -> list[Document]:
+
     """One retrievable chunk per captioned figure, with its image(s) saved to disk.
 
     Walks the document in reading order. A picture takes Docling's own caption
@@ -234,29 +316,64 @@ def _extract_figures(doc, source_path: str, document_id: str, describe: bool = F
 
     dest_dir = DIAGRAMS_DIR / document_id
     chunks: list[Document] = []
+
     for number in sorted(figures):
+        if figure_numbers is not None and number not in figure_numbers:
+            continue
+
         figure = figures[number]
         image_paths: list[str] = []
         descriptions: list[str] = []
         page_no = None
+
         for picture in figure["pictures"]:
             try:
                 pil_image = picture.get_image(doc)
             except Exception as e:
-                print(f"  [warn] could not extract image for Figure {number}: {e}", file=sys.stderr)
+                print(
+                    f"  [warn] could not extract image for Figure {number}: {e}",
+                    file=sys.stderr,
+                )
                 continue
+
             if pil_image is None:
                 continue
+            
             dest_dir.mkdir(parents=True, exist_ok=True)
             name = f"fig{number}_{len(image_paths) + 1}.png"
             pil_image.save(dest_dir / name, format="PNG")
             image_paths.append(f"diagrams/{document_id}/{name}")
+
             if page_no is None and picture.prov:
                 page_no = picture.prov[0].page_no
+
             if client is not None:
-                description = _describe_image(client, pil_image)
+                figure_context = ""
+
+                if text_chunks:
+                    relevant_chunks = [
+                        chunk.page_content
+                        for chunk in text_chunks
+                        if (
+                            chunk.metadata.get("page_no") == page_no
+                            and (
+                                number in chunk.metadata.get("figure_refs", [])
+                                or re.search(
+                                    rf"\bFigure\s+{number}\b",
+                                    chunk.metadata.get("section_path", ""),
+                                    re.IGNORECASE,
+                                ) is not None
+                            )
+                        )
+                    ]
+                    figure_context = "\n\n".join(relevant_chunks)
+
+                description = _describe_image(
+                    client, pil_image, context=figure_context
+                )
                 if description:
                     descriptions.append(description)
+
         if not image_paths:
             continue
 
@@ -338,7 +455,13 @@ def ingest_files_docling(
 
         doc_id = str(uuid.uuid4())
         print("Extracting figures" + (" (with VLM descriptions)..." if caption_figures else "..."))
-        fig_chunks = _extract_figures(doc, source_path=path, document_id=doc_id, describe=caption_figures)
+        fig_chunks = _extract_figures(
+            doc,
+            source_path=path,
+            document_id=doc_id,
+            describe=caption_figures,
+            text_chunks=path_chunks,
+        )
         print(f"  -> {len(fig_chunks)} figure chunks")
         path_chunks.extend(fig_chunks)
 

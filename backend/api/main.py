@@ -138,12 +138,21 @@ async def upload_documents(
             ingest_fn = ingest_files_docling if pipeline == "docling" else ingest_files
             # Ingestion is blocking and can take minutes (Docling parsing, embedding);
             # run it off the event loop so chat and other requests keep being served.
+            ingest_kwargs = {
+                "metadata": metadata_dict,
+                "version": version,
+                "original_names": original_names,
+            }
+
+            if pipeline == "docling":
+                ingest_kwargs["caption_figures"] = (
+                    os.getenv("CAPTION_FIGURES", "0") == "1"
+                )
+
             result = await run_in_threadpool(
                 ingest_fn,
                 temp_paths,
-                metadata=metadata_dict,
-                version=version,
-                original_names=original_names,
+                **ingest_kwargs,
             )
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Ingestion failed: {e}") from e
