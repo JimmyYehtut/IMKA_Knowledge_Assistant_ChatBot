@@ -1,0 +1,30 @@
+# test/.venv — run.py, imka_eval.py and the notebooks.
+#
+# A SEPARATE venv from backend/.venv: ragas pins its own langchain-community range,
+# and the backend venv runs the pipeline under test — an accidental downgrade there
+# would change what we are measuring.
+#
+#   python -m venv test\.venv
+#   test\.venv\Scripts\python.exe -m pip install -r test\code\requirements.txt
+#
+# Do not add pip-system-certs here: it makes the OpenAI client recurse forever on the
+# TLS handshake (reported as "Connection error.").
+ragas==0.4.3
+
+# ragas 0.4.3 imports langchain_community.chat_models.vertexai, removed in
+# langchain-community 0.4 — without this pin every ragas import fails.
+langchain-community<0.4
+
+# The judge: Haiku 5.5 / Sonnet 5.5 through RAGAS's Instructor adapter.
+anthropic>=2.1
+
+python-dotenv>=1.0.0
+httpx>=0.27.0
+
+# notebooks
+pandas
+jinja2
+matplotlib
+ipykernel<7
+nbconvert
+nbformat
