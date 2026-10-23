@@ -5,9 +5,9 @@ import re
 
 from dotenv import load_dotenv
 from langchain_core.documents import Document
+from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_openai import ChatOpenAI
 from rank_bm25 import BM25Okapi
 
 from qdrant_client.http.models import FieldCondition, Filter, MatchAny, MatchValue
@@ -20,6 +20,9 @@ load_dotenv()
 
 _RETRIEVAL_TOP_K = int(os.getenv("RETRIEVAL_TOP_K", "15"))
 _RERANK_TOP_N = int(os.getenv("RERANK_TOP_N", "5"))
+
+# Joins the stage 4 context passages; evaluation traces split the context on it.
+CONTEXT_SEPARATOR = "\n\n---\n\n"
 
 _SYSTEM_PROMPT = (
     "You are an enterprise knowledge assistant. "
@@ -96,7 +99,7 @@ Instructions:
 
 # ── Stage 1: Query Processing ─────────────────────────────────────────────────
 
-def _stage1_process_query(query: str, llm: ChatOpenAI, metadata: dict | None = None) -> str:
+def _stage1_process_query(query: str, llm: BaseChatModel, metadata: dict | None = None) -> str:
     """Clean, rewrite, and disambiguate the user query for semantic search."""
     prompt = ChatPromptTemplate.from_messages(
         [
@@ -119,10 +122,18 @@ def _stage1_process_query(query: str, llm: ChatOpenAI, metadata: dict | None = N
 
 # ── Stage 2: Retrieval ────────────────────────────────────────────────────────
 
-def _stage2_retrieve(query: str) -> list[Document]:
-    """Semantic search against Qdrant — fetches a larger candidate pool for BM25 reranking."""
+def _stage2_retrieve(query: str, document_ids: list[str] | None = None) -> list[Document]:
+    """Semantic search against Qdrant — fetches a larger candidate pool for BM25 reranking.
+
+    `document_ids` restricts the search to those documents (no restriction when empty).
+    """
     vectorstore = create_or_load_vectorstore()
-    return vectorstore.similarity_search(query, k=_RETRIEVAL_TOP_K)
+    search_filter = None
+    if document_ids:
+        search_filter = Filter(
+            must=[FieldCondition(key="metadata.document_id", match=MatchAny(any=list(document_ids)))]
+        )
+    return vectorstore.similarity_search(query, k=_RETRIEVAL_TOP_K, filter=search_filter)
 
 
 # ── Stage 3: Hybrid Reranking (semantic rank + BM25 rank) ─────────────────────
@@ -228,7 +239,9 @@ def _figures_for_chunks(chunks: list[Document]) -> list[list[dict]]:
         for doc in chunks
         if doc.metadata.get("figure_refs") and doc.metadata.get("document_id")
     }
-    stored: dict[tuple[str, int], dict] = {}
+    # Figure ids are strings ("16a", "25-1"); documents ingested before that store ints,
+    # so both sides are compared as str.
+    stored: dict[tuple[str, str], dict] = {}
     if wanted_docs:
         try:
             points, _ = get_qdrant_client().scroll(
@@ -249,7 +262,7 @@ def _figures_for_chunks(chunks: list[Document]) -> list[list[dict]]:
         for point in points:
             meta = (point.payload or {}).get("metadata", {})
             if meta.get("image_paths") and meta.get("figure_number") is not None:
-                stored[(meta.get("document_id"), meta["figure_number"])] = meta
+                stored[(meta.get("document_id"), str(meta["figure_number"]))] = meta
 
     def as_figure(meta: dict) -> dict:
         return {
@@ -265,9 +278,9 @@ def _figures_for_chunks(chunks: list[Document]) -> list[list[dict]]:
             result.append([as_figure(meta)])
             continue
         figures = [
-            as_figure(stored[(meta.get("document_id"), number)])
+            as_figure(stored[(meta.get("document_id"), str(number))])
             for number in meta.get("figure_refs") or []
-            if (meta.get("document_id"), number) in stored
+            if (meta.get("document_id"), str(number)) in stored
         ]
         result.append(figures[:_MAX_FIGURES_PER_CHUNK])
     return result
@@ -298,7 +311,7 @@ def _stage4_assemble_context(chunks: list[Document], figures: list[list[dict]] |
             ]
             part += "\n\nFigures for this passage:\n" + "\n".join(lines)
         parts.append(part)
-    return "\n\n---\n\n".join(parts)
+    return CONTEXT_SEPARATOR.join(parts)
 
 
 # ── Stage 6: Response Generation ──────────────────────────────────────────────
@@ -336,29 +349,63 @@ def select_cited(answer: str, citations: list[dict]) -> list[dict]:
 
 # ── Public entry points (stages 1-4+6 upfront, stage 5 token-by-token or invoked) ──
 
-def _prepare_context_sync(query: str, metadata: dict | None = None) -> tuple[str, list[dict], str]:
-    """Stages 1-4 + citations (stage 6). Returns (context, citations, rewritten_query)."""
+def _describe_chunk(rank: int, doc: Document) -> dict:
+    """Where a retrieved chunk comes from, for the evaluation trace."""
+    return {
+        "rank": rank,
+        "document_id": doc.metadata.get("document_id", ""),
+        "document_name": doc.metadata.get("document_name", ""),
+        "page": _page_number(doc),
+        "section_path": doc.metadata.get("section_path") or None,
+        "chunk_type": doc.metadata.get("chunk_type"),
+        "text": doc.page_content,
+    }
+
+
+def _prepare_context_sync(
+    query: str,
+    metadata: dict | None = None,
+    document_ids: list[str] | None = None,
+    trace: dict | None = None,
+) -> tuple[str, list[dict], str]:
+    """Stages 1-4 + citations (stage 6). Returns (context, citations, rewritten_query).
+
+    When `trace` is a dict it is filled with what each stage produced — the stage 2
+    candidates and the stage 3 reranked chunks (`_describe_chunk`), and the stage 4
+    context split into one string per chunk — for evaluation runs.
+    """
     llm = chat_llm()
     rewritten = _stage1_process_query(query, llm, metadata)
 
-    candidates = _stage2_retrieve(rewritten)
+    candidates = _stage2_retrieve(rewritten, document_ids)
+    if trace is not None:
+        trace["candidates"] = [_describe_chunk(rank, doc) for rank, doc in enumerate(candidates, start=1)]
     if not candidates:
         return "", [], rewritten
 
     reranked_chunks = _stage3_rerank(rewritten, candidates)
     context = _stage4_assemble_context(reranked_chunks, _figures_for_chunks(reranked_chunks))
     citations = _stage6_build_citations(reranked_chunks)
+    if trace is not None:
+        trace["chunks"] = [_describe_chunk(rank, doc) for rank, doc in enumerate(reranked_chunks, start=1)]
+        trace["contexts"] = context.split(CONTEXT_SEPARATOR)
     return context, citations, rewritten
 
 
-async def prepare_context(query: str, metadata: dict | None = None) -> tuple[str, list[dict], str]:
+async def prepare_context(
+    query: str,
+    metadata: dict | None = None,
+    document_ids: list[str] | None = None,
+    trace: dict | None = None,
+) -> tuple[str, list[dict], str]:
     """Async wrapper for stages 1-4+6, run in a thread pool.
 
     `metadata` (e.g. conversation_id, user_id) is attached to LangSmith traces
-    when LANGCHAIN_TRACING_V2 is enabled.
+    when LANGCHAIN_TRACING_V2 is enabled. `document_ids` and `trace`: see
+    _prepare_context_sync.
     """
     loop = asyncio.get_event_loop()
-    return await loop.run_in_executor(None, _prepare_context_sync, query, metadata)
+    return await loop.run_in_executor(None, _prepare_context_sync, query, metadata, document_ids, trace)
 
 
 def build_answer_chain():

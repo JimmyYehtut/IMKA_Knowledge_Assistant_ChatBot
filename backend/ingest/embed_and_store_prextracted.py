@@ -145,6 +145,7 @@ def ingest_prextracted(
         version=version,
         metadata=metadata,
         chunk_count=len(documents),
+        pipeline="prextracted",
     )
 
     return {

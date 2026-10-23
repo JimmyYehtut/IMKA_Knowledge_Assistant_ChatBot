@@ -7,6 +7,12 @@ own frontend): `conversation_id` and `message_id` for grouping/targeting
 chat-log rows, `persona` (answer persona, fixed when the conversation is
 created), `topic` (short label of the user's question), and `citations` with
 the RAG source documents.
+
+Evaluation extensions (opt-in, unused by the frontend): `document_ids` restricts
+retrieval to those documents, and `include_context: true` (non-streaming only)
+adds a `rag` object to the response — intent, rewritten query, chat model, the
+stage 2 candidates, the reranked chunks and the context passages the answer was
+generated from. See test/README.md.
 """
 import json
 import time
@@ -23,6 +29,8 @@ from api.auth import get_current_user
 from api.database import get_db
 from api.db_models import Conversation, Message
 from rag.intent import classify_intent
+from rag.llm import chat_model_name
+from rag.vectorstore import embedding_model_name
 from rag.pipeline import PERSONAS, build_answer_chain, persona_instructions, prepare_context, select_cited
 
 router = APIRouter(tags=["openai-compat"])
@@ -41,6 +49,8 @@ class ChatCompletionRequest(BaseModel):
     stream: bool = False
     conversation_id: str | None = None
     persona: str | None = None
+    document_ids: list[str] | None = None
+    include_context: bool = False
 
 
 def _extract_query(messages: list[ChatMessage]) -> str:
@@ -69,14 +79,34 @@ async def _get_or_create_conversation(
 
 
 async def _generate_answer(
-    query: str, persona: str | None = None, trace_metadata: dict | None = None
+    query: str,
+    persona: str | None = None,
+    trace_metadata: dict | None = None,
+    document_ids: list[str] | None = None,
+    trace: dict | None = None,
 ) -> tuple[str, list[dict], str]:
-    """Runs intent detection first, then the RAG pipeline if needed. Returns (answer, citations, topic)."""
+    """Runs intent detection first, then the RAG pipeline if needed. Returns (answer, citations, topic).
+
+    When `trace` is a dict it is filled with the evaluation trace (the `rag` response object).
+    """
     intent = await classify_intent(query, trace_metadata)
+    if trace is not None:
+        trace.update(
+            intent=intent.intent,
+            model=chat_model_name(),
+            embedding_model=embedding_model_name(),
+            document_ids=document_ids or [],
+            rewritten_query=None,
+            candidates=[],
+            chunks=[],
+            contexts=[],
+        )
     if intent.intent != "knowledge" and intent.reply:
         return intent.reply, [], ""
 
-    context, citations, rewritten = await prepare_context(query, trace_metadata)
+    context, citations, rewritten = await prepare_context(query, trace_metadata, document_ids, trace)
+    if trace is not None:
+        trace["rewritten_query"] = rewritten
     if not context:
         return "No relevant documents found for your query in the knowledge base.", [], intent.topic
 
@@ -128,16 +158,19 @@ async def chat_completions(
 
     if body.stream:
         return StreamingResponse(
-            _stream_sse(query, conversation, db, trace_metadata),
+            _stream_sse(query, conversation, db, trace_metadata, body.document_ids),
             media_type="text/event-stream",
             headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
         )
 
-    answer, citations, topic = await _generate_answer(query, conversation.persona, trace_metadata)
+    trace = {} if body.include_context else None
+    answer, citations, topic = await _generate_answer(
+        query, conversation.persona, trace_metadata, body.document_ids, trace
+    )
     message_id = await _persist_exchange(db, conversation, query, answer, citations, topic)
 
     completion_id = f"chatcmpl-{uuid.uuid4().hex}"
-    return {
+    response = {
         "id": completion_id,
         "object": "chat.completion",
         "created": int(time.time()),
@@ -151,6 +184,9 @@ async def chat_completions(
         "topic": topic,
         "citations": citations,
     }
+    if trace is not None:
+        response["rag"] = trace
+    return response
 
 
 def _chunk(completion_id: str, delta: dict, finish_reason: str | None = None, extra: dict | None = None) -> str:
@@ -167,7 +203,11 @@ def _chunk(completion_id: str, delta: dict, finish_reason: str | None = None, ex
 
 
 async def _stream_sse(
-    query: str, conversation: Conversation, db: AsyncSession, trace_metadata: dict | None = None
+    query: str,
+    conversation: Conversation,
+    db: AsyncSession,
+    trace_metadata: dict | None = None,
+    document_ids: list[str] | None = None,
 ) -> AsyncIterator[str]:
     completion_id = f"chatcmpl-{uuid.uuid4().hex}"
     yield _chunk(completion_id, {"role": "assistant"})
@@ -182,7 +222,7 @@ async def _stream_sse(
         yield _chunk(completion_id, {"content": full_answer})
     else:
         topic = intent.topic
-        context, citations, rewritten = await prepare_context(query, trace_metadata)
+        context, citations, rewritten = await prepare_context(query, trace_metadata, document_ids)
         if not context:
             full_answer = "No relevant documents found for your query in the knowledge base."
             yield _chunk(completion_id, {"content": full_answer})
