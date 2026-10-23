@@ -1,0 +1,30 @@
+# Tool configuration only — the backend is run from this folder, not installed as a package.
+
+[tool.ruff]
+target-version = "py312"
+line-length = 120
+extend-exclude = [".venv", ".venv-old", "data"]
+
+[tool.ruff.lint]
+# Pyflakes + pycodestyle errors, plus bug-prone patterns (bugbear) and blocking
+# calls inside async endpoints. Style-only rule sets are left out on purpose.
+select = ["E4", "E7", "E9", "F", "W6", "B", "ASYNC"]
+ignore = [
+    "B008",  # FastAPI's Depends()/File()/Form() defaults are the framework idiom
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["B011"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+addopts = "-ra --strict-markers"
+markers = [
+    "live: needs the running stack (API on :8000, Qdrant, Postgres, OpenAI); skipped unless IMKA_LIVE=1",
+]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]

@@ -40,6 +40,10 @@ DIAGRAMS_DIR = Path(__file__).resolve().parent.parent / "data" / "diagrams"
 
 _FIGURE_CAPTION_RE = re.compile(r"^Figure\s+(\d+)\b")
 _FIGURE_REF_RE = re.compile(r"\bFigure\s+(\d+)\b")
+# How many pages before its caption an uncaptioned picture may sit and still
+# belong to that figure: 0 = same page only, 1 = also the page before (a figure
+# at the foot of a page captioned at the top of the next).
+_CAPTION_PAGE_REACH = 1
 
 
 def _parse_pdf(pdf_path: str):
@@ -170,8 +174,12 @@ def _extract_figures(doc, source_path: str, document_id: str, describe: bool = F
     Walks the document in reading order. A picture takes Docling's own caption
     when it has one; pictures without one (extra panels of a multi-image
     figure, or figures whose caption Docling labelled as a heading) take the
-    next "Figure N ..." line that follows them. Pictures that never get a
-    caption (logos, warning icons) are skipped.
+    next "Figure N ..." line that follows them, provided they sit on the
+    caption's page or the page before. Pictures that never get a caption
+    (cover photos, logos, warning signs) are skipped. Without the page check
+    they were glued onto the next caption, however far away: the cover photo
+    showed up as "Figure 1 Rating plate", a magnet warning sign from p. 74 as
+    "Figure 33 Measuring points" on p. 81.
 
     Each chunk's text is the caption (plus a VLM description when `describe`
     is set) and its metadata carries `figure_number`, `figure_caption` and
@@ -183,9 +191,21 @@ def _extract_figures(doc, source_path: str, document_id: str, describe: bool = F
     pending: list = []  # pictures still waiting for a caption
     section = ""
 
-    def assign(caption: str, pictures: list) -> None:
+    def page_of(item) -> int | None:
+        return item.prov[0].page_no if item.prov else None
+
+    def near_caption(picture, caption_page: int | None) -> bool:
+        picture_page = page_of(picture)
+        if picture_page is None or caption_page is None:
+            return True
+        return caption_page - _CAPTION_PAGE_REACH <= picture_page <= caption_page
+
+    def assign(caption: str, caption_page: int | None, pictures: list) -> None:
         match = _FIGURE_CAPTION_RE.match(caption)
         if not match:
+            return
+        pictures = [p for p in pictures if near_caption(p, caption_page)]
+        if not pictures:
             return
         figure = figures.setdefault(int(match.group(1)), {"caption": caption, "section": section, "pictures": []})
         figure["pictures"].extend(pictures)
@@ -194,7 +214,7 @@ def _extract_figures(doc, source_path: str, document_id: str, describe: bool = F
         if isinstance(item, PictureItem):
             caption = item.caption_text(doc).strip()
             if caption:
-                assign(caption, pending + [item])
+                assign(caption, page_of(item), pending + [item])
                 pending = []
             else:
                 pending.append(item)
@@ -202,7 +222,7 @@ def _extract_figures(doc, source_path: str, document_id: str, describe: bool = F
             text = item.text.strip()
             if _FIGURE_CAPTION_RE.match(text):
                 if pending:
-                    assign(text, pending)
+                    assign(text, page_of(item), pending)
                     pending = []
             elif "section_header" in str(item.label):
                 section = text
@@ -308,7 +328,7 @@ def ingest_files_docling(
     all_chunks: list[Document] = []
     document_records = []
 
-    for path, doc_name in zip(file_paths, original_names):
+    for path, doc_name in zip(file_paths, original_names, strict=True):
         print(f"Parsing {doc_name} with Docling...")
         doc = _parse_pdf(path)
 

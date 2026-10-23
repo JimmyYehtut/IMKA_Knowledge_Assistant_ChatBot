@@ -9,6 +9,8 @@ export interface ChatCitation {
   number?: number | null
   section_path?: string | null
   chunk_type?: string | null
+  /** Figure passages: the source document's caption, e.g. "Figure 9 Lifting of unpacked machines". */
+  figure_caption?: string | null
 }
 
 export interface ChatMessage {
