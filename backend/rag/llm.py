@@ -32,5 +32,8 @@ def chat_llm(**kwargs) -> BaseChatModel:
     if llm_provider() == "qwen":
         from rag.qwen_client import ChatQwenRunpod, model_alias
         return ChatQwenRunpod(model_name=model_alias(), **kwargs)
+    from rag.usage import OpenAIUsageCallback
+    kwargs.setdefault("callbacks", [OpenAIUsageCallback()])
+    kwargs.setdefault("stream_usage", True)  # token usage on streamed answers too (rag.usage)
     return ChatOpenAI(model=os.getenv("OPENAI_CHAT_MODEL", "gpt-4o-mini"), **kwargs)
 

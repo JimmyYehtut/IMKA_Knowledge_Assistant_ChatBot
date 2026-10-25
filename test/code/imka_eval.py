@@ -336,7 +336,7 @@ def answer_one(backend: Backend, idx: int, item: dict, document_ids: list[str]) 
             candidates=_strip_text(rag.get("candidates") or []),
             contexts=rag.get("contexts") or [],
             conversation_id=response.get("conversation_id"),
-            usage=response.get("usage"),
+            usage=rag.get("usage"),  # per-question model usage (backend rag.usage)
         )
     except Exception as e:  # keep going on per-question failures
         record.update(answer=None, error=f"{type(e).__name__}: {e}")
@@ -886,3 +886,57 @@ def judge_spend(runs=tuple(RUNS)):
             for model, u in (_read_json(path).get("judge_usage") or {}).items():
                 rows.append({"run": run, "file": path.name, "model": model, **u})
     return pd.DataFrame(rows)
+
+
+# ── Answering cost ────────────────────────────────────────────────────────────
+
+# $ per million tokens (input, output), standard tier as listed on 23 Oct 2026.
+ANSWER_PRICES = {"gpt-4o-mini": (0.15, 0.60), "gpt-5.6-luna": (0.20, 1.20)}
+# Qwen is priced by model working time: the seconds llama-server spent on each call, times the GPU's
+# hourly rate. RunPod queueing, cold starts and job overhead are recorded but not charged here.
+GPU_PRICE_PER_HOUR = 0.69  # RunPod RTX PRO 6000 MIG 24 GB slice, per hour (23 Oct 2026)
+
+
+def _call_cost(call: dict, gpu_price_per_hour: float) -> float:
+    if call.get("provider") == "runpod":
+        return (call.get("model_ms") or 0) / 3_600_000 * gpu_price_per_hour
+    model = call.get("model") or ""
+    price = next((p for name, p in ANSWER_PRICES.items() if model.startswith(name)), None)
+    if price is None:
+        return float("nan")
+    return (call.get("prompt_tokens") or 0) / 1e6 * price[0] + (call.get("completion_tokens") or 0) / 1e6 * price[1]
+
+
+def answering_cost(runs=tuple(RUNS), gpu_price_per_hour: float = GPU_PRICE_PER_HOUR):
+    """Per run, per question (mean over every answer of every repeat): model calls, tokens, time, cost.
+
+    `model_s` is model working time (RunPod: llama-server time); `wall_s` is the question's end-to-end
+    time as the evaluation saw it (median). OpenAI query embeddings (~30 tokens) are not counted.
+    """
+    import statistics
+
+    import pandas as pd
+
+    rows = []
+    for run in runs:
+        answers = [r for repeat in REPEATS for r in (load_answers(run, repeat).get("results") or [])
+                   if r.get("answer") and isinstance(r.get("usage"), dict) and "by_call" in r["usage"]]
+        if not answers:
+            continue
+        n = len(answers)
+        calls = [c for r in answers for c in r["usage"]["by_call"]]
+        total = lambda key: sum(c.get(key) or 0 for c in calls)  # noqa: E731
+        cost = sum(_call_cost(c, gpu_price_per_hour) for c in calls)
+        rows.append({
+            "run": run,
+            "answers": n,
+            "calls/q": round(len(calls) / n, 2),
+            "prompt_tokens/q": round(total("prompt_tokens") / n),
+            "completion_tokens/q": round(total("completion_tokens") / n),
+            "model_s/q": round(total("model_ms") / n / 1000, 2) if total("model_ms") else None,
+            "runpod_exec_s/q": round(total("execution_ms") / n / 1000, 2) if total("execution_ms") else None,
+            "runpod_delay_s/q": round(total("delay_ms") / n / 1000, 2) if total("delay_ms") else None,
+            "wall_s/q (median)": round(statistics.median(r.get("elapsed_s") or 0 for r in answers), 1),
+            "cost per 1,000 questions ($)": round(cost / n * 1000, 2),
+        })
+    return pd.DataFrame(rows).set_index("run") if rows else pd.DataFrame()

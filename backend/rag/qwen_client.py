@@ -41,6 +41,8 @@ from langchain_core.outputs import ChatGeneration, ChatResult
 from langchain_core.runnables import Runnable, RunnableLambda
 from pydantic import BaseModel, ValidationError
 
+from rag import usage as _usage
+
 DEFAULT_MODEL_ALIAS = "Qwen3.8-27B-UD-Q4_K_XL"
 # Qwen3.8 non-thinking recommendation (endpoint README).
 DEFAULT_SAMPLING: dict[str, Any] = {
@@ -171,7 +173,9 @@ def run(job_input: dict[str, Any]) -> dict[str, Any]:
                 raise QwenClientError(f"Job {job_id} still {envelope.get('status')} after {REQUEST_TIMEOUT_S}s; cancelled.")
             time.sleep(POLL_INTERVAL_S)
             envelope = request("GET", f"/status/{job_id}")
-    return _output(envelope)
+    output = _output(envelope)
+    _usage.record_runpod(job_input, envelope, output)
+    return output
 
 
 async def arun(job_input: dict[str, Any]) -> dict[str, Any]:
@@ -203,7 +207,9 @@ async def arun(job_input: dict[str, Any]) -> dict[str, Any]:
                 raise QwenClientError(f"Job {job_id} still {envelope.get('status')} after {REQUEST_TIMEOUT_S}s; cancelled.")
             await asyncio.sleep(POLL_INTERVAL_S)
             envelope = await request("GET", f"/status/{job_id}")
-    return _output(envelope)
+    output = _output(envelope)
+    _usage.record_runpod(job_input, envelope, output)
+    return output
 
 
 def describe_image(prompt: str, image_data_uri: str, **sampling: Any) -> str:

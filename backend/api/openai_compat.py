@@ -29,6 +29,7 @@ from api.auth import get_current_user
 from api.database import get_db
 from api.db_models import Conversation, Message
 from rag.intent import classify_intent
+from rag import usage
 from rag.llm import chat_model_name
 from rag.vectorstore import embedding_model_name
 from rag.pipeline import PERSONAS, build_answer_chain, persona_instructions, prepare_context, select_cited
@@ -164,9 +165,12 @@ async def chat_completions(
         )
 
     trace = {} if body.include_context else None
+    calls = usage.collect() if trace is not None else None
     answer, citations, topic = await _generate_answer(
         query, conversation.persona, trace_metadata, body.document_ids, trace
     )
+    if trace is not None:
+        trace["usage"] = usage.summary(calls)
     message_id = await _persist_exchange(db, conversation, query, answer, citations, topic)
 
     completion_id = f"chatcmpl-{uuid.uuid4().hex}"

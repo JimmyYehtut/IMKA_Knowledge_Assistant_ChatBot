@@ -56,6 +56,8 @@ def main() -> None:
         print(E.summary())
         print("\n== Comparisons (primary metrics, paired bootstrap 95% CI) ==")
         print(E.comparisons().to_string(index=False))
+        print("\n== Answering cost per question (Qwen: model working time x GPU $/h) ==")
+        print(E.answering_cost().to_string())
         print("\n== Haiku vs Sonnet agreement ==")
         print(E.judge_agreement())
         spend = E.judge_spend()

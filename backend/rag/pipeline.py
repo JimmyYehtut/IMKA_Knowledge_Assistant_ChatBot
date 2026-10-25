@@ -410,8 +410,8 @@ async def prepare_context(
     when LANGCHAIN_TRACING_V2 is enabled. `document_ids` and `trace`: see
     _prepare_context_sync.
     """
-    loop = asyncio.get_event_loop()
-    return await loop.run_in_executor(None, _prepare_context_sync, query, metadata, document_ids, trace)
+    # to_thread (not run_in_executor) carries the request's context into the thread (rag.usage).
+    return await asyncio.to_thread(_prepare_context_sync, query, metadata, document_ids, trace)
 
 
 def build_answer_chain():

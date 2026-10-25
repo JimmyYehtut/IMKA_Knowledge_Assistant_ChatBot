@@ -23,6 +23,10 @@ DESCRIPTIONS = {
     "C2": "Docling layout-aware, table-atomic chunking",
     "C3": "Docling chunking + VLM figure descriptions",
 }
+COST_NOTE = ("## Answering cost and time per question\n\nOpenAI models are priced per token; Qwen per second of "
+             "model working time (llama-server's prompt + generation time) at `E.GPU_PRICE_PER_HOUR`. RunPod "
+             "queueing, cold starts and job overhead are shown (`runpod_exec_s`, `runpod_delay_s`) but not "
+             "charged. `wall_s` is the question's end-to-end time as the evaluation saw it.")
 SETUP = f"""import sys
 from pathlib import Path
 
@@ -71,6 +75,8 @@ def run_notebook(run: str) -> Path:
                       'worst["document_name"] = worst["document_name"].str[:20]\n'
                       'worst["answer (repeat 1)"] = worst["question"].map(lambda q: answers.get(q, "")[:160])\n'
                       'worst'),
+        new_markdown_cell(COST_NOTE),
+        new_code_cell("E.answering_cost((RUN,)).T"),
         new_markdown_cell("## Judge spend (Anthropic)"),
         new_code_cell('spend = E.judge_spend((RUN,))\n'
                       'spend.groupby("model")[["calls", "input_tokens", "output_tokens", "cost_usd"]].sum()'),
@@ -105,6 +111,8 @@ def report_notebook() -> Path:
                       'ax.axvline(0, color="grey", linewidth=1)\n'
                       "ax.set_yticks(range(len(shown)), labels)\nax.invert_yaxis()\n"
                       'ax.set_xlabel("B − A (95% CI)")\nplt.tight_layout()'),
+        new_markdown_cell(COST_NOTE),
+        new_code_cell("E.answering_cost(DONE)"),
         new_markdown_cell("## Judge agreement (Haiku 5.5 vs Sonnet 5.5 on context recall)"),
         new_code_cell("E.judge_agreement(DONE)"),
         new_markdown_cell("## Judge spend (Anthropic)"),
