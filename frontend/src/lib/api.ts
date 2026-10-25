@@ -115,6 +115,7 @@ export interface Citation {
   number?: number | null
   section_path?: string | null
   chunk_type?: string | null
+  figure_caption?: string | null
 }
 
 export interface OpenAIMessage {

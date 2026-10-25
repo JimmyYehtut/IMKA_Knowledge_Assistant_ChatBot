@@ -267,7 +267,9 @@ def _group_figures(doc) -> dict[str, dict]:
       one that overlaps it horizontally (two-column layouts). Stacked figures each
       reach their own caption first; panels of a grid figure all reach its caption;
     - only when the page has no such caption does Docling's own "Figure N" caption
-      on the picture count. Anything else stays uncaptioned and is skipped;
+      on the picture count, and failing that the caption opening the next page,
+      when no picture sits above it there (a figure at the foot of a page captioned
+      at the top of the next). Anything else stays uncaptioned and is skipped;
     - a picture far smaller than the largest one under the same caption is dropped
       as a stray icon.
     """
@@ -292,11 +294,21 @@ def _group_figures(doc) -> dict[str, dict]:
                 if where:
                     captions.append({"number": _figure_id(match.group(1)), "text": text, "section": section,
                                      "page": where[0], "bbox": where[1]})
-            else:
-                if not match and "section_header" in label:
-                    section = text
-                if where and text:
-                    texts.append((text, *where))
+            elif not match and "section_header" in label:
+                section = text
+            elif where and text:
+                texts.append((text, *where))
+
+    def opens_next_page(page_no: int):
+        """The caption at the top of the next page, if no picture sits above it there."""
+        on_next = [c for c in captions if c["page"] == page_no + 1]
+        if not on_next:
+            return None
+        top = max(on_next, key=lambda c: c["bbox"].t)
+        if any(page == page_no + 1 and bbox.b >= top["bbox"].t - _CAPTION_GAP_SLACK
+               for _, page, bbox, _ in pictures):
+            return None
+        return top
 
     figures: dict[str, dict] = {}
     for picture, page_no, bbox, picture_section in pictures:
@@ -310,6 +322,8 @@ def _group_figures(doc) -> dict[str, dict]:
             if match:
                 caption = {"number": _figure_id(match.group(1)), "text": own_text, "section": picture_section}
         if caption is None:
+            caption = opens_next_page(page_no)
+        if caption is None:
             continue
         figure = figures.setdefault(caption["number"], {"caption": caption["text"], "section": caption["section"],
                                                         "pictures": [], "areas": [], "legend": []})
@@ -317,7 +331,7 @@ def _group_figures(doc) -> dict[str, dict]:
         figure["areas"].append(bbox.width * bbox.height)
         # Legend: text lines between this picture's bottom and its caption ("1 Coefficient Kt for
         # Insulation Resistance") — what the picture's bare callout numbers and axis labels mean.
-        if "bbox" in caption:
+        if "bbox" in caption and caption["page"] == page_no:
             for text, page, text_bbox in texts:
                 if (page == page_no and text_bbox.t <= bbox.b + _CAPTION_GAP_SLACK
                         and text_bbox.b >= caption["bbox"].t - _CAPTION_GAP_SLACK
@@ -328,7 +342,7 @@ def _group_figures(doc) -> dict[str, dict]:
 
     for figure in figures.values():
         largest = max(figure["areas"])
-        figure["pictures"] = [p for p, area in zip(figure["pictures"], figure.pop("areas"))
+        figure["pictures"] = [p for p, area in zip(figure["pictures"], figure.pop("areas"), strict=True)
                               if area >= _MIN_PANEL_AREA_RATIO * largest]
     return figures
 
@@ -391,7 +405,7 @@ def _extract_figures(doc, source_path: str, document_id: str, describe: bool = F
                 lambda job: _describe_image(client, job[2], figures[job[0]]["caption"], figures[job[0]]["legend"]),
                 jobs,
             )
-            descriptions = {(number, i): text for (number, i, _), text in zip(jobs, results)}
+            descriptions = {(number, i): text for (number, i, _), text in zip(jobs, results, strict=True)}
 
     chunks: list[Document] = []
     for number, image_paths, images, page_no in saved:
@@ -469,7 +483,7 @@ def ingest_files_docling(
     all_chunks: list[Document] = []
     document_records = []
 
-    for path, doc_name in zip(file_paths, original_names):
+    for path, doc_name in zip(file_paths, original_names, strict=True):
         print(f"Parsing {doc_name} with Docling...")
         doc = _parse_pdf(path)
 

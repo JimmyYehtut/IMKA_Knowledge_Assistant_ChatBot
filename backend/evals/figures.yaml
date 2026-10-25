@@ -1,0 +1,53 @@
+# Diagram golden set for the ABB manual ("ABB Manual for Induction Motors and Generators_EN.pdf").
+# Run with:  python -m evals.run_figure_eval        (backend folder, stack running)
+#
+# expect_any:  the answer must draw at least one of these figure numbers inline.
+# expect_none: the answer must not draw any diagram.
+# Every image an answer draws must also load from the API (HTTP 200).
+
+document: ABB Manual for Induction Motors and Generators_EN.pdf
+persona: engineer
+
+cases:
+  - id: lift-unpacked
+    question: How do I lift an unpacked machine?
+    expect_any: [9]
+  - id: lift-overview
+    question: Which diagrams show how to lift the machine?
+    expect_any: [6, 7, 8, 9]
+  - id: rating-plate-nema
+    question: Show me the rating plate for NEMA direct on line machines
+    expect_any: [3]
+  - id: rating-plate-iec-ex
+    question: What does the rating plate of an IEC direct on line Ex machine look like?
+    expect_any: [1]
+  - id: foundation-studs
+    question: How should the foundation studs be prepared?
+    expect_any: [20]
+  - id: bracket-plates
+    question: What is the procedure for rough adjustment and mounting the bracket plates?
+    expect_any: [23, 24]
+  - id: insulation-temperature-graph
+    question: Show me a graph of how insulation resistance depends on temperature
+    expect_any: [38]
+  - id: ventilation-holes
+    question: What should the ventilation holes look like during long term storage?
+    expect_any: [17]
+  - id: vibration-measuring-points
+    question: Where are the measuring points for vibration measurement on the machine?
+    expect_any: [33]
+  - id: brush-pressure
+    question: How do I check the brush pressure?
+    expect_any: [41]
+  - id: sleeve-bearing-insulation
+    question: How do I measure the insulation resistance of a sleeve bearing?
+    expect_any: [35]
+  - id: misalignment
+    question: How is misalignment defined for shaft alignment?
+    expect_any: [27]
+  - id: greeting
+    question: Hello there!
+    expect_none: true
+  - id: off-topic
+    question: What is the capital of France?
+    expect_none: true

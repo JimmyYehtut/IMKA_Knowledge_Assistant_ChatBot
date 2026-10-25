@@ -63,3 +63,15 @@ backend/data/diagrams/
 
 # Backup of a previous virtual environment
 .venv-old/
+
+# Diagram eval output and the local eval log-in (backend/evals/run_figure_eval.py)
+backend/evals/reports/
+backend/evals/.eval_account.json
+
+# Personal Claude Code overrides (shared settings live in .claude/settings.json)
+.claude/settings.local.json
+.claude/scheduled_tasks.lock
+
+# Local credentials and Office lock files
+user-account.txt
+~$*

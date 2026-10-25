@@ -53,7 +53,7 @@ def ingest_files(
     print(f"Created {len(chunks)} text chunks.")
 
     document_records = []
-    for path, doc_name in zip(file_paths, original_names):
+    for path, doc_name in zip(file_paths, original_names, strict=True):
         doc_id = str(uuid.uuid4())
         path_chunks = [c for c in chunks if c.metadata.get("source", "") == path]
         if not path_chunks:

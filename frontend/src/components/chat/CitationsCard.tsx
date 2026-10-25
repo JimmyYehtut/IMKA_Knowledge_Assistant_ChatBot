@@ -1,5 +1,6 @@
 import { FileText } from "lucide-react"
-import { API_URL } from "@/lib/api"
+import { DiagramImage } from "@/components/chat/DiagramImage"
+import { isDiagramPath } from "@/lib/diagrams"
 import type { ChatCitation } from "@/lib/types"
 import { groupCitationsByDocument } from "@/lib/utils"
 
@@ -33,7 +34,13 @@ export function CitationsCard({ citations }: CitationsCardProps) {
                   // distinct sections, chunk types and diagrams those passages carry.
                   const sections = [...new Set(page.citations.map((c) => c.section_path).filter(Boolean))]
                   const types = [...new Set(page.citations.map((c) => c.chunk_type).filter(Boolean))]
-                  const images = [...new Set(page.citations.map((c) => c.image_path).filter(Boolean))]
+                  const images = [
+                    ...new Map(
+                      page.citations
+                        .filter((c) => isDiagramPath(c.image_path))
+                        .map((c) => [c.image_path as string, c.figure_caption ?? null]),
+                    ),
+                  ]
                   return (
                     <li key={page.page ?? "none"} className="flex flex-col gap-2">
                       <div className="text-xs text-muted-foreground">
@@ -64,13 +71,15 @@ export function CitationsCard({ citations }: CitationsCardProps) {
                           </p>
                         ))}
                       </div>
-                      {images.map((image) => (
-                        <img
-                          key={image}
-                          src={`${API_URL}/data/${image}`}
-                          alt={`Diagram from ${group.documentName}${page.page !== null ? `, page ${page.page}` : ""}`}
-                          className="max-h-64 w-full rounded-md border border-border bg-white object-contain"
-                          loading="lazy"
+                      {images.map(([path, figureCaption]) => (
+                        <DiagramImage
+                          key={path}
+                          path={path}
+                          caption={
+                            figureCaption ??
+                            `Diagram from ${group.documentName}${page.page !== null ? `, page ${page.page}` : ""}`
+                          }
+                          className="w-full [&_img]:mx-auto [&_img]:max-h-64"
                         />
                       ))}
                     </li>

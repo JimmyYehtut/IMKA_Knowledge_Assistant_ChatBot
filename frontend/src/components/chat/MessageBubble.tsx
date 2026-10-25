@@ -11,7 +11,9 @@ import {
   ThumbsUp,
   X,
 } from "lucide-react"
+import { DiagramImage } from "@/components/chat/DiagramImage"
 import { MarkdownContent } from "@/components/chat/MarkdownContent"
+import { citedDiagramsNotEmbedded } from "@/lib/diagrams"
 import type { ChatMessage } from "@/lib/types"
 import { citationLocation, cn, groupCitationsByDocument } from "@/lib/utils"
 
@@ -51,6 +53,25 @@ function IconButton({
     >
       {children}
     </button>
+  )
+}
+
+/** Diagrams the answer cited without drawing them inline, so a cited figure is always visible. */
+function CitedDiagrams({ message }: { message: ChatMessage }) {
+  const diagrams = citedDiagramsNotEmbedded(message.content, message.citations)
+  if (diagrams.length === 0) return null
+  return (
+    <div data-testid="cited-diagrams">
+      <p className="mb-1.5 text-xs font-medium text-muted-foreground">Diagrams cited in this answer</p>
+      <div className="flex flex-wrap items-start gap-3">
+        {diagrams.map((d) => (
+          <figure key={d.path} className="w-56 max-w-full">
+            <DiagramImage path={d.path} caption={d.caption} className="w-full [&_img]:max-h-40" />
+            <figcaption className="mt-1 text-xs text-muted-foreground">{d.caption}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
   )
 }
 
@@ -163,6 +184,8 @@ export function MessageBubble({ message, busy, onFeedback, onComment, onRegenera
               <span className="font-mono text-xs">Thinking...</span>
             </div>
           )}
+
+          <CitedDiagrams message={message} />
 
           {message.citations && message.citations.length > 0 && (
             <div className="space-y-1.5">

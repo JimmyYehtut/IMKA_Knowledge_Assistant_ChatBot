@@ -112,7 +112,7 @@ async def _generate_answer(
 
     chain = build_answer_chain()
     answer = await chain.ainvoke(
-        {"context": context, "question": rewritten, "persona_instructions": persona_instructions(persona)},
+        {"context": context, "question": query, "persona_instructions": persona_instructions(persona)},
         config={"run_name": "rag_answer_generation", "tags": ["rag", "stage5"], "metadata": trace_metadata or {}},
     )
     return answer, select_cited(answer, citations), intent.topic
@@ -235,7 +235,7 @@ async def _stream_sse(
             }
             chain_input = {
                 "context": context,
-                "question": rewritten,
+                "question": query,
                 "persona_instructions": persona_instructions(conversation.persona),
             }
             async for token in chain.astream(chain_input, config=stream_config):

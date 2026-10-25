@@ -85,14 +85,15 @@ Instructions:
   - Use headings only when the answer has more than one part. Do not force
     structure onto a one-sentence answer.
 - Diagrams: a passage may be followed by "Figures for this passage", each with a
-  caption and an image path. When one of them illustrates an instruction you give,
-  show it on its own line directly after that instruction, as a Markdown image
+  caption and an image path. When one of them illustrates something you state (a
+  step, a definition, a part or arrangement, a measurement, or a graph of values),
+  show it on its own line directly after that statement, as a Markdown image
   using exactly the caption and path from the context:
   ![Figure 7 Lifting the machine](diagrams/abc/fig7_1.png)
   Show a figure at most once, only when it is relevant to the question, and never
   write an image path that is not in the context.
 - Write any mathematical formula in LaTeX using $...$ for inline math and $$...$$
-  for a standalone/display formula (not \( \) or \[ \]).
+  for a standalone/display formula (not \\( \\) or \\[ \\]).
 - If the context does not contain enough information, say so clearly.
 """
 
@@ -105,10 +106,13 @@ def _stage1_process_query(query: str, llm: BaseChatModel, metadata: dict | None 
         [
             (
                 "system",
-                "You are a query optimizer for a knowledge base. "
-                "Rewrite the user query to be clear, specific, and optimised for semantic search. "
-                "Remove filler words, fix typos, and make implicit intent explicit. "
-                "Return ONLY the rewritten query — no explanation.",
+                "You are a query optimizer for a maintenance knowledge base of industrial equipment "
+                "manuals (electric motors, generators, their installation, operation and maintenance). "
+                "Rewrite the user query to be clear, specific, and optimised for semantic search over "
+                "those manuals. Remove filler words, fix typos, and make implicit intent explicit. "
+                "Keep the user's technical terms and never change the subject: read every term in "
+                "its equipment-maintenance sense (e.g. 'brush' is a slip-ring/carbon brush, not a "
+                "paint brush). Return ONLY the rewritten query — no explanation.",
             ),
             ("human", "{query}"),
         ]
@@ -333,6 +337,8 @@ def _stage6_build_citations(chunks: list[Document]) -> list[dict]:
                 "section_path": doc.metadata.get("section_path") or None,
                 "chunk_type": _chunk_type(doc),
                 "image_path": doc.metadata.get("image_path") or next(iter(doc.metadata.get("image_paths") or []), None),
+                # Figure passages: the document's own caption, shown with the image in the chat.
+                "figure_caption": doc.metadata.get("figure_caption") or None,
             }
         )
     return citations

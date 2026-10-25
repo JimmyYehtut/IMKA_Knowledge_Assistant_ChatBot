@@ -111,8 +111,8 @@ async def upload_documents(
         metadata_dict = json.loads(metadata)
         if not isinstance(metadata_dict, dict) or not all(isinstance(v, str) for v in metadata_dict.values()):
             raise ValueError
-    except ValueError:
-        raise HTTPException(status_code=400, detail="metadata must be a JSON object of string values.")
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail="metadata must be a JSON object of string values.") from e
 
     allowed_extensions = DOCLING_ALLOWED_EXTENSIONS if pipeline == "docling" else ALLOWED_EXTENSIONS
 
@@ -129,7 +129,7 @@ async def upload_documents(
             file_hash = hashlib.md5(upload.filename.encode("utf-8")).hexdigest()
             temp_path = os.path.join(temp_dir, f"uploaded_{file_hash}{ext}")
             content = await upload.read()
-            with open(temp_path, "wb") as f:
+            with open(temp_path, "wb") as f:  # noqa: ASYNC230 — one local temp write; the slow ingest runs in a threadpool
                 f.write(content)
             temp_paths.append(temp_path)
             original_names.append(upload.filename)
@@ -155,7 +155,7 @@ async def upload_documents(
         return IngestResponse(total_chunks=result["total_chunks"], documents=documents)
     finally:
         for path in temp_paths:
-            if os.path.exists(path):
+            if os.path.exists(path):  # noqa: ASYNC240 — temp-file cleanup, local and fast
                 os.remove(path)
 
 
