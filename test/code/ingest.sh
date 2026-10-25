@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-# Ingests the test-A … test-H documents, one PDF at a time, with a log per PDF.
+# Ingests the test-A … test-G documents, one PDF at a time, with a log per PDF.
 #
 #   bash test/code/ingest.sh <stage> [pdf ...]      (from the repository root, Git Bash)
 #
 # stage: C1           standard pipeline (MarkItDown + 1,000-character splitter)
 #        C2           Docling chunking
 #        C3-mini      + figure descriptions by gpt-4o-mini   (test-C)
-#        C3-luna      + figure descriptions by gpt-5.6-luna  (test-F, test-H)
-#        C3-qwen      + figure descriptions and embeddings by Qwen on RunPod,
-#                     into the ragindex_qwen collection       (test-G)
+#        C3-luna      + figure descriptions by gpt-5.6-luna  (test-F, test-G)
+#        C3-qwen      + figure descriptions and embeddings by Qwen on RunPod (deferred Qwen run),
+#                     into the ragindex_qwen collection
 # pdf:   file names under pdfs/; default all five, EMSA first (the one most likely to fail).
 #
 # Logs: test/output/ingest/<stage>-<pdf>.log; one line per PDF in test/output/ingest/status.log.

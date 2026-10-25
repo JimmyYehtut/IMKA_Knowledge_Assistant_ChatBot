@@ -1,4 +1,4 @@
-"""Evaluation helpers for runs test-A … test-H (report/notes.md, "Evaluation Plan").
+"""Evaluation helpers for runs test-A … test-G (report/notes.md, "Evaluation Plan").
 
 A run answers the whole question set against one configuration's five documents (one
 document_id per PDF, all searchable at once), three times over, then scores:
@@ -74,7 +74,7 @@ DEFAULT_EMBEDDING = "text-embedding-3-small"
 QWEN_EMBEDDING = "Qwen3-Embedding-4B-Q4_K_M"
 
 # Each stack uses one model for everything: the C3 figure descriptions come from the same
-# model that answers (caption_model). test-H is the hybrid strategy: the strong model (luna)
+# model that answers (caption_model). test-G is the hybrid strategy: the strong model (luna)
 # does all ingestion, the cheap model (gpt-4o-mini) answers. It also splits test-C → test-F
 # into what the ingestion model and what the answering model contribute.
 # answer_model: what the backend must report (OPENAI_CHAT_MODEL, or the Qwen alias with
@@ -86,9 +86,11 @@ RUNS = {
     "test-D": {"config": "C1", "answer_model": LUNA},
     "test-E": {"config": "C2", "answer_model": LUNA},
     "test-F": {"config": "C3", "answer_model": LUNA, "caption_model": LUNA},
-    "test-G": {"config": "C3", "answer_model": QWEN, "caption_model": QWEN, "embedding": QWEN_EMBEDDING},
-    "test-H": {"config": "C3", "answer_model": MINI, "caption_model": LUNA},
+    "test-G": {"config": "C3", "answer_model": MINI, "caption_model": LUNA},
 }
+# Deferred: the fully local Qwen stack (report/notes.md, "Deferred: a fully local stack"). To run it, add
+#   "test-Q": {"config": "C3", "answer_model": QWEN, "caption_model": QWEN, "embedding": QWEN_EMBEDDING}
+# and the comparison ("test-F", "test-Q", "answer_accuracy", IN_SCOPE).
 
 GROUPS = ("tables", "topical", "figures", "cross_document", "paraphrase", "out_of_scope")
 IN_SCOPE = tuple(g for g in GROUPS if g != "out_of_scope")
@@ -100,16 +102,14 @@ COMPARISONS = [
     ("test-D", "test-E", "context_recall", ("tables", "topical")),   # chunking, luna
     ("test-B", "test-C", "answer_accuracy", ("figures",)),            # captioning, gpt-4o-mini's own
     ("test-E", "test-F", "answer_accuracy", ("figures",)),            # captioning, luna's own
-    ("test-B", "test-H", "answer_accuracy", ("figures",)),            # captioning by luna, gpt-4o-mini answering
+    ("test-B", "test-G", "answer_accuracy", ("figures",)),            # captioning by luna, gpt-4o-mini answering
     # Models, at each configuration
     ("test-A", "test-D", "answer_accuracy", IN_SCOPE),                # answering model only (C1)
     ("test-B", "test-E", "answer_accuracy", IN_SCOPE),                # answering model only (C2)
     ("test-C", "test-F", "answer_accuracy", IN_SCOPE),                # whole stack (C3)
-    ("test-C", "test-H", "answer_accuracy", ("figures",)),            # ingestion model only (hybrid)
-    ("test-H", "test-F", "answer_accuracy", IN_SCOPE),                # answering model only (hybrid -> luna)
+    ("test-C", "test-G", "answer_accuracy", ("figures",)),            # ingestion model only (hybrid)
+    ("test-G", "test-F", "answer_accuracy", IN_SCOPE),                # answering model only (hybrid -> luna)
     ("test-A", "test-D", "refused", ("out_of_scope",)),
-    # API stack vs fully local stack: captioner, embedding and answering model all change.
-    ("test-F", "test-G", "answer_accuracy", IN_SCOPE),
 ]
 
 SOURCE_PAGE = re.compile(r"\bp\.\s*(\d+)")
@@ -371,7 +371,19 @@ def pinned_versions() -> dict:
                                  capture_output=True, text=True, timeout=60).stdout.strip() or None
     except Exception:
         pass
+    commit = None
+    try:
+        git = ["git", "-C", str(ROOT)]
+        commit = subprocess.run(git + ["rev-parse", "--short", "HEAD"], capture_output=True, text=True,
+                                timeout=30).stdout.strip() or None
+        dirty = subprocess.run(git + ["status", "--porcelain", "--", "backend"], capture_output=True, text=True,
+                               timeout=30).stdout.strip()
+        if commit and dirty:
+            commit += " + uncommitted backend changes"
+    except Exception:
+        pass
     return {
+        "backend_commit": commit,
         "questions_sha256": hashlib.sha256(QUESTIONS_PATH.read_bytes()).hexdigest()[:16],
         "docling_version": docling,
         "openai_temperature": __import__("os").getenv("OPENAI_TEMPERATURE") or "unset (model default)",

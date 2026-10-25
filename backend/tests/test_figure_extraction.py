@@ -139,3 +139,35 @@ def test_caption_labelled_as_heading_still_captions_the_picture_above_it(extract
     assert chunk.metadata["chunk_type"] == "figure"
     assert chunk.metadata["figure_caption"] == chunk.page_content
     assert chunk.metadata["section_path"] == "7.6.4.1 Conversion of measured insulation resistance"
+
+
+class _FakeVLM:
+    """Stands in for the OpenAI client: records each request, returns a canned reply."""
+
+    def __init__(self, reply: str, finish_reason: str = "stop"):
+        self.requests = []
+        message = type("Message", (), {"content": reply})()
+        choice = type("Choice", (), {"message": message, "finish_reason": finish_reason})()
+        self.response = type("Response", (), {"choices": [choice]})()
+        self.chat = type("Chat", (), {"completions": self})()
+
+    def create(self, **kwargs):
+        self.requests.append(kwargs)
+        return self.response
+
+
+@pytest.fixture
+def openai_captioner(monkeypatch):
+    monkeypatch.setattr(docling_ingest, "VLM_CAPTION_MODEL", "gpt-5.6-luna")
+
+
+def test_figure_description_is_trimmed_to_the_last_full_sentence_when_cut_off(openai_captioner):
+    vlm = _FakeVLM("The graph converts R to R40 with k ≈ 0.25. The manual cautions that", "length")
+    text = docling_ingest._describe_image(vlm, Image.new("RGB", (8, 8)))
+    assert text == "The graph converts R to R40 with k ≈ 0.25."
+
+
+def test_complete_figure_description_is_kept_whole(openai_captioner):
+    vlm = _FakeVLM("Callout 1 is the terminal box. Callout 2 is the earthing screw.")
+    text = docling_ingest._describe_image(vlm, Image.new("RGB", (8, 8)))
+    assert text == "Callout 1 is the terminal box. Callout 2 is the earthing screw."

@@ -1,4 +1,4 @@
-"""Command line for the test-A … test-H evaluation (see README.md).
+"""Command line for the test-A … test-G evaluation (see README.md).
 
     python run.py questions                         # check questions.json, counts per group and PDF
     python run.py documents test-F                  # which document_ids the run will use (pins them)
@@ -16,6 +16,9 @@ import imka_eval as E
 
 
 def main() -> None:
+    # Questions contain Ω, ±, … — a redirected log on Windows would otherwise be cp1252 and crash.
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("step", choices=["questions", "documents", "answer", "judge", "report"])
     parser.add_argument("run", nargs="?", choices=list(E.RUNS))

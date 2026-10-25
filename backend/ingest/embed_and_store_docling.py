@@ -153,17 +153,22 @@ def _chunk_document(doc, source_path: str) -> list[Document]:
 _DESCRIBE_PROMPT = """\
 This image is a figure from a technical equipment manual{caption}.{legend}
 Write a factual description that lets someone answer questions about its content
-without seeing it. Start with one sentence saying what the figure shows, then give
-the content that applies:
+without seeing it. Start with one sentence saying what the figure shows. Then decide
+what kind of figure it is and give only the content for that kind:
 
 - Chart or graph: the axis titles, units and ranges, whether a scale is logarithmic,
   each curve or series and its label, and readings taken from the curves as
   "x = ... -> y = ..." pairs (at least 4 per curve, spread over the range; prefix a
   value you have to estimate with "≈").
 - Table, rating plate or nameplate: transcribe every field and value exactly.
-- Drawing or diagram: every callout number with what it points to, and all
-  dimensions, angles, clearances and other numbers with their units.
+- Drawing, photo or wiring diagram: every callout number with what it points to
+  (call numbered markers callouts, never axes), and all dimensions, angles,
+  clearances and other numbers with their units.
 - Any other text visible in the image, verbatim.
+
+Keep printed values apart from readings: copy numbers printed in the image or the
+legend exactly, as printed; mark any value read off a curve or scale with "≈" and
+never present it as printed. Do not calculate new values.
 
 Report only what is visible. Do not guess unreadable values and do not add
 information that is not in the image."""
@@ -221,7 +226,15 @@ def _describe_image(client, pil_image, caption: str | None = None, legend: list[
             }],
             **limit,
         )
-        return resp.choices[0].message.content.strip()
+        choice = resp.choices[0]
+        text = (choice.message.content or "").strip()
+        if choice.finish_reason == "length":
+            # Ran out of tokens: keep the complete sentences rather than index
+            # a description that stops mid-word.
+            complete = re.match(r".*[.!?](?=\s|$)", text, re.DOTALL)
+            text = complete.group(0) if complete else text
+            print("  [warn] figure description hit the token limit; trimmed", file=sys.stderr)
+        return text or None
     except Exception as e:
         print(f"  [warn] figure description failed: {e}", file=sys.stderr)
         return None
