@@ -45,7 +45,7 @@ def fake_rag(monkeypatch):
     async def classify(query, metadata=None):
         return Intent(intent="knowledge", topic="Unpacked machine lifting")
 
-    async def prepare(query, metadata=None):
+    async def prepare(query, metadata=None, document_ids=None, trace=None):
         context = f"[1] ABB Manual, p. 25\nLift by crane.\n\nFigures for this passage:\n- Figure 9 — image path: {IMAGE}"
         return context, [dict(c) for c in CITATIONS], "lift unpacked machine"
 

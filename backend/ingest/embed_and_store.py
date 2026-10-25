@@ -72,6 +72,9 @@ def ingest_files(
             version=version,
             metadata=metadata,
             chunk_count=record["chunk_count"],
+            pipeline="standard",
+            chunking=False,
+            captioning=False,
         )
 
     return {"total_chunks": len(chunks), "documents": document_records}

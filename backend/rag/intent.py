@@ -63,5 +63,5 @@ async def classify_intent(query: str, metadata: dict | None = None) -> Intent:
     `metadata` (e.g. conversation_id, user_id) is attached to the LangSmith trace when
     LANGCHAIN_TRACING_V2 is enabled, so a run can be traced back to its conversation.
     """
-    loop = asyncio.get_event_loop()
-    return await loop.run_in_executor(None, _classify_sync, query, metadata)
+    # to_thread (not run_in_executor) carries the request's context into the thread (rag.usage).
+    return await asyncio.to_thread(_classify_sync, query, metadata)

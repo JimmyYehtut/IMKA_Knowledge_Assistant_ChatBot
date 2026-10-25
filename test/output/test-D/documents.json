@@ -1,0 +1,100 @@
+{
+  "generated_at": "2026-10-25T12:10:11",
+  "run": "test-D",
+  "spec": {
+    "config": "C1",
+    "answer_model": "gpt-5.6-luna"
+  },
+  "documents": [
+    {
+      "document_id": "713054b0-29cd-42b5-a55d-43b46ef5fba9",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "version": "1.0",
+      "chunk_count": 438,
+      "metadata": {},
+      "pipeline": "standard",
+      "chunking": false,
+      "captioning": false,
+      "models": {},
+      "embedding": {
+        "model": "text-embedding-3-small",
+        "dimension": 1024,
+        "collection": "ragindex"
+      },
+      "status": "indexed",
+      "uploaded_at": "2026-10-25T04:09:29.153811+00:00"
+    },
+    {
+      "document_id": "42b3313c-14e4-43f8-ac2e-9a3380dfaf75",
+      "document_name": "EMSA Diesel Generator manual-en.pdf",
+      "version": "1.0",
+      "chunk_count": 135,
+      "metadata": {},
+      "pipeline": "standard",
+      "chunking": false,
+      "captioning": false,
+      "models": {},
+      "embedding": {
+        "model": "text-embedding-3-small",
+        "dimension": 1024,
+        "collection": "ragindex"
+      },
+      "status": "indexed",
+      "uploaded_at": "2026-10-25T04:08:18.353976+00:00"
+    },
+    {
+      "document_id": "6988c3b4-5daf-43e2-aeec-b7f3c878cd61",
+      "document_name": "Kohler Generator Manual.pdf",
+      "version": "1.0",
+      "chunk_count": 428,
+      "metadata": {},
+      "pipeline": "standard",
+      "chunking": false,
+      "captioning": false,
+      "models": {},
+      "embedding": {
+        "model": "text-embedding-3-small",
+        "dimension": 1024,
+        "collection": "ragindex"
+      },
+      "status": "indexed",
+      "uploaded_at": "2026-10-25T04:09:59.349913+00:00"
+    },
+    {
+      "document_id": "771c25ba-6f96-4ae7-be58-edb897062094",
+      "document_name": "Nidec Motor Manual.pdf",
+      "version": "1.0",
+      "chunk_count": 172,
+      "metadata": {},
+      "pipeline": "standard",
+      "chunking": false,
+      "captioning": false,
+      "models": {},
+      "embedding": {
+        "model": "text-embedding-3-small",
+        "dimension": 1024,
+        "collection": "ragindex"
+      },
+      "status": "indexed",
+      "uploaded_at": "2026-10-25T03:04:42.173761+00:00"
+    },
+    {
+      "document_id": "8dbee7fc-536c-4a2b-8d87-6d531143e195",
+      "document_name": "Siemens_Manual_Vertical_Induction_Motors_EN.pdf",
+      "version": "1.0",
+      "chunk_count": 165,
+      "metadata": {},
+      "pipeline": "standard",
+      "chunking": false,
+      "captioning": false,
+      "models": {},
+      "embedding": {
+        "model": "text-embedding-3-small",
+        "dimension": 1024,
+        "collection": "ragindex"
+      },
+      "status": "indexed",
+      "uploaded_at": "2026-10-25T04:08:33.545027+00:00"
+    }
+  ]
+}

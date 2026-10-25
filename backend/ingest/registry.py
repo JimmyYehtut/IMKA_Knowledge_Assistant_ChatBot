@@ -28,13 +28,37 @@ def add_document(
     version: str,
     chunk_count: int,
     metadata: dict[str, str] | None = None,
+    pipeline: str = "standard",
+    chunking: bool = False,
+    captioning: bool = False,
+    models: dict[str, str] | None = None,
 ) -> dict[str, Any]:
+    """Record an indexed document.
+
+    `pipeline` names the ingestion pipeline ("standard" or "docling"); `chunking` and
+    `captioning` record which techniques it was indexed with — structure-aware (Docling
+    HybridChunker) chunking and VLM figure descriptions — so an evaluation run can tell
+    the configurations of one document apart. `models` names
+    the LLM behind each LLM-driven technique ({"captioning": ...}). `embedding`
+    records the embedding model, dimension and Qdrant collection the chunks went into.
+    """
+    from rag.vectorstore import EMBEDDING_DIMENSION, QDRANT_COLLECTION_NAME, embedding_model_name
+
     entry = {
         "document_id": document_id,
         "document_name": document_name,
         "version": version,
         "chunk_count": chunk_count,
         "metadata": metadata or {},
+        "pipeline": pipeline,
+        "chunking": chunking,
+        "captioning": captioning,
+        "models": models or {},
+        "embedding": {
+            "model": embedding_model_name(),
+            "dimension": EMBEDDING_DIMENSION,
+            "collection": QDRANT_COLLECTION_NAME,
+        },
         "status": "indexed",
         "uploaded_at": datetime.now(timezone.utc).isoformat(),
     }

@@ -1,0 +1,92 @@
+== Summary per run and group ==
+                        n  hit@1  hit@3  hit@5  reciprocal_rank  correct_pdf@5  correct_pdf@1  candidates_hit  faithfulness  answer_relevancy  context_recall  answer_accuracy  refused
+run    group                                                                                                                                                                           
+test-A tables          30  0.789  0.844  0.867            0.819          0.967          0.933           0.956         0.704             0.645           0.578            0.572      NaN
+       cross_document  30  0.722  0.822  0.844            0.775          0.967          0.800           0.967         0.778             0.766           0.801            0.756      NaN
+       topical         30  0.667  0.878  0.922            0.777          0.967          0.956           0.933         0.774             0.776           0.857            0.794      NaN
+       paraphrase      35  0.619  0.752  0.790            0.690          0.952          0.857           0.933         0.736             0.687           0.686            0.574      NaN
+       figures         25  0.413  0.453  0.533            0.450          0.907          0.813           0.613         0.867             0.201           0.197            0.167      NaN
+       out_of_scope    20    NaN    NaN    NaN              NaN            NaN            NaN             NaN           NaN               NaN             NaN              NaN    1.000
+test-B tables          30  0.778  0.944  1.000            0.871          1.000          0.967           1.000         0.693             0.875           0.956            0.833      NaN
+       cross_document  30  0.878  0.944  0.967            0.914          1.000          0.900           1.000         0.729             0.892           0.952            0.892      NaN
+       topical         30  0.711  0.867  0.922            0.799          0.967          0.956           0.967         0.795             0.767           0.815            0.794      NaN
+       paraphrase      35  0.610  0.829  0.905            0.736          1.000          0.933           0.981         0.680             0.803           0.852            0.757      NaN
+       figures         25  0.733  0.867  0.880            0.792          1.000          0.973           0.947         0.849             0.412           0.397            0.380      NaN
+       out_of_scope    20    NaN    NaN    NaN              NaN            NaN            NaN             NaN           NaN               NaN             NaN              NaN    1.000
+test-C tables          30  0.756  0.944  1.000            0.861          1.000          0.956           1.000         0.683             0.879           0.944            0.831      NaN
+       cross_document  30  0.856  0.933  0.989            0.908          1.000          0.900           1.000         0.727             0.904           0.972            0.889      NaN
+       topical         30  0.700  0.878  0.922            0.798          0.967          0.967           0.967         0.838             0.762           0.833            0.819      NaN
+       paraphrase      35  0.562  0.810  0.905            0.695          0.990          0.905           0.971         0.736             0.800           0.881            0.800      NaN
+       figures         25  0.787  0.907  0.947            0.852          0.987          0.973           0.947         0.804             0.684           0.606            0.567      NaN
+       out_of_scope    20    NaN    NaN    NaN              NaN            NaN            NaN             NaN           NaN               NaN             NaN              NaN    1.000
+test-D tables          30  0.700  0.833  0.833            0.767          0.967          0.878           0.956         0.911             0.724           0.597            0.536      NaN
+       cross_document  30  0.667  0.811  0.889            0.755          0.978          0.811           0.967         0.900             0.785           0.839            0.783      NaN
+       topical         30  0.633  0.811  0.867            0.724          0.989          0.889           0.933         0.939             0.775           0.809            0.794      NaN
+       paraphrase      35  0.619  0.810  0.848            0.714          0.962          0.905           0.962         0.879             0.693           0.676            0.652      NaN
+       figures         25  0.520  0.653  0.667            0.587          0.960          0.787           0.773         0.908             0.331           0.297            0.280      NaN
+       out_of_scope    20    NaN    NaN    NaN              NaN            NaN            NaN             NaN           NaN               NaN             NaN              NaN    0.983
+test-E tables          30  0.767  0.956  0.989            0.869          0.989          0.956           1.000         0.907             0.878           0.933            0.931      NaN
+       cross_document  30  0.767  0.922  0.944            0.846          1.000          0.833           1.000         0.902             0.839           0.933            0.894      NaN
+       topical         30  0.756  0.878  0.933            0.823          0.956          0.878           1.000         0.924             0.782           0.843            0.842      NaN
+       paraphrase      35  0.667  0.848  0.924            0.760          0.990          0.914           1.000         0.899             0.767           0.876            0.843      NaN
+       figures         25  0.787  0.907  0.920            0.841          1.000          0.987           0.933         0.892             0.406           0.387            0.347      NaN
+       out_of_scope    20    NaN    NaN    NaN              NaN            NaN            NaN             NaN           NaN               NaN             NaN              NaN    1.000
+test-F tables          30  0.733  0.967  0.978            0.847          0.978          0.956           1.000         0.880             0.873           0.922            0.911      NaN
+       cross_document  30  0.756  0.922  0.956            0.838          1.000          0.800           1.000         0.894             0.857           0.958            0.914      NaN
+       topical         30  0.744  0.889  0.933            0.817          0.967          0.922           0.978         0.937             0.797           0.864            0.872      NaN
+       paraphrase      35  0.619  0.848  0.933            0.742          0.990          0.895           0.971         0.886             0.820           0.862            0.833      NaN
+       figures         25  0.840  0.880  0.920            0.866          1.000          1.000           0.933         0.860             0.660           0.770            0.727      NaN
+       out_of_scope    20    NaN    NaN    NaN              NaN            NaN            NaN             NaN           NaN               NaN             NaN              NaN    1.000
+test-G tables          30  0.767  0.956  1.000            0.868          1.000          0.967           1.000         0.690             0.889           0.956            0.819      NaN
+       cross_document  30  0.878  0.944  0.978            0.913          1.000          0.878           1.000         0.756             0.902           0.969            0.883      NaN
+       topical         30  0.678  0.867  0.933            0.783          0.967          0.911           0.967         0.813             0.794           0.843            0.828      NaN
+       paraphrase      35  0.610  0.819  0.905            0.721          1.000          0.943           0.971         0.705             0.836           0.867            0.755      NaN
+       figures         25  0.747  0.867  0.947            0.812          0.987          0.987           0.960         0.757             0.739           0.750            0.700      NaN
+       out_of_scope    20    NaN    NaN    NaN              NaN            NaN            NaN             NaN           NaN               NaN             NaN              NaN    1.000
+
+== Comparisons (primary metrics, paired bootstrap 95% CI) ==
+     A      B          metric         groups   n  A_mean  B_mean   diff  ci_low  ci_high  up  down  same              verdict
+test-A test-B  context_recall tables+topical  60   0.717   0.885  0.168   0.041    0.290  19     7    34             B better
+test-D test-E  context_recall tables+topical  60   0.703   0.888  0.185   0.075    0.298  18     4    38             B better
+test-B test-C answer_accuracy        figures  25   0.380   0.567  0.187   0.043    0.350   6     1    18             B better
+test-E test-F answer_accuracy        figures  25   0.347   0.727  0.380   0.213    0.553  12     1    12             B better
+test-B test-G answer_accuracy        figures  25   0.380   0.700  0.320   0.153    0.493  10     1    14             B better
+test-A test-D answer_accuracy       in-scope 150   0.586   0.622  0.036  -0.008    0.082  29    19   102 no measurable effect
+test-B test-E answer_accuracy       in-scope 150   0.744   0.788  0.044   0.001    0.088  29    18   103             B better
+test-C test-F answer_accuracy       in-scope 150   0.789   0.855  0.066   0.021    0.113  36    23    91             B better
+test-C test-G answer_accuracy        figures  25   0.567   0.700  0.133   0.007    0.277   6     2    17             B better
+test-G test-F answer_accuracy       in-scope 150   0.799   0.855  0.056   0.020    0.096  39    17    94             B better
+test-A test-D         refused   out_of_scope  20   1.000   0.983 -0.017  -0.050    0.000   0     1    19 no measurable effect
+
+== Answering cost per question (Qwen: model working time x GPU $/h) ==
+        answers  calls/q  prompt_tokens/q  completion_tokens/q model_s/q runpod_exec_s/q runpod_delay_s/q  wall_s/q (median)  cost per 1,000 questions ($)
+run                                                                                                                                                       
+test-A      510      3.0             2296                  156      None            None             None                4.2                          0.44
+test-B      510      3.0             2392                  173      None            None             None                4.6                          0.46
+test-C      510      3.0             2435                  174      None            None             None                4.7                          0.47
+test-D      510      3.0             2293                  407      None            None             None                7.4                          0.95
+test-E      510      3.0             2354                  401      None            None             None                7.4                          0.95
+test-F      510      3.0             2428                  411      None            None             None                7.4                          0.98
+test-G      510      3.0             2457                  177      None            None             None                4.6                          0.47
+
+== Haiku vs Sonnet agreement ==
+{'metric': 'context_recall', 'n': 300, 'haiku_mean': 0.874, 'sonnet_mean': 0.881, 'mean_abs_diff': 0.018, 'identical_share': 0.97, 'correlation': 0.933}
+
+== Judge spend ==
+                          calls  input_tokens  output_tokens  cost_usd
+run    model                                                          
+test-A claude-haiku-5-5    2760       5523149         687024    0.8959
+       claude-sonnet-5-5    900       1137996           9000    2.3659
+test-B claude-haiku-5-5    2760       5742750         764743    0.9566
+       claude-sonnet-5-5    900       1169261           9000    2.4285
+test-C claude-haiku-5-5    2760       5804502         752395    0.9566
+       claude-sonnet-5-5   1050       1848082          41789    4.1141
+test-D claude-haiku-5-5    2760       5597539         712804    0.9162
+       claude-sonnet-5-5    900       1161553           9000    2.4131
+test-E claude-haiku-5-5    2760       5682119         708585    0.9225
+       claude-sonnet-5-5    900       1167627           9000    2.4253
+test-F claude-haiku-5-5    2762       5870164         776008    0.9751
+       claude-sonnet-5-5   1050       1865189          41712    4.1475
+test-G claude-haiku-5-5    2762       5892819         787069    0.9829
+       claude-sonnet-5-5    900       1175481           9000    2.4409
+total $26.94

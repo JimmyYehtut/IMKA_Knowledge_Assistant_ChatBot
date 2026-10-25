@@ -1,0 +1,2708 @@
+{
+  "generated_at": "2026-10-25T14:06:34",
+  "run": "test-A",
+  "repeat": 2,
+  "models": [
+    "gpt-4o-mini"
+  ],
+  "judge": {
+    "judges": {
+      "faithfulness": "claude-haiku-5-5",
+      "answer_relevancy": "claude-haiku-5-5",
+      "context_recall": "claude-haiku-5-5",
+      "answer_accuracy": "claude-sonnet-5-5"
+    },
+    "check": {
+      "context_recall": "claude-sonnet-5-5"
+    },
+    "refusal": "claude-haiku-5-5",
+    "thinking": {
+      "claude-haiku-5-5": {
+        "type": "disabled"
+      },
+      "claude-sonnet-5-5": {
+        "type": "between_tools"
+      }
+    },
+    "embedding": "text-embedding-3-small",
+    "ragas_version": "0.4.3"
+  },
+  "judge_usage": {
+    "claude-haiku-5-5": {
+      "calls": 920,
+      "input_tokens": 1838304,
+      "output_tokens": 227048,
+      "cost_usd": 0.2974
+    },
+    "claude-sonnet-5-5": {
+      "calls": 300,
+      "input_tokens": 377666,
+      "output_tokens": 3000,
+      "cost_usd": 0.7853
+    }
+  },
+  "count": 170,
+  "skipped": [],
+  "results": [
+    {
+      "id": 1,
+      "question": "In the ABB induction machine manual, what is the Pt-100 resistance, in ohms, at exactly 100°C according to Table 11?",
+      "group": "tables",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Needle-in-table",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.5,
+        "answer_relevancy": 0.7904
+      },
+      "errors": null,
+      "elapsed_s": 29.59
+    },
+    {
+      "id": 2,
+      "question": "In the ABB induction machine manual, what is the Pt-100 resistance, in ohms, at exactly 40°C according to Table 11?",
+      "group": "tables",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Needle-in-table",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 0.2,
+        "answer_relevancy": 0.7668
+      },
+      "errors": null,
+      "elapsed_s": 27.41
+    },
+    {
+      "id": 3,
+      "question": "For an ABB induction machine, what is the tightening torque (Nm) for an oiled M20 bolt of property class 8.8?",
+      "group": "tables",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Needle-in-table",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 0.75,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 21.92
+    },
+    {
+      "id": 4,
+      "question": "For an ABB induction machine, what is the tightening torque (Nm) for a dry M20 bolt of property class 8.8?",
+      "group": "tables",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Needle-in-table",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 0.5714,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 25.56
+    },
+    {
+      "id": 5,
+      "question": "On an ABB machine, what is the tightening torque, in Nm, for an EF_LB 18 axially locating bearing?",
+      "group": "tables",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Needle-in-table",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9141
+      },
+      "errors": null,
+      "elapsed_s": 21.81
+    },
+    {
+      "id": 6,
+      "question": "On an ABB machine, what is the tightening torque, in Nm, for an EM_LB 9S axially locating bearing?",
+      "group": "tables",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Needle-in-table",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9093
+      },
+      "errors": null,
+      "elapsed_s": 27.73
+    },
+    {
+      "id": 7,
+      "question": "For a rigid-support ABB machine, what is the rms velocity boundary between vibration Zone B and Zone C?",
+      "group": "tables",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Needle-in-table",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.3846,
+        "answer_relevancy": 0.9612
+      },
+      "errors": null,
+      "elapsed_s": 24.41
+    },
+    {
+      "id": 8,
+      "question": "For a flexible-support ABB machine, what is the rms velocity boundary between vibration Zone C and Zone D?",
+      "group": "tables",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Needle-in-table",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.5,
+        "answer_relevancy": 0.9576
+      },
+      "errors": null,
+      "elapsed_s": 20.2
+    },
+    {
+      "id": 9,
+      "question": "What is the initial ALARM value for bearing housing vibration on a rigid-support ABB machine?",
+      "group": "tables",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Needle-in-table",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 18.64
+    },
+    {
+      "id": 10,
+      "question": "What is the initial TRIP value for bearing housing vibration on a flexible-support ABB machine?",
+      "group": "tables",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Needle-in-table",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "faithfulness": 0.625,
+        "answer_accuracy": 1.0,
+        "answer_relevancy": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 26.83
+    },
+    {
+      "id": 11,
+      "question": "When aligning an ABB machine with a 100–250 mm rigid flange coupling, what is the permissible parallel misalignment?",
+      "group": "tables",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Needle-in-table",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.75,
+        "answer_relevancy": 0.9384
+      },
+      "errors": null,
+      "elapsed_s": 21.34
+    },
+    {
+      "id": 12,
+      "question": "When aligning an ABB machine with a 250–500 mm gear coupling, what is the permissible angular misalignment?",
+      "group": "tables",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Needle-in-table",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 27.0
+    },
+    {
+      "id": 13,
+      "question": "What is the minimum acceptable insulation resistance for a used stator winding on an ABB induction machine?",
+      "group": "cross_document",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Lookalike-section disambiguation",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.9091,
+        "answer_relevancy": 0.9267
+      },
+      "errors": null,
+      "elapsed_s": 22.9
+    },
+    {
+      "id": 14,
+      "question": "What is the minimum acceptable insulation resistance for the wound rotor winding of an ABB induction machine?",
+      "group": "cross_document",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Lookalike-section disambiguation",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9151
+      },
+      "errors": null,
+      "elapsed_s": 25.73
+    },
+    {
+      "id": 15,
+      "question": "What insulation resistance is acceptable for a new ABB stator under extremely warm and humid measuring conditions?",
+      "group": "cross_document",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Lookalike-section disambiguation",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.9,
+        "answer_relevancy": 0.9774
+      },
+      "errors": null,
+      "elapsed_s": 21.89
+    },
+    {
+      "id": 16,
+      "question": "What test voltage does ABB use for the insulation resistance test on a machine's space heater?",
+      "group": "cross_document",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Lookalike-section disambiguation",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.5,
+        "answer_relevancy": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 36.61
+    },
+    {
+      "id": 17,
+      "question": "What test voltage does ABB use for the insulation resistance test on auxiliaries other than the space heater?",
+      "group": "cross_document",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Lookalike-section disambiguation",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.6667,
+        "answer_relevancy": 0.966
+      },
+      "errors": null,
+      "elapsed_s": 28.07
+    },
+    {
+      "id": 18,
+      "question": "On an ABB machine with open-air cooling, at what percentage of filter surface obstruction does the intake filter's pressure alarm trigger?",
+      "group": "cross_document",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Lookalike-section disambiguation",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.6662
+      },
+      "errors": null,
+      "elapsed_s": 25.2
+    },
+    {
+      "id": 19,
+      "question": "On an ABB slip-ring machine, how often should the brush lifting device's movement and contacts be checked, in terms of number of starts?",
+      "group": "cross_document",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Lookalike-section disambiguation",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.3077,
+        "answer_relevancy": 0.7606
+      },
+      "errors": null,
+      "elapsed_s": 21.87
+    },
+    {
+      "id": 20,
+      "question": "What is ABB's guideline maximum number of starts per year for a typical direct-on-line application?",
+      "group": "cross_document",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Lookalike-section disambiguation",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.7826,
+        "answer_relevancy": 0.8643
+      },
+      "errors": null,
+      "elapsed_s": 24.09
+    },
+    {
+      "id": 21,
+      "question": "According to ABB, what percentage of steel content is typical for cast iron frame induction machines?",
+      "group": "cross_document",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Lookalike-section disambiguation",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9251
+      },
+      "errors": null,
+      "elapsed_s": 17.22
+    },
+    {
+      "id": 22,
+      "question": "According to ABB, what percentage of cast iron content is typical for modular steel frame induction machines?",
+      "group": "cross_document",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Lookalike-section disambiguation",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9243
+      },
+      "errors": null,
+      "elapsed_s": 27.99
+    },
+    {
+      "id": 23,
+      "question": "How does ABB calculate equivalent operating hours for a constant speed drive machine?",
+      "group": "topical",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Conditional-content confusion",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.625,
+        "answer_relevancy": 0.8313
+      },
+      "errors": null,
+      "elapsed_s": 25.92
+    },
+    {
+      "id": 24,
+      "question": "How does ABB calculate equivalent operating hours for a variable speed drive machine?",
+      "group": "topical",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Conditional-content confusion",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.875,
+        "answer_relevancy": 0.8031
+      },
+      "errors": null,
+      "elapsed_s": 26.0
+    },
+    {
+      "id": 25,
+      "question": "In ABB's worked R40 example, an insulation resistance of 30 MΩ is measured at 20°C with k=0.25. What is R40?",
+      "group": "topical",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Cross-section arithmetic",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.8,
+        "answer_relevancy": 0.8719
+      },
+      "errors": null,
+      "elapsed_s": 26.09
+    },
+    {
+      "id": 26,
+      "question": "What is the normal oil supply pressure for a flood-lubricated sleeve bearing on an ABB machine?",
+      "group": "topical",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Cross-section synthesis",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.75,
+        "answer_relevancy": 0.9247
+      },
+      "errors": null,
+      "elapsed_s": 26.41
+    },
+    {
+      "id": 27,
+      "question": "What minimum polarization index (PI) does ABB require for a class F stator winding?",
+      "group": "topical",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Needle-in-passage",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 0.75,
+        "faithfulness": 0.75,
+        "answer_relevancy": 0.9337
+      },
+      "errors": null,
+      "elapsed_s": 21.51
+    },
+    {
+      "id": 28,
+      "question": "Below what winding temperature does ABB consider the polarization index test independent of temperature?",
+      "group": "topical",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Needle-in-passage",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.8,
+        "answer_relevancy": 0.9561
+      },
+      "errors": null,
+      "elapsed_s": 25.1
+    },
+    {
+      "id": 29,
+      "question": "What is the recommended brush pressure range on the slip ring of an ABB machine, in mN/mm²?",
+      "group": "topical",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Needle-in-passage",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9383
+      },
+      "errors": null,
+      "elapsed_s": 21.3
+    },
+    {
+      "id": 30,
+      "question": "How long should the first test start of an ABB machine last?",
+      "group": "topical",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Needle-in-passage",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 24.28
+    },
+    {
+      "id": 31,
+      "question": "On an ABB slip-ring machine, if the brush wear limit mark is not evident, how far from the brush top is the wear limit?",
+      "group": "topical",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Needle-in-passage",
+      "expects_refusal": false,
+      "scores": {
+        "faithfulness": 0.6667,
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "answer_relevancy": 0.6913
+      },
+      "errors": null,
+      "elapsed_s": 23.62
+    },
+    {
+      "id": 32,
+      "question": "As a thumb rule, how often does ABB say an insulation resistance test should be performed?",
+      "group": "topical",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Needle-in-passage",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 20.23
+    },
+    {
+      "id": 33,
+      "question": "How long should the initial start of an ABB machine last?",
+      "group": "paraphrase",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Consistency (paraphrase of Q30)",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 0.75,
+        "faithfulness": 0.6,
+        "answer_relevancy": 0.9528
+      },
+      "errors": null,
+      "elapsed_s": 40.02
+    },
+    {
+      "id": 34,
+      "question": "What's the recommended duration for the first trial start of an ABB machine?",
+      "group": "paraphrase",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Consistency (paraphrase of Q30)",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 0.75,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9496
+      },
+      "errors": null,
+      "elapsed_s": 24.24
+    },
+    {
+      "id": 35,
+      "question": "What test voltage does ABB use to measure the insulation resistance of the stator winding?",
+      "group": "paraphrase",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Consistency (baseline)",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.954
+      },
+      "errors": null,
+      "elapsed_s": 27.24
+    },
+    {
+      "id": 36,
+      "question": "At what voltage is the stator winding's insulation resistance tested on ABB machines?",
+      "group": "paraphrase",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Consistency (paraphrase)",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.7261
+      },
+      "errors": null,
+      "elapsed_s": 22.8
+    },
+    {
+      "id": 37,
+      "question": "How often should carbon dust be removed from the slip ring housing of an ABB machine?",
+      "group": "paraphrase",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Consistency / fabrication probe",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 0.75,
+        "faithfulness": 0.8667,
+        "answer_relevancy": 0.8371
+      },
+      "errors": null,
+      "elapsed_s": 25.78
+    },
+    {
+      "id": 38,
+      "question": "What is the carbon-dust cleaning schedule for the slip ring housing on ABB machines?",
+      "group": "paraphrase",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Consistency / fabrication probe (paraphrase)",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.5,
+        "faithfulness": 0.9091,
+        "answer_relevancy": 0.9135
+      },
+      "errors": null,
+      "elapsed_s": 26.45
+    },
+    {
+      "id": 39,
+      "question": "What is the maximum ambient temperature for which ABB's air-cooled machines are typically designed?",
+      "group": "paraphrase",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Consistency (baseline)",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.8,
+        "answer_relevancy": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 19.26
+    },
+    {
+      "id": 40,
+      "question": "Up to what ambient temperature are ABB air-cooled machines normally rated?",
+      "group": "paraphrase",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Consistency (paraphrase)",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 0.75,
+        "faithfulness": 0.6,
+        "answer_relevancy": 0.8574
+      },
+      "errors": null,
+      "elapsed_s": 16.87
+    },
+    {
+      "id": 41,
+      "question": "From Figure 42 of the ABB manual, at 18 brushes with a carbon brush wear rate of 3 mm/10³h, what's the approximate maximum cleaning interval?",
+      "group": "figures",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Figure-only value",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 20.42
+    },
+    {
+      "id": 42,
+      "question": "From Figure 42 of the ABB manual, at 6 brushes with the lowest wear rate (1 mm/10³h), what's the approximate maximum cleaning interval?",
+      "group": "figures",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Figure-only value",
+      "expects_refusal": false,
+      "scores": {
+        "faithfulness": 0.75,
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 19.29
+    },
+    {
+      "id": 43,
+      "question": "From Figure 38 of the ABB manual, approximately what is the coefficient Kt at a winding temperature of 80°C?",
+      "group": "figures",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Figure-only value",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 0.6667,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 23.99
+    },
+    {
+      "id": 44,
+      "question": "From Figure 38 of the ABB manual, approximately what is the coefficient Kt at a winding temperature of 60°C?",
+      "group": "figures",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Figure-only value",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 0.5,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 24.94
+    },
+    {
+      "id": 45,
+      "question": "In the ABB manual's 'Typical main power cable connections' appendix, what is the tightening torque for the M12-steel cable-lug connection screw shown in the first diagram?",
+      "group": "figures",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Diagram-to-caption matching",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 23.4
+    },
+    {
+      "id": 46,
+      "question": "In the ABB manual's 'Typical main power cable connections' appendix, what is the tightening torque for the M16-bronze/brass bushing-style connection screw shown in the second diagram?",
+      "group": "figures",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Diagram-to-caption matching",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 26.7
+    },
+    {
+      "id": 47,
+      "question": "In the ABB manual's 'Typical main power cable connections' appendix, what screw size is used for the round-terminal (DIN 46223) connection, and how is it tightened?",
+      "group": "figures",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Diagram-to-caption matching (negative case)",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 0.75,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 25.05
+    },
+    {
+      "id": 48,
+      "question": "In the ABB manual's 'Typical position of plates' diagram, which letter (A or B) denotes the HXR machine mounted vertically?",
+      "group": "figures",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Legend-to-diagram matching",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8069
+      },
+      "errors": null,
+      "elapsed_s": 25.19
+    },
+    {
+      "id": 49,
+      "question": "In the ABB manual's 'Typical position of plates' diagram, which letter (A or B) denotes the HXR machine mounted horizontally?",
+      "group": "figures",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Legend-to-diagram matching",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "faithfulness": 0.5,
+        "answer_accuracy": 1.0,
+        "answer_relevancy": 0.7327
+      },
+      "errors": null,
+      "elapsed_s": 21.26
+    },
+    {
+      "id": 50,
+      "question": "In the ABB manual's direction-of-rotation diagram, which item number represents 'Reversing'?",
+      "group": "figures",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Legend-to-diagram matching",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 24.91
+    },
+    {
+      "id": 51,
+      "question": "When aligning an ABB machine with a 250–500 mm flexible coupling, what is the permissible axial misalignment?",
+      "group": "tables",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Needle-in-table",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 24.43
+    },
+    {
+      "id": 52,
+      "question": "For an ABB induction machine, what is the tightening torque (Nm) for a dry M36 bolt of property class 8.8?",
+      "group": "tables",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Needle-in-table",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 0.1429,
+        "answer_relevancy": 0.9506
+      },
+      "errors": null,
+      "elapsed_s": 27.07
+    },
+    {
+      "id": 53,
+      "question": "For an ABB induction machine, what is the tightening torque (Nm) for an oiled M8 bolt of property class 8.8?",
+      "group": "tables",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Needle-in-table",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 0.4,
+        "answer_relevancy": 0.8461
+      },
+      "errors": null,
+      "elapsed_s": 25.49
+    },
+    {
+      "id": 54,
+      "question": "For a rigid-support ABB machine, what is the rms velocity boundary between vibration Zone A and Zone B?",
+      "group": "tables",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Needle-in-table",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.5,
+        "answer_relevancy": 0.9606
+      },
+      "errors": null,
+      "elapsed_s": 21.08
+    },
+    {
+      "id": 55,
+      "question": "What is the initial ALARM value for bearing housing vibration on a flexible-support ABB machine?",
+      "group": "tables",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Needle-in-table",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.8571,
+        "answer_relevancy": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 25.43
+    },
+    {
+      "id": 56,
+      "question": "On an ABB machine, what is the tightening torque, in Nm, for an EF_LB 28 axially locating bearing?",
+      "group": "tables",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Needle-in-table",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "faithfulness": 1.0,
+        "answer_accuracy": 0.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 27.07
+    },
+    {
+      "id": 57,
+      "question": "According to ABB's Table 6, at how many equivalent operating hours does the L4 (Overhaul) maintenance level occur?",
+      "group": "topical",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Cross-page legend dependency",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.7143,
+        "answer_relevancy": 0.9372
+      },
+      "errors": null,
+      "elapsed_s": 26.27
+    },
+    {
+      "id": 58,
+      "question": "What does the abbreviation 'D' mean in ABB's recommended maintenance program tables (e.g., Table 6 and its sub-tables)?",
+      "group": "topical",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Cross-page legend dependency",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.7143,
+        "answer_relevancy": 0.951
+      },
+      "errors": null,
+      "elapsed_s": 18.68
+    },
+    {
+      "id": 59,
+      "question": "At maintenance level L3, what re-greasing check ('Check/Test' column) is specified for rolling bearings in ABB's maintenance program table?",
+      "group": "topical",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Cross-page legend dependency",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.5,
+        "answer_relevancy": 0.8923
+      },
+      "errors": null,
+      "elapsed_s": 25.23
+    },
+    {
+      "id": 60,
+      "question": "What does the abbreviation 'V/T/C' mean when it appears together in a row of ABB's maintenance program?",
+      "group": "topical",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Cross-page legend dependency",
+      "expects_refusal": false,
+      "scores": {
+        "answer_accuracy": 1.0,
+        "context_recall": 1.0,
+        "faithfulness": 0.25,
+        "answer_relevancy": 0.9401
+      },
+      "errors": null,
+      "elapsed_s": 29.12
+    },
+    {
+      "id": 61,
+      "question": "When an ABB machine is first switched on for a trial run, how briefly should it be kept energized?",
+      "group": "paraphrase",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "expects_refusal": false,
+      "scores": {
+        "faithfulness": 1.0,
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 33.99
+    },
+    {
+      "id": 62,
+      "question": "What symptoms suggest a faulty temperature sensor in the winding or bearing of an ABB machine?",
+      "group": "paraphrase",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 0.5714,
+        "answer_relevancy": 0.9833
+      },
+      "errors": null,
+      "elapsed_s": 25.55
+    },
+    {
+      "id": 63,
+      "question": "What megohm-meter voltage should be applied when megger-testing the main stator windings of an ABB machine?",
+      "group": "paraphrase",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 10.88
+    },
+    {
+      "id": 64,
+      "question": "How tightly, in Nm, must an oiled M10 bolt of property class 8.8 be fastened on an ABB machine?",
+      "group": "paraphrase",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "expects_refusal": false,
+      "scores": {
+        "faithfulness": 0.0,
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "answer_relevancy": 0.8975
+      },
+      "errors": null,
+      "elapsed_s": 20.64
+    },
+    {
+      "id": 65,
+      "question": "How is the debris screen on the slip ring housing of an ABB machine cleaned?",
+      "group": "paraphrase",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.5714,
+        "answer_relevancy": 0.9391
+      },
+      "errors": null,
+      "elapsed_s": 24.85
+    },
+    {
+      "id": 66,
+      "question": "At what oscillation speed does the alarm trigger for a rigidly mounted ABB bearing housing?",
+      "group": "paraphrase",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Vocabulary-mismatch retrieval stress",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "faithfulness": 0.7857,
+        "answer_accuracy": 1.0,
+        "answer_relevancy": 0.8247
+      },
+      "errors": null,
+      "elapsed_s": 20.0
+    },
+    {
+      "id": 67,
+      "question": "What is the exact re-greasing interval, in hours, for the rolling bearings of an ABB machine?",
+      "group": "topical",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Deferred-value / fabrication probe",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 26.38
+    },
+    {
+      "id": 68,
+      "question": "What is the maximum permissible shaft key length for an ABB HXR induction motor?",
+      "group": "out_of_scope",
+      "document_name": null,
+      "failure_type": "Absence probe",
+      "expects_refusal": true,
+      "scores": {
+        "refused": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 4.11
+    },
+    {
+      "id": 69,
+      "question": "What is the warranty period, in months, for an ABB induction machine?",
+      "group": "out_of_scope",
+      "document_name": null,
+      "failure_type": "Absence probe",
+      "expects_refusal": true,
+      "scores": {
+        "refused": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 3.5
+    },
+    {
+      "id": 70,
+      "question": "What is the list price of the carbon brush replacement kit for an ABB slip-ring motor?",
+      "group": "out_of_scope",
+      "document_name": null,
+      "failure_type": "Absence probe",
+      "expects_refusal": true,
+      "scores": {
+        "refused": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 0.68
+    },
+    {
+      "id": 71,
+      "question": "What is the recommended bearing regreasing interval for a Siemens 1LA8 motor?",
+      "group": "out_of_scope",
+      "document_name": null,
+      "failure_type": "Absence probe (non-ABB equipment)",
+      "expects_refusal": true,
+      "scores": {
+        "refused": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 4.33
+    },
+    {
+      "id": 72,
+      "question": "What one-minute insulation resistance should a Siemens vertical motor with MICLAD VPI insulation exceed?",
+      "group": "cross_document",
+      "document_name": "Siemens_Manual_Vertical_Induction_Motors_EN.pdf",
+      "failure_type": "Cross-document lookalike",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.5714,
+        "answer_relevancy": 0.9142
+      },
+      "errors": null,
+      "elapsed_s": 26.65
+    },
+    {
+      "id": 73,
+      "question": "How should a Toshiba TM21 motor be prepared for long-term storage?",
+      "group": "out_of_scope",
+      "document_name": null,
+      "failure_type": "Absence probe (non-ABB equipment)",
+      "expects_refusal": true,
+      "scores": {
+        "refused": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 1.88
+    },
+    {
+      "id": 74,
+      "question": "What is the rated output of a WEG W22 IE3 motor in frame size 315?",
+      "group": "out_of_scope",
+      "document_name": null,
+      "failure_type": "Absence probe (non-ABB equipment)",
+      "expects_refusal": true,
+      "scores": {
+        "refused": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 1.95
+    },
+    {
+      "id": 75,
+      "question": "What vibration alarm limit does GE Vernova specify for its vertical induction motors?",
+      "group": "out_of_scope",
+      "document_name": null,
+      "failure_type": "Absence probe (non-ABB equipment)",
+      "expects_refusal": true,
+      "scores": {
+        "refused": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 3.33
+    },
+    {
+      "id": 76,
+      "question": "According to the Siemens typical motor control settings, what are the alarm and trip winding temperatures for Class F insulation?",
+      "group": "tables",
+      "document_name": "Siemens_Manual_Vertical_Induction_Motors_EN.pdf",
+      "failure_type": "Needle-in-table",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 0.5,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 27.24
+    },
+    {
+      "id": 77,
+      "question": "What alarm and trip temperatures does Siemens suggest for a sleeve bearing on its vertical induction motor?",
+      "group": "cross_document",
+      "document_name": "Siemens_Manual_Vertical_Induction_Motors_EN.pdf",
+      "failure_type": "Cross-document lookalike",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 25.37
+    },
+    {
+      "id": 78,
+      "question": "What is the NEMA MG1 unfiltered vibration limit for a resiliently mounted Siemens vertical motor running at 900 RPM?",
+      "group": "tables",
+      "document_name": "Siemens_Manual_Vertical_Induction_Motors_EN.pdf",
+      "failure_type": "Needle-in-table",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.6154,
+        "answer_relevancy": 0.926
+      },
+      "errors": null,
+      "elapsed_s": 22.79
+    },
+    {
+      "id": 79,
+      "question": "During temporary storage of a Siemens vertical motor, how often and how much should the shaft be rotated by hand?",
+      "group": "topical",
+      "document_name": "Siemens_Manual_Vertical_Induction_Motors_EN.pdf",
+      "failure_type": "Needle-in-passage",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "faithfulness": 1.0,
+        "answer_accuracy": 1.0,
+        "answer_relevancy": 0.9086
+      },
+      "errors": null,
+      "elapsed_s": 24.56
+    },
+    {
+      "id": 80,
+      "question": "Using the Siemens winding-resistance method, what is the hot winding temperature if the cold resistance is 0.50 Ω at 25°C and the hot resistance is 0.61 Ω?",
+      "group": "topical",
+      "document_name": "Siemens_Manual_Vertical_Induction_Motors_EN.pdf",
+      "failure_type": "Cross-section arithmetic",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 0.3077,
+        "answer_relevancy": 0.9382
+      },
+      "errors": null,
+      "elapsed_s": 26.87
+    },
+    {
+      "id": 81,
+      "question": "What minimum insulation resistance does Siemens recommend for an older vertical motor rated 2300 V?",
+      "group": "cross_document",
+      "document_name": "Siemens_Manual_Vertical_Induction_Motors_EN.pdf",
+      "failure_type": "Cross-document lookalike",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 0.75,
+        "faithfulness": 0.7778,
+        "answer_relevancy": 0.9533
+      },
+      "errors": null,
+      "elapsed_s": 30.56
+    },
+    {
+      "id": 82,
+      "question": "What typical oil viscosity grade does Siemens list for spherical roller bearings?",
+      "group": "tables",
+      "document_name": "Siemens_Manual_Vertical_Induction_Motors_EN.pdf",
+      "failure_type": "Needle-in-table",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "faithfulness": 0.0,
+        "answer_accuracy": 0.0,
+        "answer_relevancy": 0.9817
+      },
+      "errors": null,
+      "elapsed_s": 25.99
+    },
+    {
+      "id": 83,
+      "question": "What oil grade does Siemens list for Kingsbury-type bearings?",
+      "group": "cross_document",
+      "document_name": "Siemens_Manual_Vertical_Induction_Motors_EN.pdf",
+      "failure_type": "Cross-document lookalike",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 26.42
+    },
+    {
+      "id": 84,
+      "question": "What end play is preset at the factory for the Kingsbury-type thrust bearing?",
+      "group": "topical",
+      "document_name": "Siemens_Manual_Vertical_Induction_Motors_EN.pdf",
+      "failure_type": "Needle-in-passage",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 0.75,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 29.48
+    },
+    {
+      "id": 85,
+      "question": "For a hollow shaft Siemens motor, what dial indicator reading is the limit for acceptable alignment?",
+      "group": "topical",
+      "document_name": "Siemens_Manual_Vertical_Induction_Motors_EN.pdf",
+      "failure_type": "Needle-in-passage",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.7273,
+        "answer_relevancy": 0.9297
+      },
+      "errors": null,
+      "elapsed_s": 26.86
+    },
+    {
+      "id": 86,
+      "question": "What drying temperature does Siemens give for Class F insulation, and what must be done before reaching it?",
+      "group": "tables",
+      "document_name": "Siemens_Manual_Vertical_Induction_Motors_EN.pdf",
+      "failure_type": "Conditional-content confusion",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.9091,
+        "answer_relevancy": 0.9656
+      },
+      "errors": null,
+      "elapsed_s": 26.0
+    },
+    {
+      "id": 87,
+      "question": "When shimming between flanges on a Siemens vertical motor, how thick should the minor shims be and how far may shims penetrate?",
+      "group": "figures",
+      "document_name": "Siemens_Manual_Vertical_Induction_Motors_EN.pdf",
+      "failure_type": "Legend-to-diagram matching",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.6,
+        "answer_relevancy": 0.859
+      },
+      "errors": null,
+      "elapsed_s": 21.33
+    },
+    {
+      "id": 88,
+      "question": "What regreasing interval in operating hours does the Siemens manual specify for the lower bearing?",
+      "group": "topical",
+      "document_name": "Siemens_Manual_Vertical_Induction_Motors_EN.pdf",
+      "failure_type": "Deferred-value",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.5,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 28.09
+    },
+    {
+      "id": 89,
+      "question": "What is the tightening torque for an M20 strength class 8.8 standard-thread screw on the Kohler KD27V12 engine?",
+      "group": "cross_document",
+      "document_name": "Kohler Generator Manual.pdf",
+      "failure_type": "Cross-document lookalike",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 0.5,
+        "faithfulness": 0.6,
+        "answer_relevancy": 0.9842
+      },
+      "errors": null,
+      "elapsed_s": 24.48
+    },
+    {
+      "id": 90,
+      "question": "What is the tightening torque for an M12 strength class 10.9 screw on the Kohler KD27V12 engine?",
+      "group": "tables",
+      "document_name": "Kohler Generator Manual.pdf",
+      "failure_type": "Needle-in-table",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 0.6,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 29.01
+    },
+    {
+      "id": 91,
+      "question": "What are the cold inlet and outlet valve clearances of the Kohler KD27V12?",
+      "group": "tables",
+      "document_name": "Kohler Generator Manual.pdf",
+      "failure_type": "Needle-in-table",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.8333,
+        "answer_relevancy": 0.9797
+      },
+      "errors": null,
+      "elapsed_s": 26.61
+    },
+    {
+      "id": 92,
+      "question": "At what temperature does the KD27V12 coolant thermostat start to open, and when is it completely open?",
+      "group": "tables",
+      "document_name": "Kohler Generator Manual.pdf",
+      "failure_type": "Needle-in-table",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.8,
+        "answer_relevancy": 0.9717
+      },
+      "errors": null,
+      "elapsed_s": 30.15
+    },
+    {
+      "id": 93,
+      "question": "What is the firing order of the Kohler KD27V12 engine?",
+      "group": "tables",
+      "document_name": "Kohler Generator Manual.pdf",
+      "failure_type": "Needle-in-table",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 27.19
+    },
+    {
+      "id": 94,
+      "question": "How much lubricating oil and coolant does the Kohler KD27V12 take at a fluid change?",
+      "group": "tables",
+      "document_name": "Kohler Generator Manual.pdf",
+      "failure_type": "Needle-in-table",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 0.6667,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 32.52
+    },
+    {
+      "id": 95,
+      "question": "If the fuel sulfur content is between 0.5% and 1%, how does the Kohler engine oil change interval change?",
+      "group": "tables",
+      "document_name": "Kohler Generator Manual.pdf",
+      "failure_type": "Conditional-content confusion",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 0.75,
+        "faithfulness": 0.9231,
+        "answer_relevancy": 0.9304
+      },
+      "errors": null,
+      "elapsed_s": 28.03
+    },
+    {
+      "id": 96,
+      "question": "What is the emission control warranty period for the Kohler stationary diesel engine?",
+      "group": "topical",
+      "document_name": "Kohler Generator Manual.pdf",
+      "failure_type": "Needle-in-passage",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.5,
+        "answer_relevancy": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 26.56
+    },
+    {
+      "id": 97,
+      "question": "How long does the conservation protection of a Kohler engine last in normal dry storage, and what applies to longer storage?",
+      "group": "topical",
+      "document_name": "Kohler Generator Manual.pdf",
+      "failure_type": "Needle-in-passage",
+      "expects_refusal": false,
+      "scores": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "answer_relevancy": 0.9636
+      },
+      "errors": null,
+      "elapsed_s": 38.22
+    },
+    {
+      "id": 98,
+      "question": "Which coolant products and concentration does Kohler approve for the KD27V12?",
+      "group": "topical",
+      "document_name": "Kohler Generator Manual.pdf",
+      "failure_type": "Needle-in-passage",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "faithfulness": 1.0,
+        "answer_accuracy": 1.0,
+        "answer_relevancy": 0.9703
+      },
+      "errors": null,
+      "elapsed_s": 22.8
+    },
+    {
+      "id": 99,
+      "question": "According to the Kohler KD27V12 manual, what permissible average power output over 24 hours applies to an ESP-rated and a PRP-rated generator?",
+      "group": "topical",
+      "document_name": "Kohler Generator Manual.pdf",
+      "failure_type": "Lookalike-section disambiguation",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.6,
+        "answer_relevancy": 0.8371
+      },
+      "errors": null,
+      "elapsed_s": 24.5
+    },
+    {
+      "id": 100,
+      "question": "What does Figure 27 in the Kohler manual show?",
+      "group": "figures",
+      "document_name": "Kohler Generator Manual.pdf",
+      "failure_type": "Diagram-to-caption matching",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 23.75
+    },
+    {
+      "id": 101,
+      "question": "In the EMSA hydrometer test, which specific density readings indicate a fully charged, a half charged and a discharged battery?",
+      "group": "figures",
+      "document_name": "EMSA Diesel Generator manual-en.pdf",
+      "failure_type": "Graphic-only text",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 0.75,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 24.42
+    },
+    {
+      "id": 102,
+      "question": "What is the correct charge generator belt tension on the EMSA generator, and when must it be reset?",
+      "group": "figures",
+      "document_name": "EMSA Diesel Generator manual-en.pdf",
+      "failure_type": "Graphic-only text",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 24.77
+    },
+    {
+      "id": 103,
+      "question": "What torque does EMSA specify for the charge generator pivot bolt and connecting bolt after adjusting the belt?",
+      "group": "cross_document",
+      "document_name": "EMSA Diesel Generator manual-en.pdf",
+      "failure_type": "Cross-document lookalike",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "faithfulness": 0.5,
+        "answer_accuracy": 0.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 19.71
+    },
+    {
+      "id": 104,
+      "question": "What fuel pipe diameter does EMSA recommend for an 800–1500 kVA standby generator, and what are the pipe length and height limits?",
+      "group": "tables",
+      "document_name": "EMSA Diesel Generator manual-en.pdf",
+      "failure_type": "Needle-in-table",
+      "expects_refusal": false,
+      "scores": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "answer_relevancy": 0.9104
+      },
+      "errors": null,
+      "elapsed_s": 29.18
+    },
+    {
+      "id": 105,
+      "question": "Which engine oil and antifreeze does EMSA recommend, and at what antifreeze ratio?",
+      "group": "figures",
+      "document_name": "EMSA Diesel Generator manual-en.pdf",
+      "failure_type": "Graphic-only text",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 0.5,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 27.11
+    },
+    {
+      "id": 106,
+      "question": "When adding electrolyte to an EMSA maintenance-type battery for the first time, what density and level are required, and how long is the minimum charge?",
+      "group": "figures",
+      "document_name": "EMSA Diesel Generator manual-en.pdf",
+      "failure_type": "Graphic-only text",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 27.16
+    },
+    {
+      "id": 107,
+      "question": "Which engine, lubrication capacity and coolant capacity does the EMSA model E PR XX 0015 have?",
+      "group": "tables",
+      "document_name": "EMSA Diesel Generator manual-en.pdf",
+      "failure_type": "Needle-in-table",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 21.86
+    },
+    {
+      "id": 108,
+      "question": "What do the parts of the EMSA model code E BD ST 0275 stand for?",
+      "group": "figures",
+      "document_name": "EMSA Diesel Generator manual-en.pdf",
+      "failure_type": "Legend-to-diagram matching",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.7143,
+        "answer_relevancy": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 24.33
+    },
+    {
+      "id": 109,
+      "question": "In EMSA's cable cross-section formula, what is the maximum voltage drop for power lines and what conductivity is used for copper?",
+      "group": "figures",
+      "document_name": "EMSA Diesel Generator manual-en.pdf",
+      "failure_type": "Graphic-only text",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 18.56
+    },
+    {
+      "id": 110,
+      "question": "What service life is declared for EMSA generators?",
+      "group": "topical",
+      "document_name": "EMSA Diesel Generator manual-en.pdf",
+      "failure_type": "Needle-in-passage",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "faithfulness": 1.0,
+        "answer_accuracy": 1.0,
+        "answer_relevancy": 0.9476
+      },
+      "errors": null,
+      "elapsed_s": 21.76
+    },
+    {
+      "id": 111,
+      "question": "On the example bearing plate for grease-lubricated rolling bearings in the ABB manual (Figure 4), what lubrication interval and grease quantity per bearing are shown?",
+      "group": "figures",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Figure-only value",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 25.83
+    },
+    {
+      "id": 112,
+      "question": "Which grease is the ABB example rolling-bearing plate (Figure 4) delivered with, and how often must the waste grease box be emptied?",
+      "group": "figures",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Figure-only value",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 25.78
+    },
+    {
+      "id": 113,
+      "question": "On the example IEC rating plate in Figure 1 of the ABB manual (type HXR 500LP14), what are the rated output, voltage and speed?",
+      "group": "figures",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Figure-only value",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 0.75,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 25.23
+    },
+    {
+      "id": 114,
+      "question": "What overload capability is stated on the ABB example rating plate for a frequency converter machine (Figure 2)?",
+      "group": "figures",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Figure-only value",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "faithfulness": 1.0,
+        "answer_accuracy": 0.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 24.53
+    },
+    {
+      "id": 115,
+      "question": "In Fig. 27 of the Kohler KD27V12 manual, what recommended and minimum TBN are shown at the lowest fuel sulfur content (0 ppm)?",
+      "group": "figures",
+      "document_name": "Kohler Generator Manual.pdf",
+      "failure_type": "Figure-only value",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 26.28
+    },
+    {
+      "id": 116,
+      "question": "In Fig. 27 of the Kohler KD27V12 manual, approximately what recommended and minimum TBN are shown at 15,000 ppm fuel sulfur?",
+      "group": "figures",
+      "document_name": "Kohler Generator Manual.pdf",
+      "failure_type": "Figure-only value",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "faithfulness": 0.5,
+        "answer_accuracy": 0.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 23.34
+    },
+    {
+      "id": 117,
+      "question": "According to the Kohler KD27V12 manual's TBN chart (Fig. 27), below what TBN should the engine oil be exchanged as soon as possible?",
+      "group": "figures",
+      "document_name": "Kohler Generator Manual.pdf",
+      "failure_type": "Graphic-only text",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 0.2667,
+        "answer_relevancy": 0.7461
+      },
+      "errors": null,
+      "elapsed_s": 23.74
+    },
+    {
+      "id": 118,
+      "question": "Per NEMA MG1 as listed in the Siemens vertical motor manual, what is the unfiltered vibration limit for a resiliently mounted motor at 1800 RPM?",
+      "group": "cross_document",
+      "document_name": "Siemens_Manual_Vertical_Induction_Motors_EN.pdf",
+      "failure_type": "Cross-document lookalike",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.8824,
+        "answer_relevancy": 0.7173
+      },
+      "errors": null,
+      "elapsed_s": 18.48
+    },
+    {
+      "id": 119,
+      "question": "For a Siemens vertical motor with a solid shaft, what total indicator readings are acceptable for parallel and angular alignment?",
+      "group": "cross_document",
+      "document_name": "Siemens_Manual_Vertical_Induction_Motors_EN.pdf",
+      "failure_type": "Cross-document lookalike",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9382
+      },
+      "errors": null,
+      "elapsed_s": 25.76
+    },
+    {
+      "id": 120,
+      "question": "After regreasing a Siemens vertical motor's bearing, how long should the motor run before the drain plug is re-installed?",
+      "group": "cross_document",
+      "document_name": "Siemens_Manual_Vertical_Induction_Motors_EN.pdf",
+      "failure_type": "Cross-document lookalike",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.7982
+      },
+      "errors": null,
+      "elapsed_s": 25.54
+    },
+    {
+      "id": 121,
+      "question": "What kind of grease does Siemens recommend for the bearings of its vertical induction motors?",
+      "group": "cross_document",
+      "document_name": "Siemens_Manual_Vertical_Induction_Motors_EN.pdf",
+      "failure_type": "Cross-document lookalike",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 24.32
+    },
+    {
+      "id": 122,
+      "question": "When drying a Siemens vertical motor's stator by circulating direct current, how much current and DC voltage are usually needed?",
+      "group": "cross_document",
+      "document_name": "Siemens_Manual_Vertical_Induction_Motors_EN.pdf",
+      "failure_type": "Cross-document lookalike",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.6667,
+        "answer_accuracy": 0.5,
+        "faithfulness": 0.4444,
+        "answer_relevancy": 0.9211
+      },
+      "errors": null,
+      "elapsed_s": 24.24
+    },
+    {
+      "id": 123,
+      "question": "After how many days of delayed operation is an installed Siemens vertical motor considered to be in storage?",
+      "group": "cross_document",
+      "document_name": "Siemens_Manual_Vertical_Induction_Motors_EN.pdf",
+      "failure_type": "Cross-document lookalike",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.8182,
+        "answer_relevancy": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 28.31
+    },
+    {
+      "id": 124,
+      "question": "How should MICLAD VPI stator coils on a Siemens vertical motor be cleaned and baked?",
+      "group": "cross_document",
+      "document_name": "Siemens_Manual_Vertical_Induction_Motors_EN.pdf",
+      "failure_type": "Cross-document lookalike",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 0.75,
+        "faithfulness": 0.7778,
+        "answer_relevancy": 0.804
+      },
+      "errors": null,
+      "elapsed_s": 20.9
+    },
+    {
+      "id": 125,
+      "question": "What storage duration separates short-term from long-term storage of an ABB induction machine?",
+      "group": "cross_document",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Cross-document lookalike",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.909
+      },
+      "errors": null,
+      "elapsed_s": 25.23
+    },
+    {
+      "id": 126,
+      "question": "How should the re-greasing interval of an ABB machine's rolling bearings change with bearing temperature, and what is the minimum re-greasing frequency?",
+      "group": "cross_document",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Cross-document lookalike",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.8571,
+        "answer_relevancy": 0.968
+      },
+      "errors": null,
+      "elapsed_s": 27.67
+    },
+    {
+      "id": 127,
+      "question": "After manually re-greasing an ABB machine while it is running, how long should it keep running?",
+      "group": "cross_document",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Cross-document lookalike",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.8333,
+        "answer_relevancy": 0.9023
+      },
+      "errors": null,
+      "elapsed_s": 24.38
+    },
+    {
+      "id": 128,
+      "question": "What is the tightening torque for an M16 strength class 8.8 standard-thread screw on the Kohler KD27V12 engine?",
+      "group": "cross_document",
+      "document_name": "Kohler Generator Manual.pdf",
+      "failure_type": "Cross-document lookalike",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "faithfulness": 1.0,
+        "answer_accuracy": 1.0,
+        "answer_relevancy": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 17.25
+    },
+    {
+      "id": 129,
+      "question": "abb manual table 11 - pt100 resistnce at 100 deg C?",
+      "group": "paraphrase",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Consistency (paraphrase)",
+      "expects_refusal": false,
+      "scores": {
+        "faithfulness": 0.25,
+        "context_recall": 0.0,
+        "answer_accuracy": 1.0,
+        "answer_relevancy": 0.7006
+      },
+      "errors": null,
+      "elapsed_s": 19.23
+    },
+    {
+      "id": 130,
+      "question": "How many newton-metres should an oiled M20 grade 8.8 bolt be torqued to on an ABB machine?",
+      "group": "paraphrase",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Consistency (paraphrase)",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 0.625,
+        "answer_relevancy": 0.9317
+      },
+      "errors": null,
+      "elapsed_s": 28.52
+    },
+    {
+      "id": 131,
+      "question": "On a rigidly mounted ABB machine, which RMS vibration velocity separates zone B from zone C?",
+      "group": "paraphrase",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Consistency (paraphrase)",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.6364,
+        "answer_relevancy": 0.9325
+      },
+      "errors": null,
+      "elapsed_s": 25.7
+    },
+    {
+      "id": 132,
+      "question": "whats the lowest insulation resistance thats ok for a used stator winding on an ABB motor",
+      "group": "paraphrase",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Consistency (paraphrase)",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 0.75,
+        "faithfulness": 0.9333,
+        "answer_relevancy": 0.926
+      },
+      "errors": null,
+      "elapsed_s": 25.43
+    },
+    {
+      "id": 133,
+      "question": "Roughly how many direct-on-line starts per year is an ABB induction machine designed for?",
+      "group": "paraphrase",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Consistency (paraphrase)",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.6667,
+        "answer_relevancy": 0.8487
+      },
+      "errors": null,
+      "elapsed_s": 27.22
+    },
+    {
+      "id": 134,
+      "question": "How do I work out equivalent running hours for an ABB machine on a fixed-speed drive?",
+      "group": "paraphrase",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Consistency (paraphrase)",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.3571,
+        "answer_relevancy": 0.9268
+      },
+      "errors": null,
+      "elapsed_s": 43.06
+    },
+    {
+      "id": 135,
+      "question": "For ABB flood-lubricated sleeve bearings, what oil feed pressure is considered normal?",
+      "group": "paraphrase",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Consistency (paraphrase)",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "faithfulness": 1.0,
+        "answer_accuracy": 0.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 31.41
+    },
+    {
+      "id": 136,
+      "question": "ABB class F stator - minimum PI?",
+      "group": "paraphrase",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Consistency (paraphrase)",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.8,
+        "answer_relevancy": 0.6831
+      },
+      "errors": null,
+      "elapsed_s": 25.19
+    },
+    {
+      "id": 137,
+      "question": "What contact pressure should the slip-ring brushes on an ABB machine press with?",
+      "group": "paraphrase",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Consistency (paraphrase)",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.3636,
+        "answer_relevancy": 0.8869
+      },
+      "errors": null,
+      "elapsed_s": 21.54
+    },
+    {
+      "id": 138,
+      "question": "Which DC voltage should I megger an ABB motor's space heater at?",
+      "group": "paraphrase",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Consistency (paraphrase)",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 0.8,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 25.37
+    },
+    {
+      "id": 139,
+      "question": "After how many equivalent operating hours is the L4 overhaul due on an ABB machine?",
+      "group": "paraphrase",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Consistency (paraphrase)",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 0.75,
+        "faithfulness": 0.8462,
+        "answer_relevancy": 0.8554
+      },
+      "errors": null,
+      "elapsed_s": 26.42
+    },
+    {
+      "id": 140,
+      "question": "Torque spec in Nm for the EF_LB 18 locating bearing on ABB machines?",
+      "group": "paraphrase",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Consistency (paraphrase)",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9417
+      },
+      "errors": null,
+      "elapsed_s": 26.54
+    },
+    {
+      "id": 141,
+      "question": "ABB rigid flange coupling, 100-250 mm: how much parallel offset is allowed?",
+      "group": "paraphrase",
+      "document_name": "ABB Manual for Induction Motors and Generators_EN.pdf",
+      "failure_type": "Consistency (paraphrase)",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.1667,
+        "answer_relevancy": 0.8119
+      },
+      "errors": null,
+      "elapsed_s": 25.24
+    },
+    {
+      "id": 142,
+      "question": "At what winding temperatures should a Siemens vertical motor with class F insulation alarm and shut down?",
+      "group": "paraphrase",
+      "document_name": "Siemens_Manual_Vertical_Induction_Motors_EN.pdf",
+      "failure_type": "Consistency (paraphrase)",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "faithfulness": 0.75,
+        "answer_accuracy": 0.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 30.09
+    },
+    {
+      "id": 143,
+      "question": "Siemens vertical motor in storage - how often do I turn the shaft by hand, and how many turns?",
+      "group": "paraphrase",
+      "document_name": "Siemens_Manual_Vertical_Induction_Motors_EN.pdf",
+      "failure_type": "Consistency (paraphrase)",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8306
+      },
+      "errors": null,
+      "elapsed_s": 23.51
+    },
+    {
+      "id": 144,
+      "question": "Which ISO VG oil grade does Siemens list for the spherical roller bearings of its vertical motors?",
+      "group": "paraphrase",
+      "document_name": "Siemens_Manual_Vertical_Induction_Motors_EN.pdf",
+      "failure_type": "Consistency (paraphrase)",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 0.8333,
+        "answer_relevancy": 0.9756
+      },
+      "errors": null,
+      "elapsed_s": 20.09
+    },
+    {
+      "id": 145,
+      "question": "kohler kd27v12 cold valve lash, inlet and exhaust?",
+      "group": "paraphrase",
+      "document_name": "Kohler Generator Manual.pdf",
+      "failure_type": "Consistency (paraphrase)",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.625,
+        "answer_relevancy": 0.7785
+      },
+      "errors": null,
+      "elapsed_s": 26.91
+    },
+    {
+      "id": 146,
+      "question": "When does the Kohler KD27V12's coolant thermostat begin to open, and at what temperature is it fully open?",
+      "group": "paraphrase",
+      "document_name": "Kohler Generator Manual.pdf",
+      "failure_type": "Consistency (paraphrase)",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "faithfulness": 1.0,
+        "answer_accuracy": 0.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 23.25
+    },
+    {
+      "id": 147,
+      "question": "How many litres of lubricating oil does an oil change on the Kohler KD27V12 need?",
+      "group": "paraphrase",
+      "document_name": "Kohler Generator Manual.pdf",
+      "failure_type": "Consistency (paraphrase)",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 0.6667,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 26.32
+    },
+    {
+      "id": 148,
+      "question": "EMSA generator battery: which hydrometer specific gravity means it is fully charged?",
+      "group": "paraphrase",
+      "document_name": "EMSA Diesel Generator manual-en.pdf",
+      "failure_type": "Consistency (paraphrase)",
+      "expects_refusal": false,
+      "scores": {
+        "faithfulness": 0.3333,
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 21.91
+    },
+    {
+      "id": 149,
+      "question": "What is the rated standby output of a Cummins QSK60 generator set?",
+      "group": "out_of_scope",
+      "document_name": null,
+      "failure_type": "Absence probe",
+      "expects_refusal": true,
+      "scores": {
+        "refused": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 5.76
+    },
+    {
+      "id": 150,
+      "question": "Which parameter sets the motor nominal current on an ABB ACS880 drive?",
+      "group": "out_of_scope",
+      "document_name": null,
+      "failure_type": "Absence probe",
+      "expects_refusal": true,
+      "scores": {
+        "refused": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 1.92
+    },
+    {
+      "id": 151,
+      "question": "What is the recommended oil change interval for a Caterpillar 3516 generator set?",
+      "group": "out_of_scope",
+      "document_name": null,
+      "failure_type": "Absence probe",
+      "expects_refusal": true,
+      "scores": {
+        "refused": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 5.18
+    },
+    {
+      "id": 152,
+      "question": "What SF6 gas pressure does a medium-voltage switchgear circuit breaker need?",
+      "group": "out_of_scope",
+      "document_name": null,
+      "failure_type": "Absence probe",
+      "expects_refusal": true,
+      "scores": {
+        "refused": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 0.77
+    },
+    {
+      "id": 153,
+      "question": "Which IE efficiency class does EU Ecodesign Regulation 2019/1781 require for a 75 kW motor?",
+      "group": "out_of_scope",
+      "document_name": null,
+      "failure_type": "Absence probe",
+      "expects_refusal": true,
+      "scores": {
+        "refused": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 2.71
+    },
+    {
+      "id": 154,
+      "question": "What spark plug gap does the Kohler KD27V12 engine use?",
+      "group": "out_of_scope",
+      "document_name": null,
+      "failure_type": "Absence probe",
+      "expects_refusal": true,
+      "scores": {
+        "refused": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 2.75
+    },
+    {
+      "id": 155,
+      "question": "Which Modbus register holds the stator winding temperature on a Siemens vertical induction motor?",
+      "group": "out_of_scope",
+      "document_name": null,
+      "failure_type": "Absence probe",
+      "expects_refusal": true,
+      "scores": {
+        "refused": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 6.4
+    },
+    {
+      "id": 156,
+      "question": "How do I pair an ABB induction motor with a smartphone over Bluetooth?",
+      "group": "out_of_scope",
+      "document_name": null,
+      "failure_type": "Absence probe",
+      "expects_refusal": true,
+      "scores": {
+        "refused": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 11.46
+    },
+    {
+      "id": 157,
+      "question": "What is the MTBF, in hours, of a Siemens vertical induction motor?",
+      "group": "out_of_scope",
+      "document_name": null,
+      "failure_type": "Absence probe",
+      "expects_refusal": true,
+      "scores": {
+        "refused": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 2.64
+    },
+    {
+      "id": 158,
+      "question": "Which seismic qualification is the Kohler KD27V12 generator set certified to?",
+      "group": "out_of_scope",
+      "document_name": null,
+      "failure_type": "Absence probe",
+      "expects_refusal": true,
+      "scores": {
+        "refused": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 2.4
+    },
+    {
+      "id": 159,
+      "question": "Who won the 2022 FIFA World Cup?",
+      "group": "out_of_scope",
+      "document_name": null,
+      "failure_type": "Absence probe",
+      "expects_refusal": true,
+      "scores": {
+        "refused": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 2.79
+    },
+    {
+      "id": 160,
+      "question": "What is the half-life of uranium-235?",
+      "group": "out_of_scope",
+      "document_name": null,
+      "failure_type": "Absence probe",
+      "expects_refusal": true,
+      "scores": {
+        "refused": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 0.71
+    },
+    {
+      "id": 161,
+      "question": "How quickly does a Tesla Model 3 accelerate from 0 to 100 km/h?",
+      "group": "out_of_scope",
+      "document_name": null,
+      "failure_type": "Absence probe",
+      "expects_refusal": true,
+      "scores": {
+        "refused": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 1.92
+    },
+    {
+      "id": 162,
+      "question": "According to the Nidec U.S. MOTORS product service manual, what must the inspection of a motor after extended storage include?",
+      "group": "topical",
+      "document_name": "Nidec Motor Manual.pdf",
+      "failure_type": "Needle-in-passage",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.5,
+        "answer_accuracy": 0.0,
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 25.45
+    },
+    {
+      "id": 163,
+      "question": "Why can a U.S. MOTORS brand motor ordered with class F insulation arrive with a class B nameplate?",
+      "group": "topical",
+      "document_name": "Nidec Motor Manual.pdf",
+      "failure_type": "Needle-in-passage",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.75,
+        "answer_relevancy": 1.0
+      },
+      "errors": null,
+      "elapsed_s": 24.32
+    },
+    {
+      "id": 164,
+      "question": "How is the rotation of a U.S. MOTORS brand TEFC motor with a sirocco-type fan reversed in the field?",
+      "group": "topical",
+      "document_name": "Nidec Motor Manual.pdf",
+      "failure_type": "Cross-section synthesis",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.4444,
+        "answer_accuracy": 0.0,
+        "faithfulness": 0.6667,
+        "answer_relevancy": 0.9394
+      },
+      "errors": null,
+      "elapsed_s": 23.5
+    },
+    {
+      "id": 165,
+      "question": "On a U.S. MOTORS vertical motor with spring-loaded spherical roller or angular contact thrust bearings, what end play must be set, and how long may the motor run without load?",
+      "group": "topical",
+      "document_name": "Nidec Motor Manual.pdf",
+      "failure_type": "Needle-in-passage",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 1.0,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.8462,
+        "answer_relevancy": 0.9358
+      },
+      "errors": null,
+      "elapsed_s": 33.56
+    },
+    {
+      "id": 166,
+      "question": "According to the Nidec manual, what causes the lubricating oil of a vertical motor to foam, and how is it corrected?",
+      "group": "topical",
+      "document_name": "Nidec Motor Manual.pdf",
+      "failure_type": "Needle-in-passage",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.75,
+        "answer_accuracy": 0.5,
+        "faithfulness": 0.7778,
+        "answer_relevancy": 0.797
+      },
+      "errors": null,
+      "elapsed_s": 25.34
+    },
+    {
+      "id": 167,
+      "question": "What run, alarm and shutdown temperatures does the Nidec U.S. MOTORS manual give for mineral-oil-lubricated bearings?",
+      "group": "cross_document",
+      "document_name": "Nidec Motor Manual.pdf",
+      "failure_type": "Cross-document lookalike",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.8,
+        "answer_accuracy": 1.0,
+        "faithfulness": 0.4286,
+        "answer_relevancy": 0.9693
+      },
+      "errors": null,
+      "elapsed_s": 25.81
+    },
+    {
+      "id": 168,
+      "question": "Per the Nidec U.S. MOTORS manual, what unfiltered vibration limit applies to a resiliently mounted standard machine running at 720 rpm?",
+      "group": "cross_document",
+      "document_name": "Nidec Motor Manual.pdf",
+      "failure_type": "Cross-document lookalike",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 0.3333,
+        "answer_relevancy": 0.9471
+      },
+      "errors": null,
+      "elapsed_s": 25.27
+    },
+    {
+      "id": 169,
+      "question": "After re-greasing a U.S. MOTORS brand motor, how long should it run with the drain plug removed?",
+      "group": "cross_document",
+      "document_name": "Nidec Motor Manual.pdf",
+      "failure_type": "Cross-document lookalike",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.5,
+        "answer_accuracy": 0.0,
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.7415
+      },
+      "errors": null,
+      "elapsed_s": 25.82
+    },
+    {
+      "id": 170,
+      "question": "nidec us motors relube - how many minutes to run with drain plug out?",
+      "group": "paraphrase",
+      "document_name": "Nidec Motor Manual.pdf",
+      "failure_type": "Consistency (paraphrase)",
+      "expects_refusal": false,
+      "scores": {
+        "context_recall": 0.0,
+        "answer_accuracy": 0.0,
+        "faithfulness": 0.3333,
+        "answer_relevancy": 0.0
+      },
+      "errors": null,
+      "elapsed_s": 28.9
+    }
+  ]
+}
